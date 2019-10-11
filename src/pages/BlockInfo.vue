@@ -261,7 +261,6 @@ export default Vue.extend({
         this.deployCost = blockInfo.deployCount;
       } catch (e) {
         this.alert = true;
-        console.error(e);
       } finally {
         // @ts-ignore
         this.$q.loading.hide();
