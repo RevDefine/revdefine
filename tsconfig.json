@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "sourceMap": true,
+    "target": "es6",
+    "strict": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": "."
+  },
+  "exclude": ["node_modules", "src/rnode-grpc-gen/js"]
+  // "include": ["src/rnode-grpc-gen/js/rnode-grpc-js.d.ts"]
+}
