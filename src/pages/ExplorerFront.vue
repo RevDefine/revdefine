@@ -119,7 +119,6 @@ export default Vue.extend({
 
     async clickShowBlocks() {
       await this.$store.dispatch('fetchBlocks', 20);
-      console.log(this.$store.state.blockStore.blockArray);
     },
 
     showBlock(blockHash: string) {
