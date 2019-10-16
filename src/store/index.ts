@@ -4,18 +4,28 @@ import { RootState, Settings } from './types';
 import Client from 'src/client/deployService';
 import { LightBlockInfo } from '../client/types';
 import { BlockStore } from './blockStore';
+import { stat } from 'fs';
 
 Vue.use(Vuex);
 
 const DEFAULT_GRPCPROXYHOST = 'http://127.0.0.1:8088';
 const DEFAULT_WEBSOCKET = 'http://127.0.0.1:8089';
+const DEFAULT_INITBLOCKCOUNT = 10;
+const DEFAULT_MAXCACHEDBLOCKCOUNT = 200;
+const DEFAULT_TIMEOUT = 30
 
 const store: StoreOptions<RootState> = {
   state: {
     version: '0.0.1',
-    settings: { GRPCProxyHost: DEFAULT_GRPCPROXYHOST, WebsocketHost: DEFAULT_WEBSOCKET },
+    settings: {
+      GRPCProxyHost: DEFAULT_GRPCPROXYHOST,
+      WebsocketHost: DEFAULT_WEBSOCKET,
+      InitBlockCount: DEFAULT_INITBLOCKCOUNT,
+      MaxCachedBlockCount: DEFAULT_MAXCACHEDBLOCKCOUNT,
+      Timeout: DEFAULT_TIMEOUT,
+    },
     client: new Client(DEFAULT_GRPCPROXYHOST),
-    blockStore: new BlockStore(30)
+    blockStore: new BlockStore(DEFAULT_MAXCACHEDBLOCKCOUNT)
   },
   getters: {
     getGRPCProxyHost: (state: RootState) => {
@@ -23,24 +33,36 @@ const store: StoreOptions<RootState> = {
     },
     getWebsocketHost: (state: RootState) => {
       return state.settings.WebsocketHost;
+    },
+    getInitBlockCount: (state: RootState) => {
+      return state.settings.InitBlockCount;
+    },
+    getMaxCachedBlockCount: (state: RootState) => {
+      return state.settings.MaxCachedBlockCount;
+    },
+    getTimeout: (state: RootState) => {
+      return state.settings.Timeout;
     }
   },
   mutations: {
     resetSettings: (state: RootState, settings: Settings) => {
       state.settings.GRPCProxyHost = settings.GRPCProxyHost;
       state.settings.WebsocketHost = settings.WebsocketHost;
+      state.settings.InitBlockCount = settings.InitBlockCount;
+      state.settings.MaxCachedBlockCount = settings.MaxCachedBlockCount;
+      state.settings.Timeout = settings.Timeout;
       state.client = new Client(settings.GRPCProxyHost);
-      state.blockStore.clearStore();
+      state.blockStore = new BlockStore(settings.MaxCachedBlockCount);
     },
     addBlockInfo: (state: RootState, blockInfo: LightBlockInfo) => {
       state.blockStore.addBlock(blockInfo);
     }
   },
   actions: {
-    reconfigSettings(context: ActionContext<RootState, RootState>, settings: Settings) {
+    reconfigSettings (context: ActionContext<RootState, RootState>, settings: Settings) {
       context.commit('resetSettings', settings);
     },
-    async fetchBlocks(context: ActionContext<RootState, RootState>, depth: number = 10) {
+    async fetchBlocks (context: ActionContext<RootState, RootState>, depth: number = 10) {
       const blocks = await context.state.client.showBlocks(depth);
       blocks.forEach(lightBlock => {
         context.commit('addBlockInfo', lightBlock);
