@@ -778,9 +778,9 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
 
-"@quasar/app@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@quasar/app/-/app-1.1.3.tgz#c7d944360a473c4628666bad464d72efd39d4e92"
+"@quasar/app@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@quasar/app/-/app-1.2.1.tgz#2cc23ed9230106ffc1605cc01de43395bff21405"
   dependencies:
     "@quasar/babel-preset-app" "1.1.6"
     "@quasar/fastclick" "1.1.4"
@@ -6211,9 +6211,9 @@ qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
-quasar@^1.0.0:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/quasar/-/quasar-1.1.6.tgz#91d5b7b2b763732cea9a19134df4dbfc26923210"
+quasar@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/quasar/-/quasar-1.2.1.tgz#83117f5b17adcc7c08526b9aadc4ca7c2ab21287"
 
 query-string@^4.1.0:
   version "4.3.4"
