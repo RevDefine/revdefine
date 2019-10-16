@@ -1,0 +1,18 @@
+language: node_js
+os: linux
+sudo: required
+dist: xenial
+node_js:
+  - 11.15
+branches:
+  only:
+    - master
+    - develop
+before_install:
+  - npm install -g @quasar/cli
+install:
+  - yarn
+script:
+  - quasar build
+git:
+  depth: 3
