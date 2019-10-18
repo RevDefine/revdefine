@@ -28,8 +28,3 @@ export interface LightBlockInfo {
   readonly parentsHashList: string[];
   readonly sender: string;
 }
-
-export interface GRPCError {
-  code: number;
-  message: string;
-}

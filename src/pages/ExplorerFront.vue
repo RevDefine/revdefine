@@ -42,13 +42,6 @@
       </template>
     </q-table>
 
-    <div class="column">
-      <q-btn
-        color="primary"
-        label="Show Blocks"
-        @click="clickShowBlocks"
-      />
-    </div>
   </div>
 </template>
 

@@ -17,10 +17,11 @@ import {
   LastFinalizedBlockQuery
 } from '../../grpc/DeployServiceCommon_pb';
 import { IWhenable } from 'q';
-import { BlockInfo, LightBlockInfo, GRPCError } from './types';
+import { BlockInfo, LightBlockInfo } from './types';
+import { GRPCError } from './error';
 import { Message } from 'google-protobuf';
 
-const TIMEOUT = 1000;
+const TIMEOUT = 30;
 
 function statusHandle(reject: (reason?: GRPCError) => void) {
   return (status: grpcWeb.Status) => {
@@ -29,11 +30,7 @@ function statusHandle(reject: (reason?: GRPCError) => void) {
         break;
       }
       default: {
-        const err: GRPCError = {
-          code: status.code,
-          message: status.details
-        };
-        reject(err);
+        reject(new GRPCError(status.code, status.details));
         break;
       }
     }
@@ -52,11 +49,7 @@ function statusHandleResolve<T>(
         break;
       }
       default: {
-        const err: GRPCError = {
-          code: status.code,
-          message: status.details
-        };
-        reject(err);
+        reject(new GRPCError(status.code, status.details));
         break;
       }
     }
@@ -65,23 +58,60 @@ function statusHandleResolve<T>(
 function errHandle(reject: (reason?: GRPCError) => void) {
   return (err: grpcWeb.Error, _resp: Message) => {
     if (err) {
-      const e: GRPCError = { code: err.code, message: err.message };
-      reject(e);
+      reject(new GRPCError(err.code, err.message));
     }
   };
 }
 
+function promiseTimeout<T>(timeout: number, promise: Promise<T>): Promise<T> {
+  return new Promise(function(resolve, reject) {
+    // create a timeout to reject promise if not resolved
+    const timer = setTimeout(function() {
+      reject(new GRPCError(-1, 'Timeout error.'));
+    }, timeout);
+
+    promise
+      .then(function(res) {
+        clearTimeout(timer);
+        resolve(res);
+      })
+      .catch(function(err) {
+        clearTimeout(timer);
+        reject(err);
+      });
+  });
+}
 export default class Client {
   public readonly GRPCProxyHost: string;
   public TimeOut: number;
   private deployServiceClient: DeployServiceClient;
-  public constructor(GRPCProxyHost: string, TimeOut: number = TIMEOUT) {
+  public constructor(GRPCProxyHost: string, TimeOut: number) {
     this.GRPCProxyHost = GRPCProxyHost;
     this.TimeOut = TimeOut;
     this.deployServiceClient = new DeployServiceClient(this.GRPCProxyHost, null, null);
   }
 
   public showBlock(blockHash: string): Promise<BlockInfo> {
+    return promiseTimeout(this.TimeOut * 1000, this._showBlock(blockHash));
+  }
+
+  public showBlocks(depth: number): Promise<LightBlockInfo[]> {
+    return promiseTimeout(this.TimeOut * 1000, this._showBlocks(depth));
+  }
+
+  public findDeploy(deployId: string): Promise<LightBlockInfo> {
+    return promiseTimeout(this.TimeOut * 1000, this._findDeploy(deployId));
+  }
+
+  public isFinalized(hash: string): Promise<boolean> {
+    return promiseTimeout(this.TimeOut * 1000, this._isFinalized(hash));
+  }
+
+  public lastFinalizedBlock(): Promise<BlockInfo> {
+    return promiseTimeout(this.TimeOut * 1000, this._lastFinalizedBlock());
+  }
+
+  private _showBlock(blockHash: string): Promise<BlockInfo> {
     return new Promise<BlockInfo>((resolve, reject) => {
       setTimeout(() => {
         const query = new BlockQuery();
@@ -90,11 +120,7 @@ export default class Client {
         call.on('data', (resp: BlockResponse) => {
           const blockInfo = resp.getBlockinfo();
           if (blockInfo === undefined) {
-            const err: GRPCError = {
-              code: -1,
-              message: 'block info undefined'
-            };
-            reject(err);
+            reject(new GRPCError(-1, 'block info undefined'));
           } else {
             const block: BlockInfo = {
               blockHash: blockInfo.getBlockhash(),
@@ -116,10 +142,10 @@ export default class Client {
           }
         });
         call.on('status', statusHandle(reject));
-      }, this.TimeOut);
+      }, TIMEOUT);
     });
   }
-  public showBlocks(depth: number): Promise<LightBlockInfo[]> {
+  private _showBlocks(depth: number): Promise<LightBlockInfo[]> {
     return new Promise<LightBlockInfo[]>((resolve, reject) => {
       setTimeout(() => {
         const query = new BlocksQuery();
@@ -146,11 +172,11 @@ export default class Client {
           }
         });
         call.on('status', statusHandleResolve(blockInfos, resolve, reject));
-      }, this.TimeOut);
+      }, TIMEOUT);
     });
   }
 
-  public findDeploy(deployId: string): Promise<LightBlockInfo> {
+  private _findDeploy(deployId: string): Promise<LightBlockInfo> {
     return new Promise<LightBlockInfo>((resolve, reject) => {
       setTimeout(() => {
         const query = new FindDeployQuery();
@@ -174,19 +200,15 @@ export default class Client {
             };
             resolve(lightBlock);
           } else {
-            const err: GRPCError = {
-              code: -1,
-              message: 'deploy not found'
-            };
-            reject(err);
+            reject(new GRPCError(-1, 'deploy not found'));
           }
         });
         call.on('status', statusHandle(reject));
-      }, this.TimeOut);
+      }, TIMEOUT);
     });
   }
 
-  public isFinalized(hash: string): Promise<boolean> {
+  private _isFinalized(hash: string): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       setTimeout(() => {
         const query = new IsFinalizedQuery();
@@ -197,10 +219,10 @@ export default class Client {
           resolve(isFinalized);
         });
         call.on('status', statusHandle(reject));
-      }, this.TimeOut);
+      }, TIMEOUT);
     });
   }
-  public lastFinalizedBlock(): Promise<BlockInfo> {
+  private _lastFinalizedBlock(): Promise<BlockInfo> {
     return new Promise<BlockInfo>((resolve, reject) => {
       setTimeout(() => {
         const query = new LastFinalizedBlockQuery();
@@ -228,7 +250,7 @@ export default class Client {
           }
         });
         call.on('status', statusHandle(reject));
-      }, this.TimeOut);
+      }, TIMEOUT);
     });
   }
 
