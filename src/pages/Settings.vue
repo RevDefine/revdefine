@@ -1,5 +1,47 @@
 <template>
   <q-page padding>
+    <q-dialog v-model="alert">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Connect Error</div>
+        </q-card-section>
+
+        <q-card-section>
+          The server you provided can not be acceesed. Make sure it is a rnode proxy server.
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn
+            flat
+            label="OK"
+            color="primary"
+            v-close-popup
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+    <div class="row justify-center q-pa-md">
+      <q-btn-dropdown
+        no-caps
+        label="Predefined Testnet Server"
+      >
+        <q-list>
+          <q-item
+            clickable
+            v-close-popup
+            v-for="server in serverList"
+            v-bind:key="server[0]"
+            @click="onServerSelect(server)"
+          >
+            <q-item-section>
+              <q-item-label>{{server[0]}}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
+    </div>
+
     <div class="row items-center">
       <div class="col">
         <div class="text-center ">GRPC Porxy Host</div>
@@ -81,7 +123,7 @@
       <div>
         <q-btn
           color="primary"
-          label="APPLY"
+          label="Apply and Connect"
           @click="clickApply"
         />
       </div>
@@ -101,7 +143,20 @@ export default Vue.extend({
       InitBlockCount: this.$store.getters.getInitBlockCount,
       MaxCachedBlockCount: this.$store.getters.getMaxCachedBlockCount,
       Timeout: this.$store.getters.getTimeout,
-      dense: true
+      dense: true,
+      alert: false,
+      serverList: [
+        ['node0.testnet', 'node0.testnet.revdefine.io', 'node0.testnet.rchain-dev.tk:40404'],
+        ['node1.testnet', 'node1.testnet.revdefine.io', 'node1.testnet.rchain-dev.tk:40404'],
+        ['node2.testnet', 'node2.testnet.revdefine.io', 'node2.testnet.rchain-dev.tk:40404'],
+        ['node3.testnet', 'node3.testnet.revdefine.io', 'node3.testnet.rchain-dev.tk:40404'],
+        ['node4.testnet', 'node4.testnet.revdefine.io', 'node4.testnet.rchain-dev.tk:40404'],
+        ['node5.testnet', 'node5.testnet.revdefine.io', 'node5.testnet.rchain-dev.tk:40404'],
+        ['node6.testnet', 'node6.testnet.revdefine.io', 'node6.testnet.rchain-dev.tk:40404'],
+        ['node7.testnet', 'node7.testnet.revdefine.io', 'node7.testnet.rchain-dev.tk:40404'],
+        ['node8.testnet', 'node8.testnet.revdefine.io', 'node8.testnet.rchain-dev.tk:40404'],
+        ['node9.testnet', 'node9.testnet.revdefine.io', 'node9.testnet.rchain-dev.tk:40404']
+      ]
     };
   },
   methods: {
@@ -114,6 +169,20 @@ export default Vue.extend({
         MaxCachedBlockCount: this.MaxCachedBlockCount,
         Timeout: this.Timeout
       });
+      // @ts-ignore
+      this.$q.loading.show();
+      try {
+        await this.$store.dispatch('fetchBlocks', this.$store.getters.getInitBlockCount);
+      } catch (e) {
+        this.alert = true;
+      } finally {
+        // @ts-ignore
+        this.$q.loading.hide();
+      }
+    },
+    async onServerSelect(server: string[]) {
+      this.GRPCProxyHost = 'http://' + server[1];
+      this.WebsocketHost = 'http://' + server[2];
     }
   }
 });

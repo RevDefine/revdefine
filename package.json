@@ -36,6 +36,7 @@
     "grpc-tools": "^1.8.0",
     "protobufjs": "^6.8.8",
     "ts-protoc-gen": "^0.10.1-pre.49c229b",
+    "tslint": "^5.20.0",
     "typescript": "^3.5"
   },
   "engines": {

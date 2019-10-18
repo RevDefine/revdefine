@@ -9,6 +9,9 @@
     "moduleResolution": "node",
     "baseUrl": "."
   },
-  "exclude": ["node_modules", "src/rnode-grpc-gen/js"]
+  "exclude": [
+    "node_modules",
+    "src/rnode-grpc-gen/js"
+  ]
   // "include": ["src/rnode-grpc-gen/js/rnode-grpc-js.d.ts"]
 }

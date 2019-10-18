@@ -4,15 +4,14 @@ import { RootState, Settings } from './types';
 import Client from 'src/client/deployService';
 import { LightBlockInfo } from '../client/types';
 import { BlockStore } from './blockStore';
-import { stat } from 'fs';
 
 Vue.use(Vuex);
 
-const DEFAULT_GRPCPROXYHOST = 'http://127.0.0.1:8088';
-const DEFAULT_WEBSOCKET = 'http://127.0.0.1:8089';
+const DEFAULT_GRPCPROXYHOST = 'http://127.0.0.1:40401';
+const DEFAULT_WEBSOCKET = 'http://127.0.0.1:40404';
 const DEFAULT_INITBLOCKCOUNT = 10;
 const DEFAULT_MAXCACHEDBLOCKCOUNT = 200;
-const DEFAULT_TIMEOUT = 30
+const DEFAULT_TIMEOUT = 60;
 
 const store: StoreOptions<RootState> = {
   state: {
@@ -22,9 +21,9 @@ const store: StoreOptions<RootState> = {
       WebsocketHost: DEFAULT_WEBSOCKET,
       InitBlockCount: DEFAULT_INITBLOCKCOUNT,
       MaxCachedBlockCount: DEFAULT_MAXCACHEDBLOCKCOUNT,
-      Timeout: DEFAULT_TIMEOUT,
+      Timeout: DEFAULT_TIMEOUT
     },
-    client: new Client(DEFAULT_GRPCPROXYHOST),
+    client: new Client(DEFAULT_GRPCPROXYHOST, DEFAULT_TIMEOUT),
     blockStore: new BlockStore(DEFAULT_MAXCACHEDBLOCKCOUNT)
   },
   getters: {
@@ -51,7 +50,7 @@ const store: StoreOptions<RootState> = {
       state.settings.InitBlockCount = settings.InitBlockCount;
       state.settings.MaxCachedBlockCount = settings.MaxCachedBlockCount;
       state.settings.Timeout = settings.Timeout;
-      state.client = new Client(settings.GRPCProxyHost);
+      state.client = new Client(settings.GRPCProxyHost, settings.Timeout);
       state.blockStore = new BlockStore(settings.MaxCachedBlockCount);
     },
     addBlockInfo: (state: RootState, blockInfo: LightBlockInfo) => {
@@ -59,10 +58,10 @@ const store: StoreOptions<RootState> = {
     }
   },
   actions: {
-    reconfigSettings (context: ActionContext<RootState, RootState>, settings: Settings) {
+    reconfigSettings(context: ActionContext<RootState, RootState>, settings: Settings) {
       context.commit('resetSettings', settings);
     },
-    async fetchBlocks (context: ActionContext<RootState, RootState>, depth: number = 10) {
+    async fetchBlocks(context: ActionContext<RootState, RootState>, depth: number = 10) {
       const blocks = await context.state.client.showBlocks(depth);
       blocks.forEach(lightBlock => {
         context.commit('addBlockInfo', lightBlock);
