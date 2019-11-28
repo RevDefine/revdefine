@@ -7,11 +7,9 @@
     "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types":["quasar", "node"]
   },
-  "exclude": [
-    "node_modules",
-    "src/rnode-grpc-gen/js"
-  ]
+  "exclude": ["node_modules", "grpc", "dist", "./babel.config.js", "./quasar.conf.js", "pb"]
   // "include": ["src/rnode-grpc-gen/js/rnode-grpc-js.d.ts"]
 }
