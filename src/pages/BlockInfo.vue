@@ -241,7 +241,6 @@ export default Vue.extend({
   },
   methods: {
     async getBlockInfo(blockHash: string) {
-      // @ts-ignore
       this.$q.loading.show();
       try {
         const blockInfo = await this.$store.state.client.showBlock(blockHash);
@@ -262,7 +261,6 @@ export default Vue.extend({
       } catch (e) {
         this.alert = true;
       } finally {
-        // @ts-ignore
         this.$q.loading.hide();
       }
     }
