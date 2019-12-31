@@ -1,0 +1,1 @@
+import { QVueGlobals } from 'quasar';
