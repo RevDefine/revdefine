@@ -7,7 +7,7 @@
         </q-card-section>
 
         <q-card-section>
-          The server you provided can not be acceesed. Make sure it is a rnode proxy server.
+          The server you provided can not be acceesed. Make sure it is a rnode http server.
         </q-card-section>
 
         <q-card-actions align="right">
@@ -44,31 +44,13 @@
 
     <div class="row items-center">
       <div class="col">
-        <div class="text-center ">GRPC Porxy Host</div>
-      </div>
-      <div class="col">
-        <q-input
-          filled
-          v-model="GRPCProxyHost"
-          :dense="dense"
-          :rules="[
-          val => !!val || '* Required',
-          val => val.startsWith('http://')|| '* It must be http protocol which is started with *http://* .',
-        ]"
-        />
-      </div>
-    </div>
-
-    <div class="row items-center">
-      <div class="col">
-        <div class="text-center">Websocket Host(not working right now)</div>
+        <div class="text-center">Http Host</div>
       </div>
       <div class="col">
         <q-input
           filled
           :dense="dense"
-          v-model="WebsocketHost"
-          disable
+          v-model="HttpHost"
           :rules="[
           val => !!val || '* Required',
           val => val.startsWith('http://')|| '* It must be http protocol which is started with *http://* .',
@@ -138,24 +120,23 @@ export default Vue.extend({
   name: 'SettingsPage',
   data() {
     return {
-      GRPCProxyHost: this.$store.getters.getGRPCProxyHost,
-      WebsocketHost: this.$store.getters.getWebsocketHost,
+      HttpHost: this.$store.getters.getHttpHost,
       InitBlockCount: this.$store.getters.getInitBlockCount,
       MaxCachedBlockCount: this.$store.getters.getMaxCachedBlockCount,
       Timeout: this.$store.getters.getTimeout,
       dense: true,
       alert: false,
       serverList: [
-        ['node0.testnet', 'node0.testnet.revdefine.io', 'node0.testnet.rchain-dev.tk:40404'],
-        ['node1.testnet', 'node1.testnet.revdefine.io', 'node1.testnet.rchain-dev.tk:40404'],
-        ['node2.testnet', 'node2.testnet.revdefine.io', 'node2.testnet.rchain-dev.tk:40404'],
-        ['node3.testnet', 'node3.testnet.revdefine.io', 'node3.testnet.rchain-dev.tk:40404'],
-        ['node4.testnet', 'node4.testnet.revdefine.io', 'node4.testnet.rchain-dev.tk:40404'],
-        ['node5.testnet', 'node5.testnet.revdefine.io', 'node5.testnet.rchain-dev.tk:40404'],
-        ['node6.testnet', 'node6.testnet.revdefine.io', 'node6.testnet.rchain-dev.tk:40404'],
-        ['node7.testnet', 'node7.testnet.revdefine.io', 'node7.testnet.rchain-dev.tk:40404'],
-        ['node8.testnet', 'node8.testnet.revdefine.io', 'node8.testnet.rchain-dev.tk:40404'],
-        ['node9.testnet', 'node9.testnet.revdefine.io', 'node9.testnet.rchain-dev.tk:40404']
+        ['node0.testnet', 'node0.testnet.revdefine.io', 'node0.testnet.rchain-dev.tk:40403'],
+        ['node1.testnet', 'node1.testnet.revdefine.io', 'node1.testnet.rchain-dev.tk:40403'],
+        ['node2.testnet', 'node2.testnet.revdefine.io', 'node2.testnet.rchain-dev.tk:40403'],
+        ['node3.testnet', 'node3.testnet.revdefine.io', 'node3.testnet.rchain-dev.tk:40403'],
+        ['node4.testnet', 'node4.testnet.revdefine.io', 'node4.testnet.rchain-dev.tk:40403'],
+        ['node5.testnet', 'node5.testnet.revdefine.io', 'node5.testnet.rchain-dev.tk:40403'],
+        ['node6.testnet', 'node6.testnet.revdefine.io', 'node6.testnet.rchain-dev.tk:40403'],
+        ['node7.testnet', 'node7.testnet.revdefine.io', 'node7.testnet.rchain-dev.tk:40403'],
+        ['node8.testnet', 'node8.testnet.revdefine.io', 'node8.testnet.rchain-dev.tk:40403'],
+        ['node9.testnet', 'node9.testnet.revdefine.io', 'node9.testnet.rchain-dev.tk:40403']
       ]
     };
   },
@@ -163,8 +144,7 @@ export default Vue.extend({
     async clickApply() {
       // const b = await client.showBlock('06bc2fcec3db0808edebc902564b5b17aa9f50d775a962f75a05c80690b24ea5');
       this.$store.dispatch('reconfigSettings', {
-        GRPCProxyHost: this.GRPCProxyHost,
-        WebsocketHost: this.WebsocketHost,
+        HttpHost: this.HttpHost,
         InitBlockCount: this.InitBlockCount,
         MaxCachedBlockCount: this.MaxCachedBlockCount,
         Timeout: this.Timeout
@@ -181,8 +161,7 @@ export default Vue.extend({
       }
     },
     async onServerSelect(server: string[]) {
-      this.GRPCProxyHost = 'http://' + server[1];
-      this.WebsocketHost = 'http://' + server[2];
+      this.HttpHost = 'http://' + server[2];
     }
   }
 });

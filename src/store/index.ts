@@ -7,8 +7,7 @@ import { BlockStore } from './blockStore';
 
 Vue.use(Vuex);
 
-const DEFAULT_GRPCPROXYHOST = 'http://127.0.0.1:40401';
-const DEFAULT_WEBSOCKET = 'http://127.0.0.1:40404';
+const DEFAULT_HTTPHOST = 'http://192.168.1.9:40403';
 const DEFAULT_INITBLOCKCOUNT = 10;
 const DEFAULT_MAXCACHEDBLOCKCOUNT = 200;
 const DEFAULT_TIMEOUT = 60;
@@ -17,21 +16,17 @@ const store: StoreOptions<RootState> = {
   state: {
     version: '0.0.1',
     settings: {
-      GRPCProxyHost: DEFAULT_GRPCPROXYHOST,
-      WebsocketHost: DEFAULT_WEBSOCKET,
+      HttpHost: DEFAULT_HTTPHOST,
       InitBlockCount: DEFAULT_INITBLOCKCOUNT,
       MaxCachedBlockCount: DEFAULT_MAXCACHEDBLOCKCOUNT,
       Timeout: DEFAULT_TIMEOUT
     },
-    client: new Client(DEFAULT_GRPCPROXYHOST, DEFAULT_TIMEOUT),
+    client: new Client(DEFAULT_HTTPHOST, DEFAULT_TIMEOUT),
     blockStore: new BlockStore(DEFAULT_MAXCACHEDBLOCKCOUNT)
   },
   getters: {
-    getGRPCProxyHost: (state: RootState) => {
-      return state.settings.GRPCProxyHost;
-    },
-    getWebsocketHost: (state: RootState) => {
-      return state.settings.WebsocketHost;
+    getHttpHost: (state: RootState) => {
+      return state.settings.HttpHost;
     },
     getInitBlockCount: (state: RootState) => {
       return state.settings.InitBlockCount;
@@ -45,12 +40,11 @@ const store: StoreOptions<RootState> = {
   },
   mutations: {
     resetSettings: (state: RootState, settings: Settings) => {
-      state.settings.GRPCProxyHost = settings.GRPCProxyHost;
-      state.settings.WebsocketHost = settings.WebsocketHost;
+      state.settings.HttpHost = settings.HttpHost;
       state.settings.InitBlockCount = settings.InitBlockCount;
       state.settings.MaxCachedBlockCount = settings.MaxCachedBlockCount;
       state.settings.Timeout = settings.Timeout;
-      state.client = new Client(settings.GRPCProxyHost, settings.Timeout);
+      state.client = new Client(settings.HttpHost, settings.Timeout);
       state.blockStore = new BlockStore(settings.MaxCachedBlockCount);
     },
     addBlockInfo: (state: RootState, blockInfo: LightBlockInfo) => {

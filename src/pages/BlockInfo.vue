@@ -30,7 +30,7 @@
         <span class="text-h5"># Block : </span><span
           class="text-body2"
           style="word-break: break-all;"
-        >{{blockHash}}</span>
+        >{{blockInfo.blockHash}}</span>
       </div>
       <div class="col-sm-3 col-xs-12">
         <search-block-bar @search="getBlockInfo"></search-block-bar>
@@ -43,165 +43,75 @@
         separator
         style="word-break: break-all;"
       >
+        <q-item
+          v-for="item in blockInfoList"
+          v-bind:key="item.key"
+        >
+          <template v-if="item.key === 'parentsHashList'">
+            <q-item-section class="col-sm-3 col-xs-5 col-md-2">parentsHashList</q-item-section>
+            <q-separator
+              vertical
+              spaced
+            />
+            <q-item-section>
+              <q-list>
+                <q-item
+                  v-for="parentHash in item.value"
+                  :key="parentHash"
+                >
+                  <q-item-label>
+                    <router-link :to="{ name: 'blockInfo', params: { blockHash: parentHash }}">{{parentHash}}</router-link>
+                  </q-item-label>
+                </q-item>
+              </q-list>
+            </q-item-section>
+          </template>
+
+          <template v-else-if="item.key === 'bonds'">
+            <q-item-section class="col-sm-3 col-xs-5 col-md-2">bondsValidatorList</q-item-section>
+            <q-separator
+              vertical
+              spaced
+            />
+            <q-item-section>
+              <q-list>
+                <q-item
+                  v-for="bond in item.value"
+                  :key="bond.validator"
+                >
+                  <q-item-label>{{bond}}</q-item-label>
+                </q-item>
+              </q-list>
+            </q-item-section>
+          </template>
+
+          <template v-else>
+            <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{item.key}}</q-item-section>
+            <q-separator
+              vertical
+              spaced
+            />
+            <q-item-section padding>
+              <q-item-label>{{item.value}}</q-item-label>
+            </q-item-section>
+          </template>
+        </q-item>
+
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">blockHash</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">deploys</q-item-section>
           <q-separator
             vertical
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{blockHash}}</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">blockSize</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-item-label>{{blockHash}}</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">blockNumber</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-item-label>{{blockNumber}}</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">version</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-item-label>{{version}}</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">deployCount</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-item-label>{{deployCount}}</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">tupleSpaceHash</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-item-label>{{tupleSpaceHash}}</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">timestamp</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-item-label>{{timestamp}}</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">faultTolerance</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-item-label>{{faultTolerance}}</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">mainParentHash</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <router-link :to="{ name: 'blockInfo', params: { blockHash: mainParentHash }}">{{mainParentHash}}</router-link>
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">sender</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-item-label>{{sender}}</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">shardId</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-item-label>{{shardId}}</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">parentsHashList</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
             <q-list>
               <q-item
-                v-for="parentHash in parentsHashList"
-                :key="parentHash"
+                v-for="deploy in deploys"
+                :key="deploy.sig"
               >
-                <q-item-label>
-                  <router-link :to="{ name: 'blockInfo', params: { blockHash: parentHash }}">{{parentHash}}</router-link>
-                </q-item-label>
+                <q-item-label>{{deploy}}</q-item-label>
               </q-item>
             </q-list>
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">bondsValidatorList</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-list>
-              <q-item
-                v-for="bond in bondsValidatorList"
-                :key="bond"
-              >
-                <q-item-label>{{bond}}</q-item-label>
-              </q-item>
-            </q-list>
-          </q-item-section>
-        </q-item>
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">deployCost</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section>
-            <q-item-label>{{deployCost}}</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
@@ -213,6 +123,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import SearchBlockBar from '../components/SearchBlockBar.vue';
+import { DeployInfo } from '../client/types';
+interface Item{
+  key: string;
+  value: undefined;
+}
 export default Vue.extend({
   name: 'BlockInfo',
   components: {
@@ -220,20 +135,32 @@ export default Vue.extend({
   },
   data() {
     return {
-      blockHash: '',
-      blockSize: '',
-      blockNumber: '',
-      version: '',
-      deployCount: '',
-      tupleSpaceHash: '',
-      timestamp: '',
-      faultTolerance: '',
-      mainParentHash: '',
-      sender: '',
-      shardId: '',
-      parentsHashList: [''],
-      bondsValidatorList: [''],
-      deployCost: [''],
+      blockInfo: {},
+      deploys: new Array<DeployInfo>(),
+      blockInfoList: new Array<Item>(),
+
+      listView: [
+        'blockHash',
+        'sender',
+        'seqNum',
+        'sig',
+        'sigAlgorithm',
+        'shardId',
+        'extraBytes',
+        'version',
+        'timestamp',
+        'headerExtraBytes',
+        'parentsHashList',
+        'blockNumber',
+        'preStateHash',
+        'postStateHash',
+        'bodyExtraBytes',
+        'blockSize',
+        'deployCount',
+        'faultTolerance',
+        'bonds'
+      ],
+
       isFinalized: 'unknown',
 
       alert: false
@@ -243,21 +170,15 @@ export default Vue.extend({
     async getBlockInfo(blockHash: string) {
       this.$q.loading.show();
       try {
-        const blockInfo = await this.$store.state.client.showBlock(blockHash);
-        this.blockHash = blockInfo.blockHash;
-        this.blockSize = blockInfo.blockSize;
-        this.blockNumber = blockInfo.blockNumber;
-        this.version = blockInfo.version;
-        this.deployCount = blockInfo.deployCount;
-        this.tupleSpaceHash = blockInfo.tupleSpaceHash;
-        this.timestamp = blockInfo.timestamp;
-        this.faultTolerance = blockInfo.faultTolerance;
-        this.mainParentHash = blockInfo.mainParentHash;
-        this.sender = blockInfo.sender;
-        this.shardId = blockInfo.shardId;
-        this.parentsHashList = blockInfo.parentsHashList;
-        this.bondsValidatorList = blockInfo.bondsValidatorList;
-        this.deployCost = blockInfo.deployCount;
+        const fullblockInfo = await this.$store.state.client.showBlock(blockHash);
+        this.blockInfo = fullblockInfo.blockInfo;
+        this.deploys = fullblockInfo.deploys;
+
+        this.blockInfoList = [];
+        this.listView.forEach(key => {
+          const item: Item = { value: fullblockInfo.blockInfo[key], key: key };
+          this.blockInfoList.push(item);
+        });
       } catch (e) {
         this.alert = true;
       } finally {

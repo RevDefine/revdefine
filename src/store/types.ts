@@ -8,8 +8,7 @@ export interface RootState {
 }
 
 export interface Settings {
-  GRPCProxyHost: string;
-  WebsocketHost: string;
+  HttpHost: string;
   InitBlockCount: number;
   MaxCachedBlockCount: number;
   Timeout: number;

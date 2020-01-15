@@ -33,20 +33,6 @@
           <q-item
             clickable
             v-ripple
-            to="/introduction"
-          >
-            <q-item-section avatar>
-              <q-icon name="list_alt" />
-            </q-item-section>
-
-            <q-item-section>
-              Introduction
-            </q-item-section>
-          </q-item>
-
-          <q-item
-            clickable
-            v-ripple
             to="/explorer/front"
           >
             <q-item-section avatar>
