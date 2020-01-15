@@ -42,13 +42,6 @@
       </template>
     </q-table>
 
-    <div class="column">
-      <q-btn
-        color="primary"
-        label="Show Blocks"
-        @click="clickShowBlocks"
-      />
-    </div>
   </div>
 </template>
 
@@ -95,7 +88,7 @@ export default Vue.extend({
           name: 'faulTolenrance',
           require: true,
           label: 'faulTolenrance',
-          field: 'faulTolenrance',
+          field: 'faultTolerance',
           format: (val: number) => `${val.toString().slice(0, 10)}`
         },
         // { name: 'mainParentHash', require: true, label: 'mainParentHash', field: 'mainParentHash' },

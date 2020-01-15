@@ -69,13 +69,17 @@ module.exports = function(ctx) {
         'QCardSection',
         'QCheckbox',
         'QDialog',
-        'QCardActions'
+        'QCardActions',
+        'QBtnDropdown'
       ],
 
       directives: ['Ripple', 'ClosePopup'],
 
       // Quasar plugins
-      plugins: ['Loading']
+      plugins: ['Loading', 'Notify'],
+      config: {
+        notify: {}
+      }
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
