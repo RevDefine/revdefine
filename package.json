@@ -12,13 +12,8 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
-    "@tgrospic/rnode-grpc-js": "^0.7.0",
-    "@types/google-protobuf": "^3.7.2",
     "axios": "^0.19.1",
     "elliptic": "^6.5.1",
-    "google-protobuf": "^3.9.2",
-    "grpc": "^1.24.0",
-    "grpc-web": "^1.0.6",
     "quasar": "^1.2.1",
     "vuetype": "^0.3.2"
   },
@@ -34,9 +29,6 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^5.0.0",
-    "grpc-tools": "^1.8.0",
-    "protobufjs": "^6.8.8",
-    "ts-protoc-gen": "^0.10.1-pre.49c229b",
     "tslint": "^5.20.0",
     "typescript": "^3.5"
   },
