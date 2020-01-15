@@ -7,7 +7,7 @@ import { BlockStore } from './blockStore';
 
 Vue.use(Vuex);
 
-const DEFAULT_HTTPHOST = 'http://192.168.1.9:40403';
+const DEFAULT_HTTPHOST = 'http://127.0.0.1:40403';
 const DEFAULT_INITBLOCKCOUNT = 10;
 const DEFAULT_MAXCACHEDBLOCKCOUNT = 200;
 const DEFAULT_TIMEOUT = 60;
