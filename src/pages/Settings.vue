@@ -132,11 +132,11 @@ export default Vue.extend({
         ['node2.testnet', 'node2.testnet.revdefine.io', 'node2.testnet.rchain-dev.tk:40403'],
         ['node3.testnet', 'node3.testnet.revdefine.io', 'node3.testnet.rchain-dev.tk:40403'],
         ['node4.testnet', 'node4.testnet.revdefine.io', 'node4.testnet.rchain-dev.tk:40403'],
-        ['node5.testnet', 'node5.testnet.revdefine.io', 'node5.testnet.rchain-dev.tk:40403'],
-        ['node6.testnet', 'node6.testnet.revdefine.io', 'node6.testnet.rchain-dev.tk:40403'],
-        ['node7.testnet', 'node7.testnet.revdefine.io', 'node7.testnet.rchain-dev.tk:40403'],
-        ['node8.testnet', 'node8.testnet.revdefine.io', 'node8.testnet.rchain-dev.tk:40403'],
-        ['node9.testnet', 'node9.testnet.revdefine.io', 'node9.testnet.rchain-dev.tk:40403']
+        // ['node5.testnet', 'node5.testnet.revdefine.io', 'node5.testnet.rchain-dev.tk:40403'],
+        // ['node6.testnet', 'node6.testnet.revdefine.io', 'node6.testnet.rchain-dev.tk:40403'],
+        // ['node7.testnet', 'node7.testnet.revdefine.io', 'node7.testnet.rchain-dev.tk:40403'],
+        // ['node8.testnet', 'node8.testnet.revdefine.io', 'node8.testnet.rchain-dev.tk:40403'],
+        // ['node9.testnet', 'node9.testnet.revdefine.io', 'node9.testnet.rchain-dev.tk:40403']
       ]
     };
   },
