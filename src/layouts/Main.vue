@@ -47,6 +47,20 @@
           <q-item
             clickable
             v-ripple
+            to="/genesisWallet"
+          >
+            <q-item-section avatar>
+              <q-icon name="euro_symbol" />
+            </q-item-section>
+
+            <q-item-section>
+              GenesisWallet
+            </q-item-section>
+          </q-item>
+
+          <q-item
+            clickable
+            v-ripple
             to="/settings"
           >
             <q-item-section avatar>

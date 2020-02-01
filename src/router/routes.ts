@@ -6,6 +6,7 @@ const routes: RouteConfig[] = [
     component: () => import('layouts/Main.vue'),
     children: [
       { path: '', component: () => import('pages/Settings.vue') },
+      { path: 'genesisWallet', component: () => import('pages/genesisWallet.vue') },
       {
         path: 'explorer',
         component: () => import('pages/Explorer.vue'),
