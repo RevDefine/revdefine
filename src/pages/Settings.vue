@@ -158,6 +158,7 @@ export default Vue.extend({
       } finally {
         // @ts-ignore
         this.$q.loading.hide();
+        this.$router.push({path:'/explorer/front'});
       }
     },
     async onServerSelect(server: string[]) {
