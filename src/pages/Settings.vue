@@ -152,6 +152,7 @@ export default Vue.extend({
       // @ts-ignore
       this.$q.loading.show();
       try {
+        this.$store.dispatch('connectWs');
         await this.$store.dispatch('fetchBlocks', this.$store.getters.getInitBlockCount);
         this.$router.push({ path: '/explorer/front' });
       } catch (e) {
