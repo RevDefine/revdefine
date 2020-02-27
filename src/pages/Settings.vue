@@ -30,7 +30,28 @@
           <q-item
             clickable
             v-close-popup
-            v-for="server in serverList"
+            v-for="server in testnetServerList"
+            v-bind:key="server[0]"
+            @click="onServerSelect(server)"
+          >
+            <q-item-section>
+              <q-item-label>{{server[0]}}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
+
+      <q-separator vertical spaced/>
+
+      <q-btn-dropdown
+        no-caps
+        label="Predefined Mainnet Server"
+      >
+        <q-list>
+          <q-item
+            clickable
+            v-close-popup
+            v-for="server in mainnetServerList"
             v-bind:key="server[0]"
             @click="onServerSelect(server)"
           >
@@ -126,17 +147,17 @@ export default Vue.extend({
       Timeout: this.$store.getters.getTimeout,
       dense: true,
       alert: false,
-      serverList: [
-        ['node0.testnet', 'node0.testnet.revdefine.io', 'node0.testnet.rchain-dev.tk:40403'],
-        ['node1.testnet', 'node1.testnet.revdefine.io', 'node1.testnet.rchain-dev.tk:40403'],
-        ['node2.testnet', 'node2.testnet.revdefine.io', 'node2.testnet.rchain-dev.tk:40403'],
-        ['node3.testnet', 'node3.testnet.revdefine.io', 'node3.testnet.rchain-dev.tk:40403'],
-        ['node4.testnet', 'node4.testnet.revdefine.io', 'node4.testnet.rchain-dev.tk:40403'],
-        // ['node5.testnet', 'node5.testnet.revdefine.io', 'node5.testnet.rchain-dev.tk:40403'],
-        // ['node6.testnet', 'node6.testnet.revdefine.io', 'node6.testnet.rchain-dev.tk:40403'],
-        // ['node7.testnet', 'node7.testnet.revdefine.io', 'node7.testnet.rchain-dev.tk:40403'],
-        // ['node8.testnet', 'node8.testnet.revdefine.io', 'node8.testnet.rchain-dev.tk:40403'],
-        // ['node9.testnet', 'node9.testnet.revdefine.io', 'node9.testnet.rchain-dev.tk:40403']
+      testnetServerList: [
+        ['node0.testnet', 'node0.testnet.rchain-dev.tk:40403'],
+        ['node1.testnet', 'node1.testnet.rchain-dev.tk:40403'],
+        ['node2.testnet', 'node2.testnet.rchain-dev.tk:40403'],
+        ['node3.testnet', 'node3.testnet.rchain-dev.tk:40403'],
+        ['node4.testnet', 'node4.testnet.rchain-dev.tk:40403']
+      ],
+      mainnetServerList: [
+        ['observer-asia', 'observer-asia.services.mainnet.rchain.coop:40403'],
+        ['observer-us', 'observer-us.services.mainnet.rchain.coop:40403'],
+        ['observer-eu', 'observer-eu.services.mainnet.rchain.coop:40403']
       ]
     };
   },
@@ -153,16 +174,16 @@ export default Vue.extend({
       this.$q.loading.show();
       try {
         await this.$store.dispatch('fetchBlocks', this.$store.getters.getInitBlockCount);
+        this.$router.push({ path: '/explorer/front' });
       } catch (e) {
         this.alert = true;
       } finally {
         // @ts-ignore
         this.$q.loading.hide();
-        this.$router.push({path:'/explorer/front'});
       }
     },
     async onServerSelect(server: string[]) {
-      this.HttpHost = 'http://' + server[2];
+      this.HttpHost = 'http://' + server[1];
     }
   }
 });

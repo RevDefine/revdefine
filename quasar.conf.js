@@ -70,7 +70,8 @@ module.exports = function(ctx) {
         'QCheckbox',
         'QDialog',
         'QCardActions',
-        'QBtnDropdown'
+        'QBtnDropdown',
+        'QSeparator'
       ],
 
       directives: ['Ripple', 'ClosePopup'],
