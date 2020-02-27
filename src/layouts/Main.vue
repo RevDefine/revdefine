@@ -71,6 +71,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import EventBus, { REvent } from '../client/websocket/eventBus';
+import { BlockInfo } from '../client/types';
 
 interface LangLabel {
   value: string;
@@ -95,7 +97,32 @@ export default Vue.extend({
     onLangSelect(lang: LangLabel) {
       this.$i18n.locale = lang.value;
       this.lang = lang.label;
+    },
+    notifiedBlockAdded(event: REvent, payload: any, vue: Vue) {
+      this.$store.dispatch('fetchBlock', payload['block-hash']).then(
+        (block: BlockInfo) => {
+          this.$store.commit('addBlockInfo', block.blockInfo);
+          const blockHash = block.blockInfo.blockHash;
+          this.$q.notify({
+            color: 'primary',
+            message: 'Block'.concat(' ', blockHash, ' ', 'added!'),
+            position: 'bottom-right',
+            timeout: 10000
+          });
+        },
+        _ => {
+          this.$q.notify({
+            color: 'warn',
+            message: this.$t('Block').concat(' ', payload['block-hash'], ' ', this.$t('fail to add!')),
+            position: 'bottom-right',
+            timeout: 10000
+          });
+        }
+      );
     }
+  },
+  created() {
+    EventBus.addListener(REvent.BlockAdded, this.notifiedBlockAdded, this);
   }
 });
 </script>

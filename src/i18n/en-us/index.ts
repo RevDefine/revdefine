@@ -26,5 +26,7 @@ export default {
   deployCount: 'deployCount',
   faultTolerance: 'faultTolerance',
   deploys: 'deploys',
-  bondsValidatorList: 'bondsValidatorList'
+  bondsValidatorList: 'bondsValidatorList',
+  Block: 'Block',
+  failToAdd: 'fail to add!'
 };

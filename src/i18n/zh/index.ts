@@ -26,5 +26,7 @@ export default {
   deployCount: '部署合约数目',
   faultTolerance: 'faultTolerance',
   deploys: '合约内容',
-  bondsValidatorList: '抵押节点'
+  bondsValidatorList: '抵押节点',
+  Block: '区块',
+  failToAdd: '添加失败！'
 };
