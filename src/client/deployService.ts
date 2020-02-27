@@ -1,15 +1,5 @@
-// Reference to TypeScript definitions for IntelliSense in VSCode
-// import DeployServiceClient from '@tgrospic/rnode-grpc-js';
-import { IWhenable } from 'q';
 import { BlockInfo, LightBlockInfo } from './types';
 import axios, { AxiosInstance } from 'axios';
-import { ServerResponse } from 'http';
-
-const TIMEOUT = 30;
-
-function transformBlockInfo() {}
-
-function transformLightBlockInfo(r: ServerResponse) {}
 
 export default class Client {
   public readonly HttpHost: string;
