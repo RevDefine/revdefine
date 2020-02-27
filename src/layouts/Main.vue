@@ -1,18 +1,27 @@
 <template>
   <q-layout view="hHh lpr fFf">
-    <q-header
-      elevated
-      class="bg-black"
-    >
+    <q-header elevated class="bg-black">
       <q-toolbar>
-        <q-btn
-          flat
-          @click="drawer = !drawer"
-          round
-          dense
-          icon="menu"
-        />
+        <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
         <q-toolbar-title>RevDefine</q-toolbar-title>
+
+        <q-space />
+
+        <q-btn-dropdown no-caps :label="lang">
+          <q-list>
+            <q-item
+              clickable
+              v-close-popup
+              v-for="lang in langOptions"
+              v-bind:key="lang.value"
+              @click="onLangSelect(lang)"
+            >
+              <q-item-section>
+                <q-item-label>{{ lang.label }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
       </q-toolbar>
     </q-header>
 
@@ -30,11 +39,7 @@
     >
       <q-scroll-area class="fit">
         <q-list padding>
-          <q-item
-            clickable
-            v-ripple
-            to="/explorer/front"
-          >
+          <q-item clickable v-ripple to="/explorer/front">
             <q-item-section avatar>
               <q-icon name="vertical_split" />
             </q-item-section>
@@ -44,11 +49,7 @@
             </q-item-section>
           </q-item>
 
-          <q-item
-            clickable
-            v-ripple
-            to="/settings"
-          >
+          <q-item clickable v-ripple to="/settings">
             <q-item-section avatar>
               <q-icon name="settings_applications" />
             </q-item-section>
@@ -66,11 +67,15 @@
       <router-view />
     </q-page-container>
   </q-layout>
-
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+
+interface LangLabel {
+  value: string;
+  label: string;
+}
 
 export default Vue.extend({
   name: 'MainLayout',
@@ -78,8 +83,19 @@ export default Vue.extend({
   data() {
     return {
       drawer: false,
-      miniState: true
+      miniState: true,
+      lang: 'English',
+      langOptions: [
+        { value: 'en-us', label: 'English' },
+        { value: 'zh', label: '中文' }
+      ]
     };
+  },
+  methods: {
+    onLangSelect(lang: LangLabel) {
+      this.$i18n.locale = lang.value;
+      this.lang = lang.label;
+    }
   }
 });
 </script>

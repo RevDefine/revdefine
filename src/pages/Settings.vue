@@ -11,21 +11,13 @@
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn
-            flat
-            label="OK"
-            color="primary"
-            v-close-popup
-          />
+          <q-btn flat label="OK" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>
 
     <div class="row justify-center q-pa-md">
-      <q-btn-dropdown
-        no-caps
-        label="Predefined Testnet Server"
-      >
+      <q-btn-dropdown no-caps :label="$t('TestnetServer')">
         <q-list>
           <q-item
             clickable
@@ -35,18 +27,15 @@
             @click="onServerSelect(server)"
           >
             <q-item-section>
-              <q-item-label>{{server[0]}}</q-item-label>
+              <q-item-label>{{ server[0] }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
       </q-btn-dropdown>
 
-      <q-separator vertical spaced/>
+      <q-separator vertical spaced />
 
-      <q-btn-dropdown
-        no-caps
-        label="Predefined Mainnet Server"
-      >
+      <q-btn-dropdown no-caps :label="$t('MainnetServer')">
         <q-list>
           <q-item
             clickable
@@ -56,7 +45,7 @@
             @click="onServerSelect(server)"
           >
             <q-item-section>
-              <q-item-label>{{server[0]}}</q-item-label>
+              <q-item-label>{{ server[0] }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -65,7 +54,7 @@
 
     <div class="row items-center">
       <div class="col">
-        <div class="text-center">Http Host</div>
+        <div class="text-center">{{ $t('HttpHostSetting') }}</div>
       </div>
       <div class="col">
         <q-input
@@ -73,16 +62,16 @@
           :dense="dense"
           v-model="HttpHost"
           :rules="[
-          val => !!val || '* Required',
-          val => val.startsWith('http://')|| '* It must be http protocol which is started with *http://* .',
-        ]"
+            val => !!val || '* Required',
+            val => val.startsWith('http://') || '* It must be http protocol which is started with *http://* .'
+          ]"
         />
       </div>
     </div>
 
     <div class="row items-center">
       <div class="col">
-        <div class="text-center">Init Block Count</div>
+        <div class="text-center">{{ $t('InitBlockCount') }}</div>
       </div>
       <div class="col">
         <q-input
@@ -96,7 +85,7 @@
 
     <div class="row items-center">
       <div class="col">
-        <div class="text-center">Max Cached Block Count</div>
+        <div class="text-center">{{ $t('MaxCachedBlockCount') }}</div>
       </div>
       <div class="col">
         <q-input
@@ -110,28 +99,18 @@
 
     <div class="row items-center">
       <div class="col">
-        <div class="text-center">Timeout</div>
+        <div class="text-center">{{ $t('Timeout') }}</div>
       </div>
       <div class="col">
-        <q-input
-          filled
-          :dense="dense"
-          v-model="Timeout"
-          :rules="[val => !isNaN(val) || '* It must be a number']"
-        />
+        <q-input filled :dense="dense" v-model="Timeout" :rules="[val => !isNaN(val) || '* It must be a number']" />
       </div>
     </div>
 
     <div class="row justify-center">
       <div>
-        <q-btn
-          color="primary"
-          label="Apply and Connect"
-          @click="clickApply"
-        />
+        <q-btn color="primary" :label="$t('ApplyConnect')" @click="clickApply" />
       </div>
     </div>
-
   </q-page>
 </template>
 
