@@ -28,5 +28,6 @@ export default {
   deploys: '合约内容',
   bondsValidatorList: '抵押节点',
   Block: '区块',
-  failToAdd: '添加失败！'
+  failToAdd: '添加失败！',
+  added: '添加成功!'
 };

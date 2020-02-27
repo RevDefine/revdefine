@@ -103,17 +103,21 @@ export default Vue.extend({
         (block: BlockInfo) => {
           this.$store.commit('addBlockInfo', block.blockInfo);
           const blockHash = block.blockInfo.blockHash;
+          const blockStr = this.$t('Block') as string;
+          const addStr = this.$t('added') as string;
           this.$q.notify({
             color: 'primary',
-            message: 'Block'.concat(' ', blockHash, ' ', 'added!'),
+            message: ''.concat(blockStr, ' ', blockHash, ' ', addStr),
             position: 'bottom-right',
             timeout: 10000
           });
         },
         _ => {
+          const blockStr = this.$t('Block') as string;
+          const errStr = this.$t('failToAdd') as string;
           this.$q.notify({
             color: 'warn',
-            message: this.$t('Block').concat(' ', payload['block-hash'], ' ', this.$t('fail to add!')),
+            message: ''.concat(blockStr, ' ', payload['block-hash'], ' ', errStr),
             position: 'bottom-right',
             timeout: 10000
           });
