@@ -3,10 +3,11 @@ import Vue from 'vue';
 export enum REvent {
   Open = 'OPEN',
   Close = 'CLOSE',
-  Error = 'ERROR'
+  Error = 'ERROR',
+  BlockAdded = 'BlockAdded'
 }
 
-export type EventCallback = (event: REvent, vm: Vue) => void;
+export type EventCallback = (event: REvent, payload: any, vm: Vue) => void;
 
 export interface EventListener {
   callback: EventCallback;
@@ -26,7 +27,7 @@ class EventBus {
   }
 
   public removeListener(event: REvent, callback: EventCallback, vm: Vue) {
-    let listeners = this.listeners.get(event);
+    const listeners = this.listeners.get(event);
     let index;
 
     if (listeners && listeners.length) {
@@ -46,11 +47,11 @@ class EventBus {
     return false;
   }
 
-  public triggerEvent(event: REvent) {
+  public triggerEvent(event: REvent, payload: any) {
     const listeners = this.listeners.get(event);
     if (listeners && listeners.length) {
       listeners.forEach(callback => {
-        callback.callback(event, callback.vm);
+        callback.callback(event, payload, callback.vm);
       });
     }
   }

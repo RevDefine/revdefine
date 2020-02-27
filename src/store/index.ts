@@ -2,12 +2,15 @@ import Vue from 'vue';
 import Vuex, { StoreOptions, ActionContext } from 'vuex';
 import { RootState, Settings } from './types';
 import Client from 'src/client/deployService';
-import { LightBlockInfo } from '../client/types';
+import RnodeWebsocket from '../client/websocket/ws';
+import { LightBlockInfo, BlockInfo } from '../client/types';
 import { BlockStore } from './blockStore';
 
 Vue.use(Vuex);
 
 const DEFAULT_HTTPHOST = 'http://127.0.0.1:40403';
+const WEBSOCKET_PATH = '/ws/events';
+const DEFAULT_WEBSOCKET_HOST = DEFAULT_HTTPHOST.replace('http', 'ws') + WEBSOCKET_PATH;
 const DEFAULT_INITBLOCKCOUNT = 10;
 const DEFAULT_MAXCACHEDBLOCKCOUNT = 200;
 const DEFAULT_TIMEOUT = 60;
@@ -22,7 +25,8 @@ const store: StoreOptions<RootState> = {
       Timeout: DEFAULT_TIMEOUT
     },
     client: new Client(DEFAULT_HTTPHOST, DEFAULT_TIMEOUT),
-    blockStore: new BlockStore(DEFAULT_MAXCACHEDBLOCKCOUNT)
+    blockStore: new BlockStore(DEFAULT_MAXCACHEDBLOCKCOUNT),
+    wsClient: new RnodeWebsocket(DEFAULT_WEBSOCKET_HOST)
   },
   getters: {
     getHttpHost: (state: RootState) => {
@@ -46,24 +50,36 @@ const store: StoreOptions<RootState> = {
       state.settings.Timeout = settings.Timeout;
       state.client = new Client(settings.HttpHost, settings.Timeout);
       state.blockStore = new BlockStore(settings.MaxCachedBlockCount);
+      const websocketHost = settings.HttpHost.replace('http', 'ws') + WEBSOCKET_PATH;
+      state.wsClient = new RnodeWebsocket(websocketHost);
     },
     addBlockInfo: (state: RootState, blockInfo: LightBlockInfo) => {
       state.blockStore.addBlock(blockInfo);
+    },
+    sortStoreBlocks: (state: RootState) => {
+      state.blockStore.sortBlocks();
+    },
+    connectWs: (state: RootState) => {
+      state.wsClient.connect();
     }
   },
   actions: {
     reconfigSettings(context: ActionContext<RootState, RootState>, settings: Settings) {
       context.commit('resetSettings', settings);
     },
+    connectWs(context: ActionContext<RootState, RootState>) {
+      context.commit('connectWs');
+    },
     async fetchBlocks(context: ActionContext<RootState, RootState>, depth: number = 10) {
       const blocks = await context.state.client.showBlocks(depth);
       blocks.forEach(lightBlock => {
         context.commit('addBlockInfo', lightBlock);
+        context.commit('sortStoreBlocks');
       });
+    },
+    async fetchBlock(context: ActionContext<RootState, RootState>, blockHash: string): Promise<BlockInfo> {
+      return await context.state.client.showBlock(blockHash);
     }
-    // async fetchBlock(context: ActionContext<RootState, RootState>, blockHash: string) => Primise<BlockInfo> {
-    // return await context.state.client.showBlock(blockHash);
-    // }
   }
 };
 

@@ -11,31 +11,41 @@
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn
-            flat
-            label="OK"
-            color="primary"
-            v-close-popup
-          />
+          <q-btn flat label="OK" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>
 
     <div class="row justify-center q-pa-md">
-      <q-btn-dropdown
-        no-caps
-        label="Predefined Testnet Server"
-      >
+      <q-btn-dropdown no-caps :label="$t('TestnetServer')">
         <q-list>
           <q-item
             clickable
             v-close-popup
-            v-for="server in serverList"
+            v-for="server in testnetServerList"
             v-bind:key="server[0]"
             @click="onServerSelect(server)"
           >
             <q-item-section>
-              <q-item-label>{{server[0]}}</q-item-label>
+              <q-item-label>{{ server[0] }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
+
+      <q-separator vertical spaced />
+
+      <q-btn-dropdown no-caps :label="$t('MainnetServer')">
+        <q-list>
+          <q-item
+            clickable
+            v-close-popup
+            v-for="server in mainnetServerList"
+            v-bind:key="server[0]"
+            @click="onServerSelect(server)"
+          >
+            <q-item-section>
+              <q-item-label>{{ server[0] }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -44,7 +54,7 @@
 
     <div class="row items-center">
       <div class="col">
-        <div class="text-center">Http Host</div>
+        <div class="text-center">{{ $t('HttpHostSetting') }}</div>
       </div>
       <div class="col">
         <q-input
@@ -52,16 +62,16 @@
           :dense="dense"
           v-model="HttpHost"
           :rules="[
-          val => !!val || '* Required',
-          val => val.startsWith('http://')|| '* It must be http protocol which is started with *http://* .',
-        ]"
+            val => !!val || '* Required',
+            val => val.startsWith('http://') || '* It must be http protocol which is started with *http://* .'
+          ]"
         />
       </div>
     </div>
 
     <div class="row items-center">
       <div class="col">
-        <div class="text-center">Init Block Count</div>
+        <div class="text-center">{{ $t('InitBlockCount') }}</div>
       </div>
       <div class="col">
         <q-input
@@ -75,7 +85,7 @@
 
     <div class="row items-center">
       <div class="col">
-        <div class="text-center">Max Cached Block Count</div>
+        <div class="text-center">{{ $t('MaxCachedBlockCount') }}</div>
       </div>
       <div class="col">
         <q-input
@@ -89,28 +99,18 @@
 
     <div class="row items-center">
       <div class="col">
-        <div class="text-center">Timeout</div>
+        <div class="text-center">{{ $t('Timeout') }}</div>
       </div>
       <div class="col">
-        <q-input
-          filled
-          :dense="dense"
-          v-model="Timeout"
-          :rules="[val => !isNaN(val) || '* It must be a number']"
-        />
+        <q-input filled :dense="dense" v-model="Timeout" :rules="[val => !isNaN(val) || '* It must be a number']" />
       </div>
     </div>
 
     <div class="row justify-center">
       <div>
-        <q-btn
-          color="primary"
-          label="Apply and Connect"
-          @click="clickApply"
-        />
+        <q-btn color="primary" :label="$t('ApplyConnect')" @click="clickApply" />
       </div>
     </div>
-
   </q-page>
 </template>
 
@@ -126,17 +126,17 @@ export default Vue.extend({
       Timeout: this.$store.getters.getTimeout,
       dense: true,
       alert: false,
-      serverList: [
-        ['node0.testnet', 'node0.testnet.revdefine.io', 'node0.testnet.rchain-dev.tk:40403'],
-        ['node1.testnet', 'node1.testnet.revdefine.io', 'node1.testnet.rchain-dev.tk:40403'],
-        ['node2.testnet', 'node2.testnet.revdefine.io', 'node2.testnet.rchain-dev.tk:40403'],
-        ['node3.testnet', 'node3.testnet.revdefine.io', 'node3.testnet.rchain-dev.tk:40403'],
-        ['node4.testnet', 'node4.testnet.revdefine.io', 'node4.testnet.rchain-dev.tk:40403'],
-        // ['node5.testnet', 'node5.testnet.revdefine.io', 'node5.testnet.rchain-dev.tk:40403'],
-        // ['node6.testnet', 'node6.testnet.revdefine.io', 'node6.testnet.rchain-dev.tk:40403'],
-        // ['node7.testnet', 'node7.testnet.revdefine.io', 'node7.testnet.rchain-dev.tk:40403'],
-        // ['node8.testnet', 'node8.testnet.revdefine.io', 'node8.testnet.rchain-dev.tk:40403'],
-        // ['node9.testnet', 'node9.testnet.revdefine.io', 'node9.testnet.rchain-dev.tk:40403']
+      testnetServerList: [
+        ['node0.testnet', 'node0.testnet.rchain-dev.tk:40403'],
+        ['node1.testnet', 'node1.testnet.rchain-dev.tk:40403'],
+        ['node2.testnet', 'node2.testnet.rchain-dev.tk:40403'],
+        ['node3.testnet', 'node3.testnet.rchain-dev.tk:40403'],
+        ['node4.testnet', 'node4.testnet.rchain-dev.tk:40403']
+      ],
+      mainnetServerList: [
+        ['observer-asia', 'observer-asia.services.mainnet.rchain.coop:40403'],
+        ['observer-us', 'observer-us.services.mainnet.rchain.coop:40403'],
+        ['observer-eu', 'observer-eu.services.mainnet.rchain.coop:40403']
       ]
     };
   },
@@ -152,7 +152,9 @@ export default Vue.extend({
       // @ts-ignore
       this.$q.loading.show();
       try {
+        this.$store.dispatch('connectWs');
         await this.$store.dispatch('fetchBlocks', this.$store.getters.getInitBlockCount);
+        this.$router.push({ path: '/explorer/front' });
       } catch (e) {
         this.alert = true;
       } finally {
@@ -161,7 +163,7 @@ export default Vue.extend({
       }
     },
     async onServerSelect(server: string[]) {
-      this.HttpHost = 'http://' + server[2];
+      this.HttpHost = 'http://' + server[1];
     }
   }
 });

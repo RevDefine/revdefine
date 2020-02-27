@@ -14,12 +14,16 @@ export class BlockStore {
       return;
     } else {
       if (this.blockArray.length >= this.maxLength) {
-        const deleteBlock = this.blockArray.shift() as LightBlockInfo;
+        const deleteBlock = this.blockArray.pop() as LightBlockInfo;
         delete this.blockMap[deleteBlock.blockHash];
       }
-      this.blockArray.push(blockInfo);
+      this.blockArray.unshift(blockInfo);
       this.blockMap[blockInfo.blockHash] = blockInfo;
     }
+  }
+
+  public sortBlocks() {
+    this.blockArray = this.blockArray.sort((a, b) => b.blockNumber - a.blockNumber);
   }
 
   public containBlock(blockHash: string) {

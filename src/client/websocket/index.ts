@@ -1,13 +1,13 @@
-import { ComponentOptions } from 'vue';
 import RnodeWebsocket from './ws';
-import eventBus, { REvent, EventCallback } from './eventBus';
-import Vue, { PluginFunction } from 'vue';
+import { PluginFunction } from 'vue';
 // export type PluginFunction<T> = (Vue: typeof _Vue, options?: T) => void;
 interface PluginOptions {}
 
 export const RnodeWsPlugin: PluginFunction<PluginOptions> = function RnodeWsPlugin(Vue, PluginOptions): void {
   Vue.prototype.$connect = (url: string) => {
-    Vue.prototype.$socket = new RnodeWebsocket(url);
+    const ws = new RnodeWebsocket(url);
+    ws.connect();
+    Vue.prototype.$socket = ws;
   };
 
   Vue.prototype.$disconnect = () => {

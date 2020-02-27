@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-table
-      title="Blocks"
+      :title="$t('Blocks')"
       :data="data"
       :columns="columns"
       :rows-per-page-options="[10, 20, 0]"
@@ -20,19 +20,14 @@
         <div class="q-pa-xs col-xs-12 col-sm-6 col-md-3 col-lg-2 grid-style-transition">
           <q-card>
             <q-list dense>
-              <q-item
-                v-for="col in props.cols"
-                :key="col.name"
-              >
+              <q-item v-for="col in props.cols" :key="col.name">
                 <q-item-section>
-                  <q-item-label>{{ col.label }}</q-item-label>
+                  <q-item-label>{{ $t(col.label) }}</q-item-label>
                 </q-item-section>
                 <q-item-section side>
-                  <q-item-label
-                    v-if="col.label==='blockHash'"
-                    @click="showBlock(col.value)"
-                    class="text-primary"
-                  ><span class="cursor-pointer">{{ col.value }}</span></q-item-label>
+                  <q-item-label v-if="col.label === 'blockHash'" @click="showBlock(col.value)" class="text-primary"
+                    ><span class="cursor-pointer">{{ col.value }}</span></q-item-label
+                  >
                   <q-item-label v-else>{{ col.value }}</q-item-label>
                 </q-item-section>
               </q-item>
@@ -41,7 +36,6 @@
         </div>
       </template>
     </q-table>
-
   </div>
 </template>
 
