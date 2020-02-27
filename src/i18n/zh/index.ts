@@ -29,5 +29,7 @@ export default {
   bondsValidatorList: '抵押节点',
   Block: '区块',
   failToAdd: '添加失败！',
-  added: '添加成功!'
+  added: '添加成功!',
+  Explorer: '区块浏览器',
+  Settings: '设置'
 };

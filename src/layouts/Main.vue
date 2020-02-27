@@ -45,7 +45,7 @@
             </q-item-section>
 
             <q-item-section>
-              Explorer
+              {{ $t('Explorer') }}
             </q-item-section>
           </q-item>
 
@@ -55,7 +55,7 @@
             </q-item-section>
 
             <q-item-section>
-              Settings
+              {{ $t('Settings') }}
             </q-item-section>
           </q-item>
         </q-list>

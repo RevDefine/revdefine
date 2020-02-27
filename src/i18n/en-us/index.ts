@@ -29,5 +29,7 @@ export default {
   bondsValidatorList: 'bondsValidatorList',
   Block: 'Block',
   failToAdd: 'fail to add!',
-  added: 'added!'
+  added: 'added!',
+  Explorer: 'Explorer',
+  Settings: 'Settings'
 };
