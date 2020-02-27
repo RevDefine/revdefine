@@ -56,6 +56,9 @@ const store: StoreOptions<RootState> = {
     addBlockInfo: (state: RootState, blockInfo: LightBlockInfo) => {
       state.blockStore.addBlock(blockInfo);
     },
+    sortStoreBlocks: (state: RootState) => {
+      state.blockStore.sortBlocks();
+    },
     connectWs: (state: RootState) => {
       state.wsClient.connect();
     }
@@ -71,6 +74,7 @@ const store: StoreOptions<RootState> = {
       const blocks = await context.state.client.showBlocks(depth);
       blocks.forEach(lightBlock => {
         context.commit('addBlockInfo', lightBlock);
+        context.commit('sortStoreBlocks');
       });
     },
     async fetchBlock(context: ActionContext<RootState, RootState>, blockHash: string): Promise<BlockInfo> {

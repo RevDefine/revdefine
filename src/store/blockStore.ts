@@ -22,6 +22,10 @@ export class BlockStore {
     }
   }
 
+  public sortBlocks() {
+    this.blockArray = this.blockArray.sort((a, b) => b.blockNumber - a.blockNumber);
+  }
+
   public containBlock(blockHash: string) {
     return blockHash in this.blockMap;
   }
