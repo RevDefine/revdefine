@@ -15,6 +15,7 @@
     "axios": "^0.19.1",
     "elliptic": "^6.5.1",
     "quasar": "^1.2.1",
+    "vue-i18n": "^8.15.4",
     "vuetype": "^0.3.2"
   },
   "devDependencies": {

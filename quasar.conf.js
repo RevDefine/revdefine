@@ -11,7 +11,7 @@ module.exports = function(ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
-    boot: [],
+    boot: ['i18n'],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ['app.sass'],
@@ -70,7 +70,10 @@ module.exports = function(ctx) {
         'QCheckbox',
         'QDialog',
         'QCardActions',
-        'QBtnDropdown'
+        'QBtnDropdown',
+        'QSeparator',
+        'QSelect',
+        'QSpace'
       ],
 
       directives: ['Ripple', 'ClosePopup'],
