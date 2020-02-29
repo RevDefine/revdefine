@@ -108,8 +108,9 @@ export default Vue.extend({
           this.$q.notify({
             color: 'primary',
             message: ''.concat(blockStr, ' ', blockHash, ' ', addStr),
-            position: 'bottom-right',
-            timeout: 10000
+            position: 'bottom-left',
+            timeout: 5000,
+            actions: [{label: 'Close', color: 'yellow'}]
           });
         },
         _ => {
