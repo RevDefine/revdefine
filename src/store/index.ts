@@ -50,8 +50,8 @@ const store: StoreOptions<RootState> = {
       state.settings.Timeout = settings.Timeout;
       state.client = new Client(settings.HttpHost, settings.Timeout);
       state.blockStore = new BlockStore(settings.MaxCachedBlockCount);
-      const websocketHost = settings.HttpHost.replace('http', 'ws') + WEBSOCKET_PATH;
-      state.wsClient = new RnodeWebsocket(websocketHost);
+      const websocketHost = settings.HttpHost.startsWith('http://') ? settings.HttpHost.replace('http', 'ws') : settings.HttpHost.startsWith('https://') ? settings.HttpHost.replace('https', 'wss') : settings.HttpHost;
+      state.wsClient = new RnodeWebsocket(websocketHost + WEBSOCKET_PATH);
     },
     addBlockInfo: (state: RootState, blockInfo: LightBlockInfo) => {
       state.blockStore.addBlock(blockInfo);
@@ -64,20 +64,20 @@ const store: StoreOptions<RootState> = {
     }
   },
   actions: {
-    reconfigSettings(context: ActionContext<RootState, RootState>, settings: Settings) {
+    reconfigSettings (context: ActionContext<RootState, RootState>, settings: Settings) {
       context.commit('resetSettings', settings);
     },
-    connectWs(context: ActionContext<RootState, RootState>) {
+    connectWs (context: ActionContext<RootState, RootState>) {
       context.commit('connectWs');
     },
-    async fetchBlocks(context: ActionContext<RootState, RootState>, depth: number = 10) {
+    async fetchBlocks (context: ActionContext<RootState, RootState>, depth: number = 10) {
       const blocks = await context.state.client.showBlocks(depth);
       blocks.forEach(lightBlock => {
         context.commit('addBlockInfo', lightBlock);
         context.commit('sortStoreBlocks');
       });
     },
-    async fetchBlock(context: ActionContext<RootState, RootState>, blockHash: string): Promise<BlockInfo> {
+    async fetchBlock (context: ActionContext<RootState, RootState>, blockHash: string): Promise<BlockInfo> {
       return await context.state.client.showBlock(blockHash);
     }
   }

@@ -11,13 +11,21 @@
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn flat label="OK" color="primary" v-close-popup />
+          <q-btn
+            flat
+            label="OK"
+            color="primary"
+            v-close-popup
+          />
         </q-card-actions>
       </q-card>
     </q-dialog>
 
     <div class="row justify-center q-pa-md">
-      <q-btn-dropdown no-caps :label="$t('TestnetServer')">
+      <q-btn-dropdown
+        no-caps
+        :label="$t('TestnetServer')"
+      >
         <q-list>
           <q-item
             clickable
@@ -33,9 +41,15 @@
         </q-list>
       </q-btn-dropdown>
 
-      <q-separator vertical spaced />
+      <q-separator
+        vertical
+        spaced
+      />
 
-      <q-btn-dropdown no-caps :label="$t('MainnetServer')">
+      <q-btn-dropdown
+        no-caps
+        :label="$t('MainnetServer')"
+      >
         <q-list>
           <q-item
             clickable
@@ -63,7 +77,7 @@
           v-model="HttpHost"
           :rules="[
             val => !!val || '* Required',
-            val => val.startsWith('http://') || '* It must be http protocol which is started with *http://* .'
+            val => val.match('^https?://') || '* It must be http protocol which is started with *http://* or *https://*.' ,
           ]"
         />
       </div>
@@ -102,13 +116,22 @@
         <div class="text-center">{{ $t('Timeout') }}</div>
       </div>
       <div class="col">
-        <q-input filled :dense="dense" v-model="Timeout" :rules="[val => !isNaN(val) || '* It must be a number']" />
+        <q-input
+          filled
+          :dense="dense"
+          v-model="Timeout"
+          :rules="[val => !isNaN(val) || '* It must be a number']"
+        />
       </div>
     </div>
 
     <div class="row justify-center">
       <div>
-        <q-btn color="primary" :label="$t('ApplyConnect')" @click="clickApply" />
+        <q-btn
+          color="primary"
+          :label="$t('ApplyConnect')"
+          @click="clickApply"
+        />
       </div>
     </div>
   </q-page>
