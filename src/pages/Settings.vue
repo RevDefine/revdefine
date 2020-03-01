@@ -85,6 +85,20 @@
 
     <div class="row items-center">
       <div class="col">
+        <div class="text-center">{{ $t('EnableWebsocket') }}</div>
+      </div>
+      <div class="col">
+        <q-toggle
+          v-model="EnableWebsocket"
+          :label="`${EnableWebsocket}`"
+          false-value="NO"
+          true-value="YES"
+        />
+      </div>
+    </div>
+
+    <div class="row items-center">
+      <div class="col">
         <div class="text-center">{{ $t('InitBlockCount') }}</div>
       </div>
       <div class="col">
@@ -147,6 +161,7 @@ export default Vue.extend({
       InitBlockCount: this.$store.getters.getInitBlockCount,
       MaxCachedBlockCount: this.$store.getters.getMaxCachedBlockCount,
       Timeout: this.$store.getters.getTimeout,
+      EnableWebsocket: this.$store.getters.getEnableWebsocket,
       dense: true,
       alert: false,
       testnetServerList: [
@@ -170,7 +185,8 @@ export default Vue.extend({
         HttpHost: this.HttpHost,
         InitBlockCount: this.InitBlockCount,
         MaxCachedBlockCount: this.MaxCachedBlockCount,
-        Timeout: this.Timeout
+        Timeout: this.Timeout,
+        EnableWebsocket: this.EnableWebsocket
       });
       // @ts-ignore
       this.$q.loading.show();
