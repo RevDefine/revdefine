@@ -31,5 +31,6 @@ export default {
   failToAdd: 'fail to add!',
   added: 'added!',
   Explorer: 'Explorer',
-  Settings: 'Settings'
+  Settings: 'Settings',
+  EnableWebsocket: 'EnableWebsocket'
 };

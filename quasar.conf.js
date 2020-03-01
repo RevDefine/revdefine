@@ -1,7 +1,7 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
-module.exports = function(ctx) {
+module.exports = function (ctx) {
   return {
     // Quasar looks for *.js files by default
     sourceFiles: {
@@ -73,7 +73,8 @@ module.exports = function(ctx) {
         'QBtnDropdown',
         'QSeparator',
         'QSelect',
-        'QSpace'
+        'QSpace',
+        'QToggle'
       ],
 
       directives: ['Ripple', 'ClosePopup'],
@@ -99,7 +100,7 @@ module.exports = function(ctx) {
       // extractCSS: false,
 
       // https://quasar.dev/quasar-cli/cli-documentation/handling-webpack
-      extendWebpack(cfg) {
+      extendWebpack (cfg) {
         cfg.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -180,7 +181,7 @@ module.exports = function(ctx) {
     electron: {
       // bundler: 'builder', // or 'packager'
 
-      extendWebpack(cfg) {
+      extendWebpack (cfg) {
         // do something with Electron main process Webpack cfg
         // chainWebpack also available besides this extendWebpack
       },

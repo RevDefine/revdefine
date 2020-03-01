@@ -31,5 +31,6 @@ export default {
   failToAdd: '添加失败！',
   added: '添加成功!',
   Explorer: '区块浏览器',
-  Settings: '设置'
+  Settings: '设置',
+  EnableWebsocket: '实时更新数据'
 };

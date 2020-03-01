@@ -14,4 +14,5 @@ export interface Settings {
   InitBlockCount: number;
   MaxCachedBlockCount: number;
   Timeout: number;
+  EnableWebsocket: 'YES' | 'NO';
 }

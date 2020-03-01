@@ -9,7 +9,7 @@ export default class RnodeWebsocket {
     this.url = url;
   }
 
-  public connect() {
+  public connect () {
     if (this.ws === undefined || this.ws.readyState === WebSocket.CLOSED) {
       this.ws = new WebSocket(this.url);
       this.onEvents();
@@ -18,14 +18,26 @@ export default class RnodeWebsocket {
     }
   }
 
-  public reconnect() {
+  public close () {
+    if (this.ws === undefined) {
+      return
+    } else {
+      if (this.ws.OPEN || this.ws.CONNECTING) {
+        this.ws.close()
+      } else {
+        return
+      }
+    }
+  }
+
+  public reconnect () {
     if (this.ws.readyState === WebSocket.OPEN || this.ws.readyState === WebSocket.CONNECTING) {
       this.ws.close(NORMALCLOSECODE);
     }
     this.connect();
   }
 
-  private onMessage(event: MessageEvent) {
+  private onMessage (event: MessageEvent) {
     const data = JSON.parse(event.data);
     const eventType = data.event;
     const payload = data.payload;
@@ -34,16 +46,16 @@ export default class RnodeWebsocket {
     }
   }
 
-  public onEvents() {
-    this.ws.onopen = function(event: Event) {
+  public onEvents () {
+    this.ws.onopen = function (event: Event) {
       EventBus.triggerEvent(REvent.Open, {});
     };
 
-    this.ws.onclose = function(event: Event) {
+    this.ws.onclose = function (event: Event) {
       EventBus.triggerEvent(REvent.Close, {});
     };
 
-    this.ws.onerror = function(event: Event) {
+    this.ws.onerror = function (event: Event) {
       EventBus.triggerEvent(REvent.Error, {});
     };
 

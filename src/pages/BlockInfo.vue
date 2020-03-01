@@ -14,29 +14,50 @@
         </q-card-section>
 
         <q-card-actions>
-          <q-btn flat label="OK" color="primary" v-close-popup to="/explorer/front" />
+          <q-btn
+            flat
+            label="OK"
+            color="primary"
+            v-close-popup
+            to="/explorer/front"
+          />
         </q-card-actions>
       </q-card>
     </q-dialog>
 
     <div class="row">
       <div class="col-sm-9 col-xs-12">
-        <span class="text-h5"># Block : </span
-        ><span class="text-body2" style="word-break: break-all;">{{ blockInfo.blockHash }}</span>
+        <span class="text-h5"># Block : </span><span
+          class="text-body2"
+          style="word-break: break-all;"
+        >{{ blockInfo.blockHash }}</span>
       </div>
       <div class="col-sm-3 col-xs-12">
         <search-block-bar @search="getBlockInfo"></search-block-bar>
       </div>
     </div>
     <div>
-      <q-list bordered separator style="word-break: break-all;">
-        <q-item v-for="item in blockInfoList" v-bind:key="item.key">
+      <q-list
+        bordered
+        separator
+        style="word-break: break-all;"
+      >
+        <q-item
+          v-for="item in blockInfoList"
+          v-bind:key="item.key"
+        >
           <template v-if="item.key === 'parentsHashList'">
             <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{ $t('parentsHashList') }}</q-item-section>
-            <q-separator vertical spaced />
+            <q-separator
+              vertical
+              spaced
+            />
             <q-item-section>
               <q-list>
-                <q-item v-for="parentHash in item.value" :key="parentHash">
+                <q-item
+                  v-for="parentHash in item.value"
+                  :key="parentHash"
+                >
                   <q-item-label>
                     <router-link :to="{ name: 'blockInfo', params: { blockHash: parentHash } }">{{
                       parentHash
@@ -49,19 +70,39 @@
 
           <template v-else-if="item.key === 'bonds'">
             <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{ $t('bondsValidatorList') }}</q-item-section>
-            <q-separator vertical spaced />
+            <q-separator
+              vertical
+              spaced
+            />
             <q-item-section>
               <q-list>
-                <q-item v-for="bond in item.value" :key="bond.validator">
+                <q-item
+                  v-for="bond in item.value"
+                  :key="bond.validator"
+                >
                   <q-item-label>{{ bond }}</q-item-label>
                 </q-item>
               </q-list>
             </q-item-section>
           </template>
 
+          <template v-else-if="item.key === 'timestamp'">
+            <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{ $t(item.key) }}</q-item-section>
+            <q-separator
+              vertical
+              spaced
+            />
+            <q-item-section>
+              <q-item-label>{{ item.value + ' -- ' + convertTimeStamp(item.value) }}</q-item-label>
+            </q-item-section>
+          </template>
+
           <template v-else>
             <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{ $t(item.key) }}</q-item-section>
-            <q-separator vertical spaced />
+            <q-separator
+              vertical
+              spaced
+            />
             <q-item-section padding>
               <q-item-label>{{ item.value }}</q-item-label>
             </q-item-section>
@@ -70,10 +111,16 @@
 
         <q-item>
           <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{ $t('deploys') }}</q-item-section>
-          <q-separator vertical spaced />
+          <q-separator
+            vertical
+            spaced
+          />
           <q-item-section padding>
             <q-list>
-              <q-item v-for="deploy in deploys" :key="deploy.sig">
+              <q-item
+                v-for="deploy in deploys"
+                :key="deploy.sig"
+              >
                 <q-item-label>{{ deploy }}</q-item-label>
               </q-item>
             </q-list>
@@ -88,6 +135,8 @@
 import Vue from 'vue';
 import SearchBlockBar from '../components/SearchBlockBar.vue';
 import { DeployInfo } from '../client/types';
+import { timeStampToDateTime } from '../lib/datetime';
+
 interface Item {
   key: string;
   value: undefined;
@@ -148,6 +197,9 @@ export default Vue.extend({
       } finally {
         this.$q.loading.hide();
       }
+    },
+    convertTimeStamp(time: string) {
+      return timeStampToDateTime(time);
     }
   },
 
