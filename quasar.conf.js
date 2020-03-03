@@ -74,7 +74,7 @@ module.exports = function (ctx) {
         'QSeparator',
         'QSelect',
         'QSpace',
-        'QToggle'
+        'QToggle',
       ],
 
       directives: ['Ripple', 'ClosePopup'],

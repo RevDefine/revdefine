@@ -32,5 +32,8 @@ export default {
   added: 'added!',
   Explorer: 'Explorer',
   Settings: 'Settings',
-  EnableWebsocket: 'EnableWebsocket'
+  EnableWebsocket: 'EnableWebsocket',
+  Search: 'Search',
+  DeployId: 'DeployId',
+  BlockHash: 'BlockHash'
 };
