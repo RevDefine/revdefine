@@ -1,41 +1,14 @@
 <template>
   <q-page padding>
-    <q-dialog v-model="alert">
-      <q-card>
-        <q-card-section>
-          <div class="text-h6">Not found BlockHash {{ $router.currentRoute.params.blockHash }}</div>
-        </q-card-section>
 
-        <q-card-section>
-          <div class="text-body2">
-            The blockHash you provided can not be found. Please make sure your
-            <router-link to="/settings">setting</router-link> is right and config an enbled server.
-          </div>
-        </q-card-section>
-
-        <q-card-actions>
-          <q-btn
-            flat
-            label="OK"
-            color="primary"
-            v-close-popup
-            to="/explorer/front"
-          />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-
-    <div class="row">
-      <div class="col-sm-9 col-xs-12">
-        <span class="text-h5"># Block : </span><span
-          class="text-body2"
-          style="word-break: break-all;"
-        >{{ blockInfo.blockHash }}</span>
-      </div>
-      <div class="col-sm-3 col-xs-12">
-        <search-block-bar @search="getBlockInfo"></search-block-bar>
-      </div>
-    </div>
+    <q-toolbar>
+      <span class="text-h5"># Block </span>
+      <q-space />
+      <search-alert
+        :alert='alert'
+        @search-alert="searchHash"
+      ></search-alert>
+    </q-toolbar>
     <div>
       <q-list
         bordered
@@ -176,7 +149,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import SearchBlockBar from '../components/SearchBlockBar.vue';
+import SearchAlert from '../components/SearchAlert.vue';
+import { SearchType } from '../components/SearchBar.vue';
 import { DeployInfo } from '../client/types';
 import { timeStampToDateTime } from '../lib/datetime';
 
@@ -188,7 +162,7 @@ interface Item {
 export default Vue.extend({
   name: 'BlockInfo',
   components: {
-    'search-block-bar': SearchBlockBar
+    'search-alert': SearchAlert
   },
   data() {
     return {
@@ -240,6 +214,23 @@ export default Vue.extend({
     };
   },
   methods: {
+    async searchHash(searchHash: string, searchType: SearchType) {
+      if (searchType == SearchType.BlockHash) {
+        let blockHash = searchHash;
+        this.getBlockInfo(blockHash);
+      } else if (searchType == SearchType.DeployId) {
+        try {
+          this.$q.loading.show();
+          const block = await this.$store.state.client.findDeploy(searchHash);
+          let blockHash = block.blockHash;
+          this.getBlockInfo(blockHash);
+        } catch (e) {
+          this.alert = true;
+        }finally{
+          this.$q.loading.hide()
+        }
+      }
+    },
     async getBlockInfo(blockHash: string) {
       this.$q.loading.show();
       try {

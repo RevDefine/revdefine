@@ -14,17 +14,20 @@ export default class Client {
     });
   }
 
-  public async showBlock(blockHash: string): Promise<BlockInfo> {
+  public async showBlock (blockHash: string): Promise<BlockInfo> {
     const resp = await this.axiosInstance.get<BlockInfo>('/api/block/' + blockHash);
     return resp.data;
   }
 
-  public async showBlocks(depth: number): Promise<LightBlockInfo[]> {
+  public async showBlocks (depth: number): Promise<LightBlockInfo[]> {
     const resp = await this.axiosInstance.get<LightBlockInfo[]>('/api/blocks/' + depth);
     return resp.data;
   }
 
-  // public findDeploy(deployId: string): LightBlockInfo {}
+  public async findDeploy (deployId: string): Promise<LightBlockInfo> {
+    const resp = await this.axiosInstance.get<LightBlockInfo>('/api/deploy/' + deployId)
+    return resp.data
+  }
 
   // public isFinalized(hash: string): boolean {}
 
