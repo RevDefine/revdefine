@@ -32,5 +32,8 @@ export default {
   added: '添加成功!',
   Explorer: '区块浏览器',
   Settings: '设置',
-  EnableWebsocket: '实时更新数据'
+  EnableWebsocket: '实时更新数据',
+  Search: '搜索',
+  DeployId: '合约Id',
+  BlockHash: '区块哈希'
 };
