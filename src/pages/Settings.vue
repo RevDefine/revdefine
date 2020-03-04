@@ -165,16 +165,17 @@ export default Vue.extend({
       dense: true,
       alert: false,
       testnetServerList: [
-        ['node0.testnet', 'node0.testnet.rchain-dev.tk:40403'],
-        ['node1.testnet', 'node1.testnet.rchain-dev.tk:40403'],
-        ['node2.testnet', 'node2.testnet.rchain-dev.tk:40403'],
-        ['node3.testnet', 'node3.testnet.rchain-dev.tk:40403'],
-        ['node4.testnet', 'node4.testnet.rchain-dev.tk:40403']
+        ['node0.testnet', 'http://node0.testnet.rchain-dev.tk:40403'],
+        ['node1.testnet', 'http://node1.testnet.rchain-dev.tk:40403'],
+        ['node2.testnet', 'http://node2.testnet.rchain-dev.tk:40403'],
+        ['node3.testnet', 'http://node3.testnet.rchain-dev.tk:40403'],
+        ['node4.testnet', 'http://node4.testnet.rchain-dev.tk:40403']
       ],
       mainnetServerList: [
-        ['observer-asia', 'observer-asia.services.mainnet.rchain.coop:40403'],
-        ['observer-us', 'observer-us.services.mainnet.rchain.coop:40403'],
-        ['observer-eu', 'observer-eu.services.mainnet.rchain.coop:40403']
+        ['observer', 'https://observer.services.mainnet.rchain.coop'],
+        ['observer-asia', 'http://observer-asia.services.mainnet.rchain.coop:40403'],
+        ['observer-us', 'http://observer-us.services.mainnet.rchain.coop:40403'],
+        ['observer-eu', 'http://observer-eu.services.mainnet.rchain.coop:40403']
       ]
     };
   },
@@ -202,7 +203,7 @@ export default Vue.extend({
       }
     },
     async onServerSelect(server: string[]) {
-      this.HttpHost = 'http://' + server[1];
+      this.HttpHost = server[1];
     }
   }
 });
