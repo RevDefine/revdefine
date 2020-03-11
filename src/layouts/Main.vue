@@ -51,7 +51,7 @@
 
           <q-item clickable v-ripple to="/explorer/rev">
             <q-item-section avatar>
-              <q-icon name="attach_money" />
+              <q-icon name="img:statics/icons/RChain_Icon_Red.svg"/>
             </q-item-section>
 
             <q-item-section>
