@@ -1,5 +1,7 @@
-import { BlockInfo, LightBlockInfo } from './types';
+import { BlockInfo, LightBlockInfo, ExploratoryDeployResponse } from './types';
 import axios, { AxiosInstance } from 'axios';
+
+
 
 export default class Client {
   public readonly HttpHost: string;
@@ -29,9 +31,17 @@ export default class Client {
     return resp.data
   }
 
+  public async exploratoryDeploy (term: string): Promise<ExploratoryDeployResponse> {
+    const resp = await this.axiosInstance.post<ExploratoryDeployResponse>('/api/explore-deploy', term)
+    return resp.data
+  }
+
   // public isFinalized(hash: string): boolean {}
 
   // public lastFinalizedBlock(): BlockInfo {}
 
   // public visualizeDag(depth: number, showJustificationLines: boolean) {}
+
+  //////////////////////////////////////////////////////////////////
+
 }
