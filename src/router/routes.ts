@@ -13,7 +13,8 @@ const routes: RouteConfig[] = [
         children: [
           { path: 'block/:blockHash', name: 'blockInfo', component: () => import('pages/BlockInfo.vue') },
           // { path: 'block', component: { template: '<div>User {{ $route.params.blockHash }}</div>' } },
-          { path: 'front', name: 'explorerFront', component: () => import('pages/ExplorerFront.vue') }
+          { path: 'front', name: 'explorerFront', component: () => import('pages/ExplorerFront.vue') },
+          { path: 'rev', name: 'rev', component: () => import('pages/Rev.vue') }
         ]
       },
       { path: 'settings', name: 'settings', component: () => import('pages/Settings.vue') }
