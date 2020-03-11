@@ -44,5 +44,6 @@ export default {
   YourRevAddressIsNotValid: 'Your Rev address is not valid!',
   YourEthAddressIsNotValid: 'Your Rev address is not valid!',
   YourInputAddressIsNotValidAddress: 'Your input address Is Not a valid address!',
-  InputYourRevAddrOrEthAddr: 'Input your Rev address or Eth address!'
+  InputYourRevAddrOrEthAddr: 'Input your Rev address or Eth address!',
+  SomeErrorMightHappenCheckYourNetwork: 'Check balance fail. Please check your network!'
 };

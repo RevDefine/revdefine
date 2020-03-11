@@ -62,6 +62,26 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
+
+    <q-dialog v-model="checkAlert">
+      <q-card>
+
+        <q-card-section>
+          <div class="text-h6">
+            {{$t('SomeErrorMightHappenCheckYourNetwork')}}
+          </div>
+        </q-card-section>
+
+        <q-card-actions>
+          <q-btn
+            flat
+            label="OK"
+            color="primary"
+            v-close-popup
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -78,7 +98,8 @@ export default Vue.extend({
       ethAddress: '',
       checkAddress: ' ',
       balance: 0,
-      alert: false
+      alert: false,
+      checkAlert: false
     };
   },
   methods:{
@@ -94,10 +115,17 @@ export default Vue.extend({
       if(checkAddress == ''){
         this.alert = true
       } else{
-        const apiClient = new RChainApi(this.$store.state.client)
-        const balance = await apiClient.checkBalance(checkAddress)
-        this.balance = balance
-        this.checkAddress = checkAddress
+        try{
+          this.$q.loading.show()
+          const apiClient = new RChainApi(this.$store.state.client)
+          const balance = await apiClient.checkBalance(checkAddress)
+          this.balance = balance
+          this.checkAddress = checkAddress
+        } catch {
+          this.checkAlert = true
+        } finally{
+          this.$q.loading.hide()
+        }
       }
     },
     verifyRevAddress(address: string): boolean{
@@ -105,10 +133,11 @@ export default Vue.extend({
       return verifyRevAddr(address);
     },
     verifyEthAddress(address: string):boolean{
-      if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
+      const normalizedAddr = address.toLowerCase()
+      if (!/^(0x)?[0-9a-f]{40}$/i.test(normalizedAddr)) {
         // check if it has the basic requirements of an address
         return false;
-      } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
+      } else if (/^(0x)?[0-9a-f]{40}$/.test(normalizedAddr) || /^(0x)?[0-9A-F]{40}$/.test(normalizedAddr)) {
         // If it's all small caps or all all caps, return true
         return true;
       } else {
