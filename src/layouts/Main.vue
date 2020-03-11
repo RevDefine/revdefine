@@ -49,6 +49,16 @@
             </q-item-section>
           </q-item>
 
+          <q-item clickable v-ripple to="/explorer/rev">
+            <q-item-section avatar>
+              <q-icon name="attach_money" />
+            </q-item-section>
+
+            <q-item-section>
+              Rev 
+            </q-item-section>
+          </q-item>
+
           <q-item clickable v-ripple to="/settings">
             <q-item-section avatar>
               <q-icon name="settings_applications" />

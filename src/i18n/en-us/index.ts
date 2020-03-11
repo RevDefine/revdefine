@@ -35,5 +35,13 @@ export default {
   EnableWebsocket: 'EnableWebsocket',
   Search: 'Search',
   DeployId: 'DeployId',
-  BlockHash: 'BlockHash'
+  BlockHash: 'BlockHash',
+  CheckBalance: 'Check Balance',
+  EthAddress: 'Eth Address',
+  RevAddress: 'Rev Address',
+  BalanceOfYourAddress: 'The balance of your address:',
+  is: 'is',
+  YourRevAddressIsNotValid: 'Your Rev address is not valid!',
+  YourEthAddressIsNotValid: 'Your Rev address is not valid!',
+  YourInputAddressIsNotValidAddress: 'Your input address Is Not a valid address'
 };
