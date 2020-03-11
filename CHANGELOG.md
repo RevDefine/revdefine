@@ -1,0 +1,13 @@
+# 2020-03-11
+1. add rev query page
+
+# 2020-03-04
+1. add https address and input support
+2. add deployId search
+3. make deployInfo easy to view
+
+# 2020-03-03
+1. add button for closing notified message
+2. add support for https and wss
+3. make timestamp to be readable
+4. button in the setting to enabe websocket 
