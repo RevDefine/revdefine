@@ -43,5 +43,6 @@ export default {
   is: 'is',
   YourRevAddressIsNotValid: 'Your Rev address is not valid!',
   YourEthAddressIsNotValid: 'Your Rev address is not valid!',
-  YourInputAddressIsNotValidAddress: 'Your input address Is Not a valid address'
+  YourInputAddressIsNotValidAddress: 'Your input address Is Not a valid address!',
+  InputYourRevAddrOrEthAddr: 'Input your Rev address or Eth address!'
 };
