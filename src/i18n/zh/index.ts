@@ -44,5 +44,6 @@ export default {
   YourRevAddressIsNotValid: '你输入的Rev地址不是正常地址!',
   YourEthAddressIsNotValid: '你输入的Eth地址不是正常地址!',
   YourInputAddressIsNotValidAddress: '你输入的地址不是正常地址!',
-  InputYourRevAddrOrEthAddr: '输入你的以太地址或者Rev地址!'
+  InputYourRevAddrOrEthAddr: '输入你的以太地址或者Rev地址!',
+  SomeErrorMightHappenCheckYourNetwork: '查询失败。请检查你的网络!'
 };
