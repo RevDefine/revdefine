@@ -105,10 +105,11 @@ export default Vue.extend({
       return verifyRevAddr(address);
     },
     verifyEthAddress(address: string):boolean{
-      if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
+      const normalizedAddr = address.toLowerCase()
+      if (!/^(0x)?[0-9a-f]{40}$/i.test(normalizedAddr)) {
         // check if it has the basic requirements of an address
         return false;
-      } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
+      } else if (/^(0x)?[0-9a-f]{40}$/.test(normalizedAddr) || /^(0x)?[0-9A-F]{40}$/.test(normalizedAddr)) {
         // If it's all small caps or all all caps, return true
         return true;
       } else {
