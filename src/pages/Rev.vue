@@ -34,11 +34,14 @@
       </q-card-section>
 
       <q-card-section>
-        <div class="text-body1"> 
+        <div class="text-body1">
           {{$t('BalanceOfYourAddress') }}
-          <div class="text-body1 text-weight-bolder" style="word-break: break-all;">{{checkAddress}}</div>
+          <div
+            class="text-body1 text-weight-bolder"
+            style="word-break: break-all;"
+          >{{checkAddress}}</div>
           {{$t('is')}}
-          <div class="text-body1 text-weight-bolder">{{balance}}</div>
+          <div class="text-body1 text-weight-bolder">{{balance / 100000000}}</div>
         </div>
       </q-card-section>
     </q-card>
@@ -87,8 +90,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {verifyRevAddr, getAddrFromEth} from '../lib/rnode-address';
-import RChainApi from '../client/api'
+import { verifyRevAddr, getAddrFromEth } from '../lib/rnode-address';
+import RChainApi from '../client/api';
 
 export default Vue.extend({
   name: 'Rev',
@@ -102,38 +105,38 @@ export default Vue.extend({
       checkAlert: false
     };
   },
-  methods:{
-    async checkBalance(revAddress: string, ethAddress: string){
-      var checkAddress = ''
-      if(this.verifyRevAddress(revAddress)){
-        checkAddress = revAddress
-      } else{
-        if(this.verifyEthAddress(ethAddress)){
-          checkAddress = getAddrFromEth(ethAddress)
+  methods: {
+    async checkBalance(revAddress: string, ethAddress: string) {
+      var checkAddress = '';
+      if (this.verifyRevAddress(revAddress)) {
+        checkAddress = revAddress;
+      } else {
+        if (this.verifyEthAddress(ethAddress)) {
+          checkAddress = getAddrFromEth(ethAddress);
         }
       }
-      if(checkAddress == ''){
-        this.alert = true
-      } else{
-        try{
-          this.$q.loading.show()
-          const apiClient = new RChainApi(this.$store.state.client)
-          const balance = await apiClient.checkBalance(checkAddress)
-          this.balance = balance
-          this.checkAddress = checkAddress
+      if (checkAddress == '') {
+        this.alert = true;
+      } else {
+        try {
+          this.$q.loading.show();
+          const apiClient = new RChainApi(this.$store.state.client);
+          const balance = await apiClient.checkBalance(checkAddress);
+          this.balance = balance;
+          this.checkAddress = checkAddress;
         } catch {
-          this.checkAlert = true
-        } finally{
-          this.$q.loading.hide()
+          this.checkAlert = true;
+        } finally {
+          this.$q.loading.hide();
         }
       }
     },
-    verifyRevAddress(address: string): boolean{
+    verifyRevAddress(address: string): boolean {
       // @ts-ignore
       return verifyRevAddr(address);
     },
-    verifyEthAddress(address: string):boolean{
-      const normalizedAddr = address.toLowerCase()
+    verifyEthAddress(address: string): boolean {
+      const normalizedAddr = address.toLowerCase();
       if (!/^(0x)?[0-9a-f]{40}$/i.test(normalizedAddr)) {
         // check if it has the basic requirements of an address
         return false;
@@ -142,8 +145,8 @@ export default Vue.extend({
         return true;
       } else {
         // Otherwise check each case
-        return false
-        // 
+        return false;
+        //
         // return isChecksumAddress(address);
       }
     }
