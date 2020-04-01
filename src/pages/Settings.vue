@@ -110,11 +110,11 @@ export default Vue.extend({
       dense: true,
       alert: false,
       testnetServerList: [
-        ['node0.testnet', 'http://node0.testnet.rchain-dev.tk:40403'],
-        ['node1.testnet', 'http://node1.testnet.rchain-dev.tk:40403'],
-        ['node2.testnet', 'http://node2.testnet.rchain-dev.tk:40403'],
-        ['node3.testnet', 'http://node3.testnet.rchain-dev.tk:40403'],
-        ['node4.testnet', 'http://node4.testnet.rchain-dev.tk:40403']
+        ['observer.testnet', 'https://observer.testnet.rchain.coop']
+        // ['node1.testnet', 'http://node1.testnet.rchain-dev.tk:40403'],
+        // ['node2.testnet', 'http://node2.testnet.rchain-dev.tk:40403'],
+        // ['node3.testnet', 'http://node3.testnet.rchain-dev.tk:40403'],
+        // ['node4.testnet', 'http://node4.testnet.rchain-dev.tk:40403']
       ],
       mainnetServerList: [
         ['observer', 'https://observer.services.mainnet.rchain.coop'],
