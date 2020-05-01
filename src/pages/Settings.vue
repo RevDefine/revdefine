@@ -7,7 +7,7 @@
         </q-card-section>
 
         <q-card-section>
-          The server you provided can not be acceesed. Make sure it is a rnode http server.
+          The server you provided can not be accessed. Make sure it is a rnode http server.
         </q-card-section>
 
         <q-card-actions align="right">

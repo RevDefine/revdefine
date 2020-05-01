@@ -1,4 +1,59 @@
 <template>
+  <q-layout view="hHh lpR fFf">
+
+    <q-header elevated class="bg-primary text-white" height-hint="98">
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img width="80" src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
+          </q-avatar>
+          Title
+        </q-toolbar-title>
+        <q-tabs align="left">
+          <q-route-tab to="/page1" label="Page One" />
+          <q-route-tab to="/page2" label="Page Two" />
+          <q-route-tab to="/page3" label="Page Three" />
+        </q-tabs>
+
+        <q-btn-dropdown no-caps :label="lang">
+          <q-list>
+            <q-item
+              clickable
+              v-close-popup
+              v-for="lang in langOptions"
+              v-bind:key="lang.value"
+              @click="onLangSelect(lang)"
+            >
+              <q-item-section>
+                <q-item-label>{{ lang.label }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
+      </q-toolbar>
+
+
+    </q-header>
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+
+    <q-footer elevated class="bg-grey-8 text-white">
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img  width="80px" src="https://rchain.coop/assets/r-chain-horizontal-logo-final-white@3x.png">
+          </q-avatar>
+          Title
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-footer>
+
+  </q-layout>
+</template>
+<!--
+<template>
   <q-layout view="hHh lpr fFf">
     <q-header elevated class="bg-black">
       <q-toolbar>
@@ -63,12 +118,12 @@
     </q-drawer>
 
     <q-page-container>
-      <!-- This is where pages get injected -->
+
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
-
+-->
 <script lang="ts">
 import Vue from 'vue';
 import EventBus, { REvent } from '../client/websocket/eventBus';
