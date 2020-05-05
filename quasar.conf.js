@@ -47,6 +47,9 @@ module.exports = function (ctx) {
         'QLayout',
         'QHeader',
         'QDrawer',
+        'QTabs',
+        'QTab',
+        'QRouteTab',
         'QPageContainer',
         'QPage',
         'QToolbar',
@@ -74,7 +77,8 @@ module.exports = function (ctx) {
         'QSeparator',
         'QSelect',
         'QSpace',
-        'QToggle'
+        'QToggle',
+        'QFooter'
       ],
 
       directives: ['Ripple', 'ClosePopup'],
