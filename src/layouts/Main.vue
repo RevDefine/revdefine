@@ -4,15 +4,17 @@
     <q-header elevated class="bg-primary text-white" height-hint="98">
       <q-toolbar>
         <q-toolbar-title>
+          <!--
           <q-avatar>
             <img width="80" src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
           </q-avatar>
-          Title
+          -->
+          RevDefine
         </q-toolbar-title>
         <q-tabs align="left">
-          <q-route-tab to="/page1" label="Page One" />
-          <q-route-tab to="/page2" label="Page Two" />
-          <q-route-tab to="/page3" label="Page Three" />
+          <q-route-tab to="/page1" label="Explorer" />
+          <q-route-tab to="/page2" label="REV Balance" />
+          <q-route-tab to="/page3" label="Settings" />
         </q-tabs>
 
         <q-btn-dropdown no-caps :label="lang">
