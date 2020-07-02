@@ -88,6 +88,7 @@ module.exports = function (ctx) {
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
     supportIE: false,
+    supportTS: true,
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
