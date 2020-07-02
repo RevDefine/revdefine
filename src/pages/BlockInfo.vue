@@ -1,41 +1,14 @@
 <template>
   <q-page padding>
-    <q-dialog v-model="alert">
-      <q-card>
-        <q-card-section>
-          <div class="text-h6">Not found BlockHash {{ $router.currentRoute.params.blockHash }}</div>
-        </q-card-section>
 
-        <q-card-section>
-          <div class="text-body2">
-            The blockHash you provided can not be found. Please make sure your
-            <router-link to="/settings">setting</router-link> is right and config an enbled server.
-          </div>
-        </q-card-section>
-
-        <q-card-actions>
-          <q-btn
-            flat
-            label="OK"
-            color="primary"
-            v-close-popup
-            to="/explorer/front"
-          />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-
-    <div class="row">
-      <div class="col-sm-9 col-xs-12">
-        <span class="text-h5"># Block : </span><span
-          class="text-body2"
-          style="word-break: break-all;"
-        >{{ blockInfo.blockHash }}</span>
-      </div>
-      <div class="col-sm-3 col-xs-12">
-        <search-block-bar @search="getBlockInfo"></search-block-bar>
-      </div>
-    </div>
+    <q-toolbar>
+      <span class="text-h5"># Block </span>
+      <q-space />
+      <search-alert
+        :alert='alert'
+        @search-alert="searchHash"
+      ></search-alert>
+    </q-toolbar>
     <div>
       <q-list
         bordered
@@ -74,7 +47,7 @@
               vertical
               spaced
             />
-            <q-item-section>
+            <q-item-section padding>
               <q-list>
                 <q-item
                   v-for="bond in item.value"
@@ -92,7 +65,7 @@
               vertical
               spaced
             />
-            <q-item-section>
+            <q-item-section padding>
               <q-item-label>{{ item.value + ' -- ' + convertTimeStamp(item.value) }}</q-item-label>
             </q-item-section>
           </template>
@@ -121,19 +94,63 @@
                 v-for="deploy in deploys"
                 :key="deploy.sig"
               >
-                <q-item-label>{{ deploy }}</q-item-label>
+                <q-btn
+                  :label="deploy.sig"
+                  @click='showDeployInfo(deploy.sig)'
+                />
               </q-item>
             </q-list>
           </q-item-section>
         </q-item>
       </q-list>
+
+      <q-dialog
+        v-model="deployInfoDialog"
+        full-width
+        full-height
+      >
+        <q-card>
+          <q-card-section class="row items-center q-pb-none">
+            <q-space />
+            <q-btn
+              icon="close"
+              flat
+              round
+              dense
+              v-close-popup
+            />
+          </q-card-section>
+          <q-card-section>
+            <q-list
+              bordered
+              separator
+              style="word-break: break-all;"
+            >
+              <q-item
+                v-for="info in deployInfoListView"
+                v-bind:key="info"
+              >
+                <q-item-section class="col-sm-3 col-xs-5 col-md-2"> {{$t(info)}} </q-item-section>
+                <q-separator
+                  vertical
+                  spaced
+                ></q-separator>
+                <q-item-section padding>
+                  <q-item-label>{{ deployInfoView[info] }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-card-section>
+        </q-card>
+      </q-dialog>
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import SearchBlockBar from '../components/SearchBlockBar.vue';
+import SearchAlert from '../components/SearchAlert.vue';
+import { SearchType } from '../components/SearchBar.vue';
 import { DeployInfo } from '../client/types';
 import { timeStampToDateTime } from '../lib/datetime';
 
@@ -141,16 +158,33 @@ interface Item {
   key: string;
   value: undefined;
 }
+
 export default Vue.extend({
   name: 'BlockInfo',
   components: {
-    'search-block-bar': SearchBlockBar
+    'search-alert': SearchAlert
   },
   data() {
     return {
       blockInfo: {},
       deploys: new Array<DeployInfo>(),
       blockInfoList: new Array<Item>(),
+
+      deployInfoView: {},
+      deployInfoDialog: false,
+      deployInfoListView: [
+        'deployer',
+        'term',
+        'timestamp',
+        'sig',
+        'sigAlgorithm',
+        'phloPrice',
+        'phloLimit',
+        'validAfterBlockNumber',
+        'cost',
+        'errored',
+        'systemDeployError'
+      ],
 
       listView: [
         'blockHash',
@@ -180,6 +214,23 @@ export default Vue.extend({
     };
   },
   methods: {
+    async searchHash(searchHash: string, searchType: SearchType) {
+      if (searchType == SearchType.BlockHash) {
+        let blockHash = searchHash;
+        this.getBlockInfo(blockHash);
+      } else if (searchType == SearchType.DeployId) {
+        try {
+          this.$q.loading.show();
+          const block = await this.$store.state.client.findDeploy(searchHash);
+          let blockHash = block.blockHash;
+          this.getBlockInfo(blockHash);
+        } catch (e) {
+          this.alert = true;
+        }finally{
+          this.$q.loading.hide()
+        }
+      }
+    },
     async getBlockInfo(blockHash: string) {
       this.$q.loading.show();
       try {
@@ -200,6 +251,13 @@ export default Vue.extend({
     },
     convertTimeStamp(time: string) {
       return timeStampToDateTime(time);
+    },
+    showDeployInfo(deployId: string) {
+      const result = this.deploys.find(d => d.sig === deployId);
+      if (result != undefined) {
+        this.deployInfoView = result;
+        this.deployInfoDialog = true;
+      }
     }
   },
 

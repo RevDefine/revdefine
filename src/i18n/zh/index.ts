@@ -32,5 +32,18 @@ export default {
   added: '添加成功!',
   Explorer: '区块浏览器',
   Settings: '设置',
-  EnableWebsocket: '实时更新数据'
+  EnableWebsocket: '实时更新数据',
+  Search: '搜索',
+  DeployId: '合约Id',
+  BlockHash: '区块哈希',
+  CheckBalance: '查询余额',
+  EthAddress: '以太地址',
+  RevAddress: 'Rev地址',
+  BalanceOfYourAddress: '你钱包的余额',
+  is: '是',
+  YourRevAddressIsNotValid: '你输入的Rev地址不是正常地址!',
+  YourEthAddressIsNotValid: '你输入的Eth地址不是正常地址!',
+  YourInputAddressIsNotValidAddress: '你输入的地址不是正常地址!',
+  InputYourRevAddrOrEthAddr: '输入你的以太地址或者Rev地址!',
+  SomeErrorMightHappenCheckYourNetwork: '查询失败。请检查你的网络!'
 };

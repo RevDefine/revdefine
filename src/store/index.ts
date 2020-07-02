@@ -8,7 +8,7 @@ import { BlockStore } from './blockStore';
 
 Vue.use(Vuex);
 
-const DEFAULT_HTTPHOST = 'http://127.0.0.1:40403';
+const DEFAULT_HTTPHOST = process.env.NODE_ENV == 'development' ? 'http://127.0.0.1:40403' : 'https://observer.services.mainnet.rchain.coop';
 const WEBSOCKET_PATH = '/ws/events';
 const DEFAULT_WEBSOCKET_HOST = DEFAULT_HTTPHOST.replace('http', 'ws') + WEBSOCKET_PATH;
 const DEFAULT_INITBLOCKCOUNT = 10;

@@ -13,7 +13,10 @@
       hide-header
     >
       <template v-slot:top-right>
-        <search-block-bar @search="showBlock"></search-block-bar>
+        <search-block-bar
+          :alert='alert'
+          @search-alert="showBlock"
+        ></search-block-bar>
       </template>
 
       <template v-slot:item="props">
@@ -30,7 +33,7 @@
                 <q-item-section side>
                   <q-item-label
                     v-if="col.label === 'blockHash'"
-                    @click="showBlock(col.value)"
+                    @click="showBlock(col.value, 'BlockHash')"
                     class="text-primary"
                   ><span class="cursor-pointer">{{ col.value }}</span></q-item-label>
                   <q-item-label v-else-if="col.label === 'timestamp'">{{ convertTimeStamp(col.value) }}</q-item-label>
@@ -47,13 +50,14 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import SearchBlockBar from '../components/SearchBlockBar.vue';
+import { SearchType } from '../components/SearchBar.vue';
+import SearchAlert from '../components/SearchAlert.vue';
 import { timeStampToShortTime } from '../lib/datetime';
 
 export default Vue.extend({
   name: 'ExplorerFront',
   components: {
-    'search-block-bar': SearchBlockBar
+    'search-block-bar': SearchAlert
   },
   data() {
     return {
@@ -61,7 +65,6 @@ export default Vue.extend({
       pagination: {
         rowsPerPage: 0
       },
-      searchBlockHash: '',
       visibleColumns: [
         'blockHash',
         'blockSize',
@@ -72,6 +75,7 @@ export default Vue.extend({
         'sender',
         'version'
       ],
+      alert: false,
       columns: [
         {
           name: 'blockHash',
@@ -115,8 +119,23 @@ export default Vue.extend({
       await this.$store.dispatch('fetchBlocks', 20);
     },
 
-    showBlock(blockHash: string) {
-      this.$router.push('/explorer/block/'.concat(blockHash));
+    async showBlock(searchHash: string, searchType: SearchType) {
+      if (searchType == SearchType.BlockHash) {
+        let blockHash = searchHash;
+        this.$router.push('/explorer/block/'.concat(blockHash));
+      } else if (searchType == SearchType.DeployId) {
+        try{
+          this.$q.loading.show()
+          const block = await this.$store.state.client.findDeploy(searchHash);
+          let blockHash = block.blockHash;
+          this.$q.loading.hide()
+          this.$router.push('/explorer/block/'.concat(blockHash));
+        } catch(e){
+          this.alert= true
+        } finally{
+          this.$q.loading.hide()
+        }
+      }
       // this.$router.push('/explorer/block/');
     },
     convertTimeStamp(time: string) {

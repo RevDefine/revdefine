@@ -48,3 +48,63 @@ export interface LightBlockInfo {
   readonly deployCount: number;
   readonly faultTolerance: number;
 }
+
+export interface ExploratoryDeployResponse {
+  expr: RhoExpr[]
+  block: LightBlockInfo
+}
+
+export type RhoExpr = ExprMap | ExprBool | ExprInt | ExprString | ExprUri | ExprBytes | ExprUnforg | ExprPar | ExprList | ExprTuple
+export type RhoUnforg = UnforgDeploy | UnforgDeployer | UnforgPrivate
+
+export interface ExprMap {
+  data: Map<string, RhoExpr>
+}
+
+export interface ExprBool {
+  data: boolean
+}
+
+export interface ExprInt {
+  data: number
+}
+
+export interface ExprString {
+  data: string
+}
+
+export interface ExprUri {
+  data: string
+}
+
+export interface ExprBytes {
+  data: string
+}
+
+export interface ExprUnforg {
+  data: RhoUnforg
+}
+
+export interface ExprPar {
+  data: RhoExpr[]
+}
+
+export interface ExprList {
+  data: RhoExpr[]
+}
+
+export interface ExprTuple {
+  data: RhoExpr[]
+}
+
+export interface UnforgPrivate {
+  data: string
+}
+
+export interface UnforgDeploy {
+  data: string
+}
+
+export interface UnforgDeployer {
+  data: string
+}

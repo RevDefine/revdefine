@@ -32,5 +32,18 @@ export default {
   added: 'added!',
   Explorer: 'Explorer',
   Settings: 'Settings',
-  EnableWebsocket: 'EnableWebsocket'
+  EnableWebsocket: 'EnableWebsocket',
+  Search: 'Search',
+  DeployId: 'DeployId',
+  BlockHash: 'BlockHash',
+  CheckBalance: 'Check Balance',
+  EthAddress: 'Eth Address',
+  RevAddress: 'Rev Address',
+  BalanceOfYourAddress: 'The balance of your address:',
+  is: 'is',
+  YourRevAddressIsNotValid: 'Your Rev address is not valid!',
+  YourEthAddressIsNotValid: 'Your Rev address is not valid!',
+  YourInputAddressIsNotValidAddress: 'Your input address Is Not a valid address!',
+  InputYourRevAddrOrEthAddr: 'Input your Rev address or Eth address!',
+  SomeErrorMightHappenCheckYourNetwork: 'Check balance fail. Please check your network!'
 };

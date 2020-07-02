@@ -13,7 +13,10 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.19.1",
-    "elliptic": "^6.5.1",
+    "base-58": "^0.0.1",
+    "blakejs": "^1.1.0",
+    "elliptic": "^6.5.2",
+    "js-sha3": "^0.8.0",
     "quasar": "^1.2.1",
     "vue-i18n": "^8.15.4",
     "vuetype": "^0.3.2"
@@ -31,8 +34,7 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^5.0.0",
-    "tslint": "^5.20.0",
-    "typescript": "^3.5"
+    "tslint": "^5.20.0"
   },
   "engines": {
     "node": ">= 8.9.0",

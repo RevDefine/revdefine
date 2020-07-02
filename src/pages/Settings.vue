@@ -11,29 +11,15 @@
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn
-            flat
-            label="OK"
-            color="primary"
-            v-close-popup
-          />
+          <q-btn flat label="OK" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
     </q-dialog>
 
     <div class="row justify-center q-pa-md">
-      <q-btn-dropdown
-        no-caps
-        :label="$t('TestnetServer')"
-      >
+      <q-btn-dropdown no-caps :label="$t('TestnetServer')">
         <q-list>
-          <q-item
-            clickable
-            v-close-popup
-            v-for="server in testnetServerList"
-            v-bind:key="server[0]"
-            @click="onServerSelect(server)"
-          >
+          <q-item clickable v-close-popup v-for="server in testnetServerList" v-bind:key="server[0]" @click="onServerSelect(server)">
             <q-item-section>
               <q-item-label>{{ server[0] }}</q-item-label>
             </q-item-section>
@@ -41,23 +27,11 @@
         </q-list>
       </q-btn-dropdown>
 
-      <q-separator
-        vertical
-        spaced
-      />
+      <q-separator vertical spaced />
 
-      <q-btn-dropdown
-        no-caps
-        :label="$t('MainnetServer')"
-      >
+      <q-btn-dropdown no-caps :label="$t('MainnetServer')">
         <q-list>
-          <q-item
-            clickable
-            v-close-popup
-            v-for="server in mainnetServerList"
-            v-bind:key="server[0]"
-            @click="onServerSelect(server)"
-          >
+          <q-item clickable v-close-popup v-for="server in mainnetServerList" v-bind:key="server[0]" @click="onServerSelect(server)">
             <q-item-section>
               <q-item-label>{{ server[0] }}</q-item-label>
             </q-item-section>
@@ -71,15 +45,10 @@
         <div class="text-center">{{ $t('HttpHostSetting') }}</div>
       </div>
       <div class="col">
-        <q-input
-          filled
-          :dense="dense"
-          v-model="HttpHost"
-          :rules="[
+        <q-input filled :dense="dense" v-model="HttpHost" :rules="[
             val => !!val || '* Required',
             val => val.match('^https?://') || '* It must be http protocol which is started with *http://* or *https://*.' ,
-          ]"
-        />
+          ]" />
       </div>
     </div>
 
@@ -88,12 +57,7 @@
         <div class="text-center">{{ $t('EnableWebsocket') }}</div>
       </div>
       <div class="col">
-        <q-toggle
-          v-model="EnableWebsocket"
-          :label="`${EnableWebsocket}`"
-          false-value="NO"
-          true-value="YES"
-        />
+        <q-toggle v-model="EnableWebsocket" :label="`${EnableWebsocket}`" false-value="NO" true-value="YES" />
       </div>
     </div>
 
@@ -102,12 +66,7 @@
         <div class="text-center">{{ $t('InitBlockCount') }}</div>
       </div>
       <div class="col">
-        <q-input
-          filled
-          :dense="dense"
-          v-model="InitBlockCount"
-          :rules="[val => !isNaN(val) || '* It must be a number']"
-        />
+        <q-input filled :dense="dense" v-model="InitBlockCount" :rules="[val => !isNaN(val) || '* It must be a number']" />
       </div>
     </div>
 
@@ -116,12 +75,7 @@
         <div class="text-center">{{ $t('MaxCachedBlockCount') }}</div>
       </div>
       <div class="col">
-        <q-input
-          filled
-          :dense="dense"
-          v-model="MaxCachedBlockCount"
-          :rules="[val => !isNaN(val) || '* It must be a number']"
-        />
+        <q-input filled :dense="dense" v-model="MaxCachedBlockCount" :rules="[val => !isNaN(val) || '* It must be a number']" />
       </div>
     </div>
 
@@ -130,22 +84,13 @@
         <div class="text-center">{{ $t('Timeout') }}</div>
       </div>
       <div class="col">
-        <q-input
-          filled
-          :dense="dense"
-          v-model="Timeout"
-          :rules="[val => !isNaN(val) || '* It must be a number']"
-        />
+        <q-input filled :dense="dense" v-model="Timeout" :rules="[val => !isNaN(val) || '* It must be a number']" />
       </div>
     </div>
 
     <div class="row justify-center">
       <div>
-        <q-btn
-          color="primary"
-          :label="$t('ApplyConnect')"
-          @click="clickApply"
-        />
+        <q-btn color="primary" :label="$t('ApplyConnect')" @click="clickApply" />
       </div>
     </div>
   </q-page>
@@ -165,16 +110,17 @@ export default Vue.extend({
       dense: true,
       alert: false,
       testnetServerList: [
-        ['node0.testnet', 'node0.testnet.rchain-dev.tk:40403'],
-        ['node1.testnet', 'node1.testnet.rchain-dev.tk:40403'],
-        ['node2.testnet', 'node2.testnet.rchain-dev.tk:40403'],
-        ['node3.testnet', 'node3.testnet.rchain-dev.tk:40403'],
-        ['node4.testnet', 'node4.testnet.rchain-dev.tk:40403']
+        ['observer.testnet', 'https://observer.testnet.rchain.coop']
+        // ['node1.testnet', 'http://node1.testnet.rchain-dev.tk:40403'],
+        // ['node2.testnet', 'http://node2.testnet.rchain-dev.tk:40403'],
+        // ['node3.testnet', 'http://node3.testnet.rchain-dev.tk:40403'],
+        // ['node4.testnet', 'http://node4.testnet.rchain-dev.tk:40403']
       ],
       mainnetServerList: [
-        ['observer-asia', 'observer-asia.services.mainnet.rchain.coop:40403'],
-        ['observer-us', 'observer-us.services.mainnet.rchain.coop:40403'],
-        ['observer-eu', 'observer-eu.services.mainnet.rchain.coop:40403']
+        ['observer', 'https://observer.services.mainnet.rchain.coop'],
+        ['observer-asia', 'https://observer-asia.services.mainnet.rchain.coop'],
+        ['observer-us', 'https://observer-us.services.mainnet.rchain.coop'],
+        ['observer-eu', 'https://observer-eu.services.mainnet.rchain.coop']
       ]
     };
   },
@@ -202,7 +148,7 @@ export default Vue.extend({
       }
     },
     async onServerSelect(server: string[]) {
-      this.HttpHost = 'http://' + server[1];
+      this.HttpHost = server[1];
     }
   }
 });
