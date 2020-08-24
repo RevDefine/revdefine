@@ -1,20 +1,20 @@
  <template>
   <div>
     <div class="row col-xs-12 justify-center">
-      <transfer-table></transfer-table>
+      <block-table></block-table>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import TransferTable from '../components/TransferTable.vue';
+import BlockTable from '../components/BlockTable.vue';
 
 export default Vue.extend({
   components: {
-    'transfer-table': TransferTable
+    'block-table': BlockTable
   },
-  name: 'transfer',
+  name: 'blocks',
   data() {
     return {};
   }

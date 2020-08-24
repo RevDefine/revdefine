@@ -12,12 +12,16 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.9.3",
+    "apexcharts": "^3.20.0",
     "axios": "^0.19.1",
     "base-58": "^0.0.1",
     "blakejs": "^1.1.0",
+    "echarts": "^4.8.0",
     "elliptic": "^6.5.2",
     "js-sha3": "^0.8.0",
     "quasar": "^1.12.13",
+    "vue-apexcharts": "^1.6.0",
+    "vue-echarts-v3": "^2.0.1",
     "vue-i18n": "^8.15.4",
     "vuetype": "^0.3.2"
   },

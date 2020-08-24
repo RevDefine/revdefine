@@ -29,25 +29,29 @@
               active-color='primary'
               content-class="font-head"
             >
-              <q-tab
+              <q-route-tab
                 no-caps
                 name="home"
                 label="Home"
+                to="/home"
               />
-              <q-tab
+              <q-route-tab
                 no-caps
                 name="blocks"
                 label="Blocks"
+                to="/blocks"
               />
-              <q-tab
+              <q-route-tab
                 no-caps
                 name="transfer"
                 label="Transfer"
+                to="/transfer"
               />
-              <q-tab
+              <q-route-tab
                 no-caps
                 name="account"
                 label="Account"
+                to="/account"
               />
             </q-tabs>
             <q-space />
@@ -74,7 +78,7 @@
         </div>
       </q-header>
 
-      <q-footer
+      <!-- <q-footer
         class="bg-white"
         reveal
       >
@@ -83,12 +87,15 @@
             <q-toolbar-title class="font-head">Footer</q-toolbar-title>
           </q-toolbar>
         </div>
-      </q-footer>
+      </q-footer> -->
 
       <q-page-container>
         <!-- This is where pages get injected -->
         <div class="row justify-center">
-          <div class="col-md-10 col-sm-12 col-xs-12">
+          <div
+            class="col-md-10 col-sm-12 col-xs-12"
+            style="max-width:1200px"
+          >
             <router-view />
           </div>
         </div>
