@@ -1,88 +1,104 @@
 <template>
-  <q-layout view="hHh lpr fFf">
-    <q-header elevated class="bg-black">
-      <q-toolbar>
-        <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        <q-toolbar-title>RevDefine</q-toolbar-title>
-
-        <q-space />
-
-        <q-btn-dropdown no-caps :label="lang">
-          <q-list>
-            <q-item
-              clickable
-              v-close-popup
-              v-for="lang in langOptions"
-              v-bind:key="lang.value"
-              @click="onLangSelect(lang)"
-            >
-              <q-item-section>
-                <q-item-label>{{ lang.label }}</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-btn-dropdown>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer
-      v-model="drawer"
-      show-if-above
-      :mini="miniState"
-      @mouseover="miniState = false"
-      @mouseout="miniState = true"
-      mini-to-overlay
-      :width="200"
-      :breakpoint="500"
-      bordered
-      content-class="bg-grey-3"
+  <div>
+    <q-layout
+      view="lHr Lpr lFr"
+      class="bg-grey-1"
     >
-      <q-scroll-area class="fit">
-        <q-list padding>
-          <q-item clickable v-ripple to="/explorer/front">
-            <q-item-section avatar>
-              <q-icon name="vertical_split" />
-            </q-item-section>
+      <q-header class="bg-white">
+        <div class="row justify-center">
+          <q-toolbar class="col-md-10">
+            <div>
+              <img
+                class="logo-size"
+                src="../assets/revdefineLogo.png"
+              >
+            </div>
 
-            <q-item-section>
-              {{ $t('Explorer') }}
-            </q-item-section>
-          </q-item>
+            <q-toolbar-title
+              class="font-head"
+              shrink
+              v-if="$q.screen.gt.xs"
+            >RevDefine
+            </q-toolbar-title>
 
-          <q-item clickable v-ripple to="/explorer/rev">
-            <q-item-section avatar>
-              <q-icon name="img:statics/icons/RChain_Icon_Red.svg"/>
-            </q-item-section>
+            <div class="col-md-1 col-lg-1 col-sm-1"></div>
 
-            <q-item-section>
-              Rev 
-            </q-item-section>
-          </q-item>
+            <q-tabs
+              align="left"
+              v-model="tab"
+              active-color='primary'
+              content-class="font-head"
+            >
+              <q-tab
+                no-caps
+                name="home"
+                label="Home"
+              />
+              <q-tab
+                no-caps
+                name="blocks"
+                label="Blocks"
+              />
+              <q-tab
+                no-caps
+                name="transfer"
+                label="Transfer"
+              />
+              <q-tab
+                no-caps
+                name="account"
+                label="Account"
+              />
+            </q-tabs>
+            <q-space />
+            <q-btn-dropdown
+              no-caps
+              class="font-content"
+              :label="lang"
+            >
+              <q-list>
+                <q-item
+                  clickable
+                  v-close-popup
+                  v-for="lang in langOptions"
+                  v-bind:key="lang.value"
+                  @click="onLangSelect(lang)"
+                >
+                  <q-item-section>
+                    <q-item-label>{{ lang.label }}</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
+          </q-toolbar>
+        </div>
+      </q-header>
 
-          <q-item clickable v-ripple to="/settings">
-            <q-item-section avatar>
-              <q-icon name="settings_applications" />
-            </q-item-section>
+      <q-footer
+        class="bg-white"
+        reveal
+      >
+        <div class="row justify-center">
+          <q-toolbar class="col-md-10">
+            <q-toolbar-title class="font-head">Footer</q-toolbar-title>
+          </q-toolbar>
+        </div>
+      </q-footer>
 
-            <q-item-section>
-              {{ $t('Settings') }}
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-scroll-area>
-    </q-drawer>
-
-    <q-page-container>
-      <!-- This is where pages get injected -->
-      <router-view />
-    </q-page-container>
-  </q-layout>
+      <q-page-container>
+        <!-- This is where pages get injected -->
+        <div class="row justify-center">
+          <div class="col-md-10 col-sm-12 col-xs-12">
+            <router-view />
+          </div>
+        </div>
+      </q-page-container>
+    </q-layout>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import EventBus, { REvent } from '../client/websocket/eventBus';
-import { BlockInfo } from '../client/types';
 
 interface LangLabel {
   value: string;
@@ -94,50 +110,24 @@ export default Vue.extend({
 
   data() {
     return {
-      drawer: false,
-      miniState: true,
       lang: 'English',
       langOptions: [
         { value: 'en-us', label: 'English' },
         { value: 'zh', label: '中文' }
-      ]
+      ],
+      tab: 'home'
     };
   },
   methods: {
     onLangSelect(lang: LangLabel) {
       this.$i18n.locale = lang.value;
       this.lang = lang.label;
-    },
-    notifiedBlockAdded(event: REvent, payload: any, vue: Vue) {
-      this.$store.dispatch('fetchBlock', payload['block-hash']).then(
-        (block: BlockInfo) => {
-          this.$store.commit('addBlockInfo', block.blockInfo);
-          const blockHash = block.blockInfo.blockHash;
-          const blockStr = this.$t('Block') as string;
-          const addStr = this.$t('added') as string;
-          this.$q.notify({
-            color: 'primary',
-            message: ''.concat(blockStr, ' ', blockHash, ' ', addStr),
-            position: 'bottom-left',
-            timeout: 5000,
-            actions: [{label: 'Close', color: 'yellow'}]
-          });
-        },
-        _ => {
-          const blockStr = this.$t('Block') as string;
-          const errStr = this.$t('failToAdd') as string;
-          this.$q.notify({
-            color: 'warn',
-            message: ''.concat(blockStr, ' ', payload['block-hash'], ' ', errStr),
-            position: 'bottom-right',
-            timeout: 10000
-          });
-        }
-      );
     }
-  },
-  created() {
-    EventBus.addListener(REvent.BlockAdded, this.notifiedBlockAdded, this);
   }
 });
 </script>
+
+<style lang="sass">
+.logo-font
+  width: 72px
+</style>
