@@ -1,49 +1,25 @@
 <template>
-  <q-toolbar>
-    <q-btn-dropdown
-      :label="$t(searchType)"
-      no-caps
-    >
-      <q-list>
-        <q-item
-          clickable
-          v-close-popup
-          @click="searchType='BlockHash'"
-        >
-          <q-item-section>
-            <q-item-label>{{$t('BlockHash')}}</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item
-          clickable
-          v-close-popup
-          @click="searchType='DeployId'"
-        >
-          <q-item-section>
-            <q-item-label>{{$t('DeployId')}}</q-item-label>
-          </q-item-section>
-        </q-item>
-
-      </q-list>
-    </q-btn-dropdown>
-
-    <q-input
-      borderless
-      dense
-      filled
-      :placeholder="$t('Search')"
-      v-model="searchHash"
-      v-on:keyup.enter.native="$emit('search', searchHash, searchType)"
-    >
-      <template v-slot:append>
-        <q-icon
-          name="search"
-          v-on:click="$emit('search', searchHash, searchType)"
-        />
-      </template>
-    </q-input>
-  </q-toolbar>
+  <div class="row col-xs-12 col-sm-12 col-md-12 justify-center items-center search-bg">
+    <div class="col-md-6 col-sm-8 col-xs-10">
+      <q-input
+        rounded
+        outlined
+        dense
+        clearable
+        bg-color="white"
+        :placeholder="$t('Search')"
+        v-model="searchHash"
+        v-on:keyup.enter.native="$emit('search', searchHash, searchType)"
+      >
+        <template v-slot:prepend>
+          <q-icon
+            name="search"
+            v-on:click="$emit('search', searchHash, searchType)"
+          />
+        </template>
+      </q-input>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -67,3 +43,10 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style lang="sass" scoped>
+.search-bg
+  background-image: url('~assets/searching-bc.png')
+  max-width: 1200px
+  height: 160px
+</style>
