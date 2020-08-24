@@ -6,6 +6,7 @@ const routes: RouteConfig[] = [
     component: () => import('layouts/Main.vue'),
     children: [
       { path: '', component: () => import('pages/Home.vue') },
+<<<<<<< HEAD
       {
         path: 'explorer',
         component: () => import('pages/Explorer.vue'),
@@ -18,6 +19,12 @@ const routes: RouteConfig[] = [
         ]
       },
       { path: 'settings', name: 'settings', component: () => import('pages/Settings.vue') }
+=======
+      { path: 'home', component: () => import('pages/Home.vue') },
+      { path: 'blocks', component: () => import('pages/Blocks.vue') },
+      { path: 'transfer', component: () => import('pages/Transfer.vue') },
+      { path: 'account', component: () => import('pages/Account.vue') },
+>>>>>>> d83440b... new version of define layout and structure
     ]
   }
 ];

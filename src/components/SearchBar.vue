@@ -25,11 +25,6 @@
 <script lang="ts">
 import Vue from 'vue';
 
-export enum SearchType {
-  BlockHash = 'BlockHash',
-  DeployId = 'DeployId'
-}
-
 export default Vue.extend({
   name: 'search-block-bar',
   model: {
@@ -37,8 +32,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      searchHash: '',
-      searchType: SearchType.BlockHash
+      searchHash: ''
     };
   }
 });
