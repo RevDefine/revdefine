@@ -1,5 +1,5 @@
 <template>
-  <div class="row col-xs-12 col-sm-12 col-md-12 justify-center items-center search-bg">
+  <div class="row col-xs-12 col-sm-12 col-md-12 justify-center items-center search-bg rounded">
     <div class="col-md-6 col-sm-8 col-xs-10">
       <q-input
         rounded
@@ -43,4 +43,6 @@ export default Vue.extend({
   background-image: url('~assets/searching-bc.png')
   max-width: 1200px
   height: 160px
+.rounded
+  border-radius: 8px
 </style>
