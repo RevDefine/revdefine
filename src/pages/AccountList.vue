@@ -1,20 +1,20 @@
  <template>
   <div>
     <div class="row col-xs-12 justify-center">
-      <latest-block></latest-block>
+      <account-table></account-table>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import latestBlocks from '../components/LatestBlocks.vue';
+import DTable from '../components/DTable.vue';
 
 export default Vue.extend({
   components: {
-    'latest-block': latestBlocks
+    'account-table': DTable
   },
-  name: 'blocks',
+  name: 'accounts',
   data() {
     return {};
   }

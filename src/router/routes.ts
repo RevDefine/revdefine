@@ -6,10 +6,11 @@ const routes: RouteConfig[] = [
     component: () => import('layouts/Main.vue'),
     children: [
       { path: '', component: () => import('pages/Home.vue') },
-      { path: 'home', component: () => import('pages/Home.vue') },
-      { path: 'blocks', component: () => import('pages/Blocks.vue') },
-      { path: 'transfer', component: () => import('pages/Transfer.vue') },
-      { path: 'account', component: () => import('pages/Account.vue') },
+      { name: 'home', path: 'home', component: () => import('pages/Home.vue') },
+      { name: 'blocks', path: 'blocks', component: () => import('pages/Blocks.vue') },
+      { name: 'transfer', path: 'transfer', component: () => import('pages/Transfer.vue') },
+      { name: 'revaccounts', path: 'revaccounts', component: () => import('pages/AccountList.vue') },
+      { name: 'revaccount', path: 'revaccount/:addr', component: () => import('pages/AccountDetail.vue') },
     ]
   }
 ];

@@ -1,61 +1,66 @@
-<template>
+  <template>
   <q-card
     bordered
     class="full-width"
   >
+    <div>
+      <define-loading :showing="loading"></define-loading>
+    </div>
     <q-card-section>
-      <div class="text-h6">Latest Block Info</div>
+      <div class="text-h6">Account</div>
     </q-card-section>
+
     <q-separator
       dark
       inset
     />
+
     <q-card-section>
       <q-list>
         <q-item>
           <q-item-section>
-            <q-item-label>blockHash</q-item-label>
+            <q-item-label>address</q-item-label>
           </q-item-section>
 
           <q-item-section side>
             <q-item-label>
-              488baf3f2e7be35c427285eecd7a730d1a840ac74fab614fc63eb578977477a6
+              {{ address }}
             </q-item-label>
           </q-item-section>
         </q-item>
 
         <q-item>
           <q-item-section>
-            <q-item-label>sender</q-item-label>
+            <q-item-label>balance</q-item-label>
           </q-item-section>
 
           <q-item-section side>
             <q-item-label>
-              040fead40b06b322711e64c34f4da2cca21d96346055de5781f10a30180b0fdc1d17dd299ecd7ddf79fe35b488126dd678401c114f77bab25de8a8bd2a0245919d
+              {{ balance }}
             </q-item-label>
           </q-item-section>
         </q-item>
 
         <q-item>
           <q-item-section>
-            <q-item-label>timestamp</q-item-label>
+            <q-item-label>isGenesisAddress</q-item-label>
           </q-item-section>
 
           <q-item-section side>
             <q-item-label>
-              1598269136481 -- Mon Aug 24 2020 19:38:56 GMT+0800 (China Standard Time)
+              {{ isGenesisAddress }}
             </q-item-label>
           </q-item-section>
         </q-item>
 
         <q-item>
           <q-item-section>
-            <q-item-label>deployCount</q-item-label>
+            <q-item-label>lastOperationBlock</q-item-label>
           </q-item-section>
 
           <q-item-section side>
             <q-item-label>
-              1
+              {{ lastOperationBlock }}
             </q-item-label>
           </q-item-section>
         </q-item>
@@ -66,11 +71,35 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import client from '../defineAPI';
+import defineLoading from './Loading.vue';
 
 export default Vue.extend({
-  name: 'latestBlockInfo',
+  name: 'accountOverview',
+  components: {
+    'define-loading': defineLoading
+  },
+  props: {
+    addr: String
+  },
   data() {
-    return {};
+    return {
+      address: '',
+      balance: 0,
+      isGenesisAddress: false,
+      lastOperationBlock: '',
+
+      loading: false
+    };
+  },
+  async created() {
+    this.loading = true;
+    const account = await client.revAccount(this.addr);
+    this.address = account.account.address;
+    this.balance = account.account.balance;
+    this.isGenesisAddress = account.account.isGenesisVault;
+    this.lastOperationBlock = account.account.lastOperationBlock;
+    this.loading = false;
   }
 });
 </script>

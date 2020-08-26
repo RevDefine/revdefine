@@ -51,7 +51,7 @@
                 no-caps
                 name="account"
                 label="Account"
-                to="/account"
+                to="/revaccounts"
               />
             </q-tabs>
             <q-space />
