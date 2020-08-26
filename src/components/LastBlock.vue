@@ -3,9 +3,9 @@
     bordered
     class="full-width"
   >
-    <div>
+    <!-- <div>
       <define-loading :showing="loading"></define-loading>
-    </div>
+    </div> -->
     <q-card-section>
       <div class="text-h6">Latest Block Info</div>
     </q-card-section>
@@ -74,13 +74,13 @@
 <script lang="ts">
 import Vue from 'vue';
 import client from '../defineAPI';
-import defineLoading from './Loading.vue';
+// import defineLoading from './Loading.vue';
 
 export default Vue.extend({
-  name: 'latestBlockInfo',
-  components: {
-    'define-loading': defineLoading
-  },
+  name: 'lastBlockInfo',
+  // components: {
+  //   'define-loading': defineLoading
+  // },
   data() {
     return {
       deployCount: 0,

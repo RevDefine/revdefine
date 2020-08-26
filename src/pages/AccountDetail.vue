@@ -1,22 +1,24 @@
  <template>
   <div>
     <div class="row col-xs-12 justify-center">
-      <account-table></account-table>
+      <account-overview :addr="addr"></account-overview>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import DTable from '../components/AccountTable.vue';
+import AccountOverview from '../components/AccountOverview.vue';
 
 export default Vue.extend({
   components: {
-    'account-table': DTable
+    'account-overview': AccountOverview
   },
-  name: 'accounts',
+  name: 'accountDetail',
   data() {
-    return {};
+    return {
+      addr: ''
+    };
   }
 });
 </script>

@@ -68,7 +68,7 @@ class DefineClient {
   }
 
   public async revAccount (address: string): Promise<RevAccountResponse> {
-    const resp = await this.defineAxiosInstance.get<RevAccountResponse>('/revaccount/balance/' + address)
+    const resp = await this.defineAxiosInstance.get<RevAccountResponse>('/revaccount/' + address)
     return resp.data
   }
 

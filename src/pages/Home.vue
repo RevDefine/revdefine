@@ -27,14 +27,14 @@
 import Vue from 'vue';
 import SearchBlockBar from '../components/SearchBar.vue';
 import Chart from '../components/ApexChart.vue';
-import LastBlockInfo from '../components/LastBlock.vue';
-import LatestTransfer from '../components/LatestTransfer.vue';
+import lastBlockInfo from '../components/LastBlock.vue';
+import latestTransfer from '../components/LatestTransfer.vue';
 
 export default Vue.extend({
   components: {
     'search-bar': SearchBlockBar,
-    'last-block-info': LastBlockInfo,
-    'latest-transfer': LatestTransfer,
+    'last-block-info': lastBlockInfo,
+    'latest-transfer': latestTransfer,
     chart: Chart
   },
   name: 'Home',

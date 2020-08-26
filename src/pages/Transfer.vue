@@ -8,11 +8,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import LatestTransfer from '../components/LatestTransfer.vue';
+import latestTransfer from '../components/LatestTransfer.vue';
 
 export default Vue.extend({
   components: {
-    'latest-transfer-table': LatestTransfer
+    'latest-transfer-table': latestTransfer
   },
   name: 'transfer',
   data() {

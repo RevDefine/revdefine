@@ -1,7 +1,7 @@
 <template>
   <div class="full-width">
     <q-table
-      title="Transfers"
+      title="Blocks"
       :data="data"
       :columns="columns"
       :pagination.sync="pagination"
@@ -33,52 +33,52 @@
           </q-td>
 
           <q-td
-            key="Age"
+            key="blockSize"
             :props="props"
           >
-            <timeago
-              :datetime="props.row.timestamp"
-              :auto-update="5"
-            >
-            </timeago>
+            {{props.row.blockSize}}
           </q-td>
 
           <q-td
-            key="From"
+            key="blockNumber"
             :props="props"
           >
-            <div class="cursor-pointer clickable">
-              {{ props.row.fromAddr.slice(0, 20) + '...' }}
-            </div>
+            {{ props.row.blockNumber}}
           </q-td>
+
           <q-td
-            key="To"
+            key="deployCount"
             :props="props"
           >
-            <div v-if="props.row.toAddr == 'validator'">
-              {{ props.row.toAddr }}
-            </div>
-            <div
-              v-else
-              class="cursor-pointer clickable"
-            >
-              {{ props.row.toAddr.slice(0, 20) + '...' }}
-            </div>
+            {{ props.row.deployCount }}
           </q-td>
+
           <q-td
-            key="Value"
+            key="seqNum"
             :props="props"
           >
-            {{ revUnit(props.row.amount) }}
+            {{ props.row.seqNum }}
+          </q-td>
+
+          <q-td
+            key="timestamp"
+            :props="props"
+          >
+            {{ props.row.timestamp }}
+          </q-td>
+
+          <q-td
+            key="sender"
+            :props="props"
+          >
+            {{ props.row.sender.slice(0, 20) + "..." }}
           </q-td>
         </q-tr>
 
       </template>
-
       <template v-slot:loading>
         <define-loading :showing="loading"></define-loading>
       </template>
-
     </q-table>
 
     <div class="row justify-center q-mt-md">
@@ -100,7 +100,7 @@ import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
 
 export default Vue.extend({
-  name: 'latestTransfer',
+  name: 'latestBlocks',
   components: {
     'define-loading': defineLoading
   },
@@ -114,39 +114,65 @@ export default Vue.extend({
           align: 'left',
           field: 'blockHash'
         },
-        { name: 'Age', align: 'left', label: 'Age', field: 'age' },
+        { name: 'blockSize', align: 'left', label: 'blockSize', field: 'blockSize' },
         {
-          name: 'From',
+          name: 'blockNumber',
           align: 'left',
-          label: 'From',
-          field: 'fromAddr'
+          label: 'blockNumber',
+          field: 'blockNumber'
         },
         {
-          name: 'To',
+          name: 'deployCount',
           align: 'left',
-          label: 'To',
-          field: 'toAddr'
+          label: 'deployCount',
+          field: 'deployCount'
         },
         {
-          name: 'Value',
+          name: 'seqNum',
           align: 'left',
-          label: 'Value',
-          field: 'amount'
+          label: 'seqNum',
+          field: 'seqNum'
+        },
+        {
+          name: 'timestamp',
+          align: 'left',
+          label: 'timestamp',
+          field: 'timestamp'
+        },
+        {
+          name: 'sender',
+          align: 'left',
+          label: 'sender',
+          field: 'sender'
         }
       ],
       data: [
         {
-          fromAddr: '',
-          toAddr: '',
-          amount: 0,
-          transactionType: '',
           blockHash: '',
-          blockNumber: 0,
-          deployId: '',
+          sender: '',
+          seqNum: 0,
+          sig: '',
+          sigAlgorithm: '',
+          shardId: '',
+          extraBytes: '',
+
+          // HeaderProto message
+          version: 0,
           timestamp: 0,
-          isFinalized: false,
-          isSucceeded: false,
-          reason: ''
+          headerExtraBytes: '',
+          parentsHashList: [''],
+
+          // BodyProto message
+          blockNumber: 0,
+          preStateHash: '',
+          postStateHash: '',
+          bodyExtraBytes: '',
+          bonds: [{ validator: '', stake: 0 }],
+
+          // extra
+          blockSize: '',
+          deployCount: 0,
+          faultTolerance: 0
         }
       ],
       loading: false,
@@ -164,8 +190,8 @@ export default Vue.extend({
   },
   async mounted() {
     this.loading = true;
-    const transactions = await client.getLatestTransactions();
-    this.data = transactions.transactions;
+    const blocks = await client.showBlocks(10);
+    this.data = blocks;
     this.loading = false;
   }
 });
