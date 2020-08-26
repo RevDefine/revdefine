@@ -14,11 +14,11 @@
     </div>
 
     <div class="row">
-      <latest-block-info></latest-block-info>
+      <last-block-info></last-block-info>
     </div>
 
     <div class="row">
-      <transfer-table></transfer-table>
+      <latest-transfer></latest-transfer>
     </div>
   </div>
 </template>
@@ -27,14 +27,14 @@
 import Vue from 'vue';
 import SearchBlockBar from '../components/SearchBar.vue';
 import Chart from '../components/ApexChart.vue';
-import LatestBlockInfo from '../components/LatestBlock.vue';
-import TransferTable from '../components/TransferTable.vue';
+import LastBlockInfo from '../components/LastBlock.vue';
+import LatestTransfer from '../components/LatestTransfer.vue';
 
 export default Vue.extend({
   components: {
     'search-bar': SearchBlockBar,
-    'latest-block-info': LatestBlockInfo,
-    'transfer-table': TransferTable,
+    'last-block-info': LastBlockInfo,
+    'latest-transfer': LatestTransfer,
     chart: Chart
   },
   name: 'Home',

@@ -1,15 +1,26 @@
 {
-  "compilerOptions": {
-    "allowJs": true,
-    "sourceMap": true,
-    "target": "es6",
-    "strict": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "baseUrl": ".",
-    "types": ["quasar", "node"]
-  },
-  "exclude": ["node_modules", "grpc", "dist", "./babel.config.js", "./quasar.conf.js", "pb"]
-  // "include": ["src/rnode-grpc-gen/js/rnode-grpc-js.d.ts"]
+    "compilerOptions": {
+        "allowJs": true,
+        "sourceMap": true,
+        "target": "es6",
+        "strict": true,
+        "experimentalDecorators": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "allowSyntheticDefaultImports": true,
+        "types": [
+            "quasar",
+            "node"
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        "grpc",
+        "dist",
+        "./babel.config.js",
+        "./quasar.conf.js",
+        "pb"
+    ]
+    // "include": ["src/rnode-grpc-gen/js/rnode-grpc-js.d.ts"]
 }

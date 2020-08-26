@@ -23,6 +23,7 @@
     "vue-apexcharts": "^1.6.0",
     "vue-echarts-v3": "^2.0.1",
     "vue-i18n": "^8.15.4",
+    "vue-timeago": "^5.1.2",
     "vuetype": "^0.3.2"
   },
   "devDependencies": {
