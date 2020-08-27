@@ -27,13 +27,11 @@
             key="address"
             :props="props"
           >
-            <div
-              :to="{name:'revaccount', params:{'addr': props.row.address}}"
-              replace
-              class="cursor-pointer clickable"
-            >
-              {{ props.row.address }}
-            </div>
+            <address-link
+              :addr="props.row.address"
+              :short=false
+              :length="20"
+            ></address-link>
           </q-td>
 
           <q-td
@@ -81,11 +79,13 @@ import Vue from 'vue';
 import client from '../defineAPI';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
+import addressLink from './AddressLink.vue';
 
 export default Vue.extend({
   name: 'accountTable',
   components: {
-    'define-loading': defineLoading
+    'define-loading': defineLoading,
+    'address-link': addressLink
   },
   data() {
     return {

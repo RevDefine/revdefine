@@ -6,6 +6,7 @@
     <div>
       <define-loading :showing="loading"></define-loading>
     </div>
+
     <q-card-section>
       <div class="text-h6">Account</div>
     </q-card-section>
@@ -92,14 +93,24 @@ export default Vue.extend({
       loading: false
     };
   },
-  async created() {
-    this.loading = true;
-    const account = await client.revAccount(this.addr);
-    this.address = account.account.address;
-    this.balance = account.account.balance;
-    this.isGenesisAddress = account.account.isGenesisVault;
-    this.lastOperationBlock = account.account.lastOperationBlock;
-    this.loading = false;
+  methods: {
+    async getOverviewData() {
+      this.loading = true;
+      const account = await client.revAccount(this.$route.params.addr);
+      this.address = account.account.address;
+      this.balance = account.account.balance;
+      this.isGenesisAddress = account.account.isGenesisVault;
+      this.lastOperationBlock = account.account.lastOperationBlock;
+      this.loading = false;
+    }
+  },
+  async mounted() {
+    await this.getOverviewData();
+  },
+  watch: {
+    async $route() {
+      await this.getOverviewData();
+    }
   }
 });
 </script>
