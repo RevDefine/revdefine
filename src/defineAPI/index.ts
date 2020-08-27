@@ -62,8 +62,8 @@ class DefineClient {
   }
 
 
-  public async trasaction (address: string): Promise<TransactionsResponse> {
-    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/transaction/' + address)
+  public async trasactions (address: string): Promise<TransactionsResponse> {
+    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/transactions/' + address)
     return resp.data
   }
 

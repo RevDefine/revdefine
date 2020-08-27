@@ -8,11 +8,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import DTable from '../components/DTable.vue';
+import accountTable from '../components/AccountTable.vue';
 
 export default Vue.extend({
   components: {
-    'account-table': DTable
+    'account-table': accountTable
   },
   name: 'accounts',
   data() {

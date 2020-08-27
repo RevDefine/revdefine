@@ -47,24 +47,25 @@
             key="From"
             :props="props"
           >
-            <div class="cursor-pointer clickable">
-              {{ props.row.fromAddr.slice(0, 20) + '...' }}
-            </div>
+            <address-link
+              :addr="props.row.fromAddr"
+              :short=true
+              :length="20"
+            ></address-link>
           </q-td>
+
           <q-td
             key="To"
             :props="props"
           >
-            <div v-if="props.row.toAddr == 'validator'">
-              {{ props.row.toAddr }}
-            </div>
-            <div
-              v-else
-              class="cursor-pointer clickable"
-            >
-              {{ props.row.toAddr.slice(0, 20) + '...' }}
-            </div>
+            <address-link
+              :addr="props.row.toAddr"
+              :short=true
+              :length="20"
+            ></address-link>
+
           </q-td>
+
           <q-td
             key="Value"
             :props="props"
@@ -98,11 +99,13 @@ import Vue from 'vue';
 import client from '../defineAPI';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
+import addressLink from './AddressLink.vue';
 
 export default Vue.extend({
   name: 'latestTransfer',
   components: {
-    'define-loading': defineLoading
+    'define-loading': defineLoading,
+    'address-link': addressLink
   },
   data() {
     return {
