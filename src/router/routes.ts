@@ -7,7 +7,13 @@ const routes: RouteConfig[] = [
     children: [
       { path: '', component: () => import('pages/Home.vue') },
       { name: 'home', path: 'home', component: () => import('pages/Home.vue') },
-      { name: 'blocks', path: 'blocks', component: () => import('pages/Blocks.vue') },
+      {
+        name: 'blocks', path: 'blocks', component: () => import('pages/Blocks.vue'),
+        children: [
+          { path: '', component: () => import('pages/BlocksList.vue') },
+          { path: ':blockHash', component: () => import('pages/Blocks.vue') }
+        ]
+      },
       { name: 'transfer', path: 'transfer', component: () => import('pages/Transfer.vue') },
       {
         name: 'revaccounts', path: 'revaccounts', component: () => import('pages/Accounts.vue'),

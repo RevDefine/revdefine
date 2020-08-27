@@ -1,15 +1,15 @@
  <template>
-  <div>
-    <div class="row col-xs-12 justify-center">
-      <router-view></router-view>
-    </div>
-  </div>
+  <latest-block></latest-block>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import latestBlocks from '../components/LatestBlocks.vue';
 
 export default Vue.extend({
+  components: {
+    'latest-block': latestBlocks
+  },
   name: 'blocks',
   data() {
     return {};
