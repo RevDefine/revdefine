@@ -9,8 +9,14 @@ const routes: RouteConfig[] = [
       { name: 'home', path: 'home', component: () => import('pages/Home.vue') },
       { name: 'blocks', path: 'blocks', component: () => import('pages/Blocks.vue') },
       { name: 'transfer', path: 'transfer', component: () => import('pages/Transfer.vue') },
-      { name: 'revaccounts', path: 'revaccounts', component: () => import('pages/AccountList.vue') },
-      { name: 'revaccount', path: 'revaccount/:addr', component: () => import('pages/AccountDetail.vue') },
+      {
+        name: 'revaccounts', path: 'revaccounts', component: () => import('pages/Accounts.vue'),
+        children: [
+          { path: '', component: () => import('components/AccountTable.vue') },
+          { name: 'revaccount', path: ':addr', component: () => import('pages/AccountDetail.vue') }
+        ]
+      },
+
     ]
   }
 ];

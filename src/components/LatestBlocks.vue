@@ -64,7 +64,11 @@
             key="timestamp"
             :props="props"
           >
-            {{ props.row.timestamp }}
+            <timeago
+              :datetime="props.row.timestamp"
+              :auto-update="5"
+            >
+            </timeago>
           </q-td>
 
           <q-td

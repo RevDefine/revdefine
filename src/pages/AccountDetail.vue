@@ -1,5 +1,5 @@
  <template>
-  <div>
+  <div class="full-width">
     <div class="row col-xs-12 justify-center">
       <account-overview :addr="addr"></account-overview>
     </div>
