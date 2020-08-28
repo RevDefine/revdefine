@@ -129,7 +129,7 @@
 import Vue from 'vue';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
-import addressLink from './AddressLink.vue';
+import addressLink from './links/AddressLink.vue';
 
 export default Vue.extend({
   name: 'transferList',
