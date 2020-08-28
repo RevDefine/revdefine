@@ -2,7 +2,7 @@
   <div class="full-width">
     <q-table
       title="Transfer"
-      :data="data"
+      :data="transactions"
       :columns="columns"
       :pagination.sync="pagination"
       hide-pagination
@@ -127,7 +127,6 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import client from '../defineAPI';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
 import addressLink from './AddressLink.vue';
@@ -137,6 +136,10 @@ export default Vue.extend({
   components: {
     'define-loading': defineLoading,
     'address-link': addressLink
+  },
+  props: {
+    transactions: Array,
+    loading: Boolean
   },
   data() {
     return {
@@ -168,22 +171,6 @@ export default Vue.extend({
         { name: 'success', align: 'left', label: 'success', field: 'success' },
         { name: 'finalized', align: 'left', label: 'finalized', field: 'finalized' }
       ],
-      data: [
-        {
-          fromAddr: '',
-          toAddr: '',
-          amount: 0,
-          transactionType: 'transfer',
-          blockHash: '',
-          blockNumber: 0,
-          deployId: '',
-          timestamp: 0,
-          isFinalized: false,
-          isSucceeded: false,
-          reason: ''
-        }
-      ],
-      loading: false,
       pagination: {
         // sortBy: 'desc',
         // descending: false,
@@ -194,21 +181,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    revUnit: revUnit,
-    async getTransfer() {
-      this.loading = true;
-      const resp = await client.trasactions(this.$route.params.addr);
-      this.data = resp.transactions;
-      this.loading = false;
-    }
-  },
-  async mounted() {
-    await this.getTransfer();
-  },
-  watch: {
-    async $route() {
-      await this.getTransfer();
-    }
+    revUnit: revUnit
   }
 });
 </script>

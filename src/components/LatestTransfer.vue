@@ -2,7 +2,7 @@
   <div class="full-width">
     <q-table
       title="Transfers"
-      :data="data"
+      :data="transactions"
       :columns="columns"
       :pagination.sync="pagination"
       hide-pagination
@@ -96,7 +96,6 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import client from '../defineAPI';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
 import addressLink from './AddressLink.vue';
@@ -106,6 +105,10 @@ export default Vue.extend({
   components: {
     'define-loading': defineLoading,
     'address-link': addressLink
+  },
+  props: {
+    transactions: Array,
+    loading: Boolean
   },
   data() {
     return {
@@ -137,22 +140,6 @@ export default Vue.extend({
           field: 'amount'
         }
       ],
-      data: [
-        {
-          fromAddr: '',
-          toAddr: '',
-          amount: 0,
-          transactionType: '',
-          blockHash: '',
-          blockNumber: 0,
-          deployId: '',
-          timestamp: 0,
-          isFinalized: false,
-          isSucceeded: false,
-          reason: ''
-        }
-      ],
-      loading: false,
       pagination: {
         // sortBy: 'desc',
         // descending: false,
@@ -164,12 +151,6 @@ export default Vue.extend({
   },
   methods: {
     revUnit: revUnit
-  },
-  async mounted() {
-    this.loading = true;
-    const transactions = await client.getLatestTransactions();
-    this.data = transactions.transactions;
-    this.loading = false;
   }
 });
 </script>
