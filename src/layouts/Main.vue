@@ -4,7 +4,10 @@
       view="lHr Lpr lFr"
       class="bg-grey-1"
     >
-      <q-header class="bg-white">
+      <q-header
+        reveal
+        class="bg-white"
+      >
         <div class="row justify-center">
           <q-toolbar class="col-md-10">
             <div>
