@@ -11,7 +11,7 @@ const routes: RouteConfig[] = [
         name: 'blocks', path: 'blocks', component: () => import('pages/Blocks.vue'),
         children: [
           { path: '', component: () => import('pages/BlocksList.vue') },
-          { path: ':blockHash', component: () => import('pages/Blocks.vue') }
+          { name: 'block', path: ':blockHash', component: () => import('pages/BlockDetail.vue') }
         ]
       },
       { name: 'transfer', path: 'transfer', component: () => import('pages/Transfer.vue') },

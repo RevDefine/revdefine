@@ -1,14 +1,14 @@
- <template>
-  <latest-block></latest-block>
+<template>
+  <block-detail></block-detail>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import latestBlocks from '../components/LatestBlocks.vue';
+import blockDetail from '../components/BlockDetail.vue';
 
 export default Vue.extend({
   components: {
-    'latest-block': latestBlocks
+    'block-detail': blockDetail
   },
   name: 'blocks',
   data() {
