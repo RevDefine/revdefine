@@ -27,9 +27,11 @@
             key="blockHash"
             :props="props"
           >
-            <div class="cursor-pointer clickable">
-              {{ props.row.blockHash.slice(0, 20) + '...' }}
-            </div>
+            <block-link
+              :blockHash="props.row.blockHash"
+              :short="true"
+              :length="20"
+            ></block-link>
           </q-td>
 
           <q-td
@@ -99,12 +101,14 @@ import Vue from 'vue';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
 import addressLink from './links/AddressLink.vue';
+import blockLink from './links/BlockLink.vue';
 
 export default Vue.extend({
   name: 'latestTransfer',
   components: {
     'define-loading': defineLoading,
-    'address-link': addressLink
+    'address-link': addressLink,
+    'block-link': blockLink
   },
   props: {
     transactions: Array,

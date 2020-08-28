@@ -51,7 +51,11 @@
             key="lastOperationBlock"
             :props="props"
           >
-            {{ props.row.lastOperationBlock }}
+            <block-link
+              :blockHash="props.row.lastOperationBlock"
+              :short="false"
+            >
+            </block-link>
           </q-td>
         </q-tr>
 
@@ -80,12 +84,14 @@ import client from '../defineAPI';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
 import addressLink from './links/AddressLink.vue';
+import blockLink from './links/BlockLink.vue';
 
 export default Vue.extend({
   name: 'accountTable',
   components: {
     'define-loading': defineLoading,
-    'address-link': addressLink
+    'address-link': addressLink,
+    'block-link': blockLink
   },
   data() {
     return {

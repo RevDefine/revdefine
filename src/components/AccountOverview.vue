@@ -61,7 +61,10 @@
 
           <q-item-section side>
             <q-item-label>
-              {{ lastOperationBlock }}
+              <block-link
+                :blockHash="lastOperationBlock"
+                :short="false"
+              ></block-link>
             </q-item-label>
           </q-item-section>
         </q-item>
@@ -74,11 +77,13 @@
 import Vue from 'vue';
 import client from '../defineAPI';
 import defineLoading from './Loading.vue';
+import blockLink from './links/BlockLink.vue';
 
 export default Vue.extend({
   name: 'accountOverview',
   components: {
-    'define-loading': defineLoading
+    'define-loading': defineLoading,
+    'block-link': blockLink
   },
   props: {
     addr: String
