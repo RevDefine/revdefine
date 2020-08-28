@@ -193,30 +193,68 @@
         </q-item>
 
         <q-item>
-          <q-expansion-item
-            expand-separator
-            label="ParentsHash"
-            class="full-width"
-          >
-            <q-card>
-              <q-card-section>
-                Parent
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">parentsHashList'</q-item-section>
+          <q-separator
+            vertical
+            spaced
+          />
+          <q-item-section>
+            <q-list>
+              <q-item
+                v-for="parentHash in blockInfoDetail.blockInfo.parentsHashList"
+                :key="parentHash"
+              >
+                <q-item-label>
+                  <block-link
+                    :blockHash="parentHash"
+                    :short="false"
+                    :length="10"
+                  ></block-link>
+                </q-item-label>
+              </q-item>
+            </q-list>
+          </q-item-section>
         </q-item>
 
         <q-item>
-          <q-expansion-item
-            expand-separator
-            label="Bonds"
-          >
-            <q-card>
-              <q-card-section>
-                Bond
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">bondsValidatorList</q-item-section>
+          <q-separator
+            vertical
+            spaced
+          />
+          <q-item-section padding>
+            <q-list>
+              <q-item
+                v-for="bond in blockInfoDetail.blockInfo.bonds"
+                :key="bond.validator"
+              >
+                <q-item-label>{{ bond }}</q-item-label>
+              </q-item>
+            </q-list>
+          </q-item-section>
+        </q-item>
+
+        <q-item>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">deploys</q-item-section>
+          <q-separator
+            vertical
+            spaced
+          />
+          <q-item-section padding>
+            <q-list>
+              <q-item
+                v-for="deploy in blockInfoDetail.deploys"
+                :key="deploy.sig"
+              >
+                <deploy-link
+                  :blockHash="blockInfoDetail.blockInfo.blockHash"
+                  :deployId="deploy.sig"
+                  :short="false"
+                  :length="10"
+                ></deploy-link>
+              </q-item>
+            </q-list>
+          </q-item-section>
         </q-item>
 
         <q-item>
@@ -232,19 +270,6 @@
           </q-expansion-item>
         </q-item>
 
-        <q-item>
-          <q-expansion-item
-            expand-separator
-            label="Deploys"
-          >
-            <q-card>
-              <q-card-section>
-                Deploys
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
-        </q-item>
-
       </q-list>
 
     </q-card>
@@ -254,8 +279,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import { BlockInfo } from '../defineAPI/rnodeTypes';
+import blockLink from './BlockLink.vue';
+import deployLink from './DeployLink.vue';
 export default Vue.extend({
   name: 'blockDetail',
+  components: {
+    'block-link': blockLink,
+    'deploy-link': deployLink
+  },
   props: {
     blockInfoDetail: {
       type: Object as () => BlockInfo
