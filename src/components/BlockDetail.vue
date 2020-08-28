@@ -14,7 +14,7 @@
                   />
                 </template>
                 <q-breadcrumbs-el label="Blocks" />
-                <q-breadcrumbs-el :label="blockInfo.blockHash.slice(0,20)+ '...'" />
+                <q-breadcrumbs-el :label="blockInfoDetail.blockInfo.blockHash.slice(0,20)+ '...'" />
               </q-breadcrumbs>
             </q-toolbar>
           </div>
@@ -34,7 +34,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.blockHash }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.blockHash }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -45,7 +45,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.sender }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.sender }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -56,7 +56,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.seqNum }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.seqNum }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -67,7 +67,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.sig }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.sig }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -78,7 +78,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.sigAlgorithm }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.sigAlgorithm }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -89,7 +89,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.shardId }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.shardId }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -100,7 +100,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.extraBytes }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.extraBytes }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -111,7 +111,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.version }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.version }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -122,7 +122,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.timestamp }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.timestamp }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -133,7 +133,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.headerExtraBytes }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.headerExtraBytes }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -144,7 +144,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.blockNumber }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.blockNumber }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -155,7 +155,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.preStateHash }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.preStateHash }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -166,7 +166,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.postStateHash }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.postStateHash }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -177,7 +177,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.bodyExtraBytes }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.bodyExtraBytes }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -188,7 +188,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.blockSize }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.blockInfo.blockSize }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -253,65 +253,17 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import client from '../defineAPI';
-
+import { BlockInfo } from '../defineAPI/rnodeTypes';
 export default Vue.extend({
-  name: 'BlockInfo',
-  data() {
-    return {
-      blockInfo: {
-        blockHash: '',
-        sender: '',
-        seqNum: 0,
-        sig: '',
-        sigAlgorithm: '',
-        shardId: '',
-        extraBytes: '',
-
-        // HeaderProto message
-        version: 0,
-        timestamp: 0,
-        headerExtraBytes: '',
-        parentsHashList: [''],
-
-        // BodyProto message
-        blockNumber: 0,
-        preStateHash: '',
-        postStateHash: '',
-        bodyExtraBytes: '',
-        bonds: [{ validator: '', stake: 0 }],
-
-        // extra
-        blockSize: '',
-        deployCount: 0,
-        faultTolerance: 0
-      },
-      deploys: [
-        {
-          deployer: '',
-          term: '',
-          timestamp: 0,
-          sig: '',
-          sigAlgorithm: '',
-          phloPrice: 1,
-          phloLimit: 1,
-          validAfterBlockNumber: 1,
-          cost: 1,
-          errored: false,
-          systemDeployError: ''
-        }
-      ],
-      loading: false,
-      blockHash: ''
-    };
-  },
-  methods: {},
-  async mounted() {
-    this.loading = true;
-    const block = await client.showBlock(this.$route.params.blockHash);
-    this.deploys = block.deploys;
-    this.blockInfo = block.blockInfo;
-    this.loading = false;
+  name: 'blockDetail',
+  props: {
+    blockInfoDetail: {
+      type: Object as () => BlockInfo
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    }
   }
 });
 </script>
