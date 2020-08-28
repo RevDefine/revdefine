@@ -14,9 +14,9 @@
       inset
     />
     <q-card-section>
-      <q-list>
+      <q-list style="word-break: break-all;">
         <q-item>
-          <q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">
             <q-item-label>blockHash</q-item-label>
           </q-item-section>
 
@@ -28,7 +28,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">
             <q-item-label>sender</q-item-label>
           </q-item-section>
 
@@ -40,7 +40,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">
             <q-item-label>timestamp</q-item-label>
           </q-item-section>
 
@@ -56,7 +56,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">
             <q-item-label>deployCount</q-item-label>
           </q-item-section>
 

@@ -18,7 +18,10 @@
     </div>
 
     <div class="row">
-      <latest-transfer></latest-transfer>
+      <latest-transfer
+        :transactions="data"
+        :loading="loading"
+      ></latest-transfer>
     </div>
   </div>
 </template>
@@ -29,7 +32,7 @@ import SearchBlockBar from '../components/SearchBar.vue';
 import Chart from '../components/ApexChart.vue';
 import lastBlockInfo from '../components/LastBlock.vue';
 import latestTransfer from '../components/LatestTransfer.vue';
-
+import client from '../defineAPI';
 export default Vue.extend({
   components: {
     'search-bar': SearchBlockBar,
@@ -39,10 +42,33 @@ export default Vue.extend({
   },
   name: 'Home',
   data() {
-    return {};
+    return {
+      data: [
+        {
+          fromAddr: '',
+          toAddr: '',
+          amount: 0,
+          transactionType: '',
+          blockHash: '',
+          blockNumber: 0,
+          deployId: '',
+          timestamp: 0,
+          isFinalized: false,
+          isSucceeded: false,
+          reason: ''
+        }
+      ],
+      loading: false
+    };
   },
   methods: {
     searchAlert() {}
+  },
+  async mounted() {
+    this.loading = true;
+    const transactions = await client.getLatestTransactions();
+    this.data = transactions.transactions;
+    this.loading = false;
   }
 });
 </script>
