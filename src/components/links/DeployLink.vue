@@ -5,7 +5,7 @@
       class="cursor-pointer clickable"
     >
       <div v-if="short">
-        {{ deployID.slice(0, this.length) + "..." }}
+        {{ deployId.slice(0, this.length) + "..." }}
       </div>
       <div v-else>
         {{ deployId }}

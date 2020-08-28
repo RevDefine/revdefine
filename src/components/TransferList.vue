@@ -63,7 +63,11 @@
             key="blockHash"
             :props="props"
           >
-            {{ props.row.blockHash.slice(0, 10) + "..." }}
+            <block-link
+              :blockHash="props.row.blockHash"
+              :short="true"
+              :length="10"
+            ></block-link>
           </q-td>
 
           <q-td
@@ -77,7 +81,12 @@
             key="deployId"
             :props="props"
           >
-            {{ props.row.deployId.slice(0, 10) + "..." }}
+            <deploy-link
+              :blockHash="props.row.blockHash"
+              :deployId="props.row.deployId"
+              :short="true"
+              :length="10"
+            ></deploy-link>
           </q-td>
 
           <q-td
@@ -130,12 +139,16 @@ import Vue from 'vue';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
 import addressLink from './links/AddressLink.vue';
+import deployLink from './links/DeployLink.vue';
+import blockLink from './links/BlockLink.vue';
 
 export default Vue.extend({
   name: 'transferList',
   components: {
     'define-loading': defineLoading,
-    'address-link': addressLink
+    'address-link': addressLink,
+    'deploy-link': deployLink,
+    'block-link': blockLink
   },
   props: {
     transactions: Array,

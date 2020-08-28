@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div v-if="blockHash.length == 0">
+    None
+  </div>
+  <div v-else>
     <router-link
       :to="{name:'block', params:{'blockHash': blockHash}}"
       class="cursor-pointer clickable"
@@ -21,7 +24,10 @@ export default Vue.extend({
   props: {
     blockHash: String,
     short: Boolean,
-    length: Number
+    length: {
+      type: Number,
+      default: 20
+    }
   }
 })
 </script>
