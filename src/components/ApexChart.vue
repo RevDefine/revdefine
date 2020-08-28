@@ -10,8 +10,10 @@
 
 
 <script>
+import Vue from 'vue'
 import VueApexCharts from 'vue-apexcharts'
-export default {
+import client from '../defineAPI'
+export default Vue.extend({
   name: 'ApexChart',
   components: {
     apexchart: VueApexCharts
@@ -24,18 +26,19 @@ export default {
             show: false
           }
         },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-        },
         stroke: {
           curve: 'smooth'
         }
       },
       series: [{
-        name: 'series-1',
-        data: [30, 40, 45, 50, 49, 60, 70, 91]
+        name: 'transfer',
+        data: [0, 0, 0, 0, 0, 0, 0]
       }]
     }
+  },
+  async mounted () {
+    const data = await client.statTransfer()
+    data.datas.forEach(element => (element.start, element.data))
   }
-}
+})
 </script>
