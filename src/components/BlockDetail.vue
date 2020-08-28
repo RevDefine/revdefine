@@ -279,8 +279,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import { BlockInfo } from '../defineAPI/rnodeTypes';
-import blockLink from './BlockLink.vue';
-import deployLink from './DeployLink.vue';
+import blockLink from './links/BlockLink.vue';
+import deployLink from './links/DeployLink.vue';
 export default Vue.extend({
   name: 'blockDetail',
   components: {

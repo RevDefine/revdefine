@@ -103,7 +103,7 @@ import Vue from 'vue';
 import client from '../defineAPI';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
-import blockLink from './BlockLink.vue';
+import blockLink from './links/BlockLink.vue';
 
 export default Vue.extend({
   name: 'latestBlocks',
