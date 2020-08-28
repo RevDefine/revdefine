@@ -67,6 +67,11 @@ class DefineClient {
     return resp.data
   }
 
+  public async deployTransaction (deployId: string): Promise<TransactionsResponse> {
+    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/deploy/' + deployId + '/transfer')
+    return resp.data
+  }
+
   public async revAccount (address: string): Promise<RevAccountResponse> {
     const resp = await this.defineAxiosInstance.get<RevAccountResponse>('/revaccount/' + address)
     return resp.data
@@ -86,7 +91,7 @@ class DefineClient {
     return resp.data
   }
   public async statTransfer (): Promise<RangeDataResponse> {
-    const resp = await this.defineAxiosInstance.get<RangeDataResponse>('/stat/deploy')
+    const resp = await this.defineAxiosInstance.get<RangeDataResponse>('/stat/transfer')
     return resp.data
   }
 

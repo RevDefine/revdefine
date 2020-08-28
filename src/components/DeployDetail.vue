@@ -153,15 +153,28 @@
       </q-list>
 
     </q-card>
+
+    <div>
+      <transfer-list
+        :transactions="transactions"
+        :loading="transactionsLoading"
+      >
+      </transfer-list>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import { BlockInfo, DeployInfo } from '../defineAPI/rnodeTypes';
+import client from '../defineAPI';
+import transferList from './TransferList.vue';
 
 export default Vue.extend({
   name: 'deployDetail',
+  components: {
+    'transfer-list': transferList
+  },
   props: {
     blockInfoDetail: {
       type: Object as () => BlockInfo
@@ -188,12 +201,44 @@ export default Vue.extend({
         cost: 1,
         errored: false,
         systemDeployError: ''
-      }
+      },
+      transactionsLoading: false,
+      transactions: [
+        {
+          fromAddr: '',
+          toAddr: '',
+          amount: 0,
+          transactionType: '',
+          blockHash: '',
+          blockNumber: 0,
+          deployId: '',
+          timestamp: 0,
+          isFinalized: false,
+          isSucceeded: false,
+          reason: ''
+        }
+      ]
     };
   },
   beforeUpdate() {
     const targetDeploy = this.blockInfoDetail.deploys.find(element => element.sig == this.deployId) as DeployInfo;
     this.deployInfo = targetDeploy;
+  },
+  methods: {
+    async getTransfer() {
+      this.transactionsLoading = true;
+      const transactions = await client.deployTransaction(this.deployId);
+      this.transactions = transactions.transactions;
+      this.transactionsLoading = false;
+    }
+  },
+  async mounted() {
+    await this.getTransfer();
+  },
+  watch: {
+    async $route() {
+      await this.getTransfer();
+    }
   }
 });
 </script>
