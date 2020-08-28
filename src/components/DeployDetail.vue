@@ -14,7 +14,9 @@
                   />
                 </template>
                 <q-breadcrumbs-el label="Blocks" />
-                <q-breadcrumbs-el :label="blockInfo.blockHash.slice(0,20)+ '...'" />
+                <q-breadcrumbs-el :label="blockInfoDetail.blockInfo.blockHash.slice(0,20)+ '...'" />
+                <q-breadcrumbs-el label="Deploy" />
+                <q-breadcrumbs-el :label="deployInfo.sig.slice(0,20)+ '...'" />
               </q-breadcrumbs>
             </q-toolbar>
           </div>
@@ -34,7 +36,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.deployer }}</q-item-label>
+            <q-item-label>{{ deployInfo.deployer }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -45,7 +47,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.term }}</q-item-label>
+            <q-item-label>{{ deployInfo.term }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -56,7 +58,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.timestamp }}</q-item-label>
+            <q-item-label>{{ deployInfo.timestamp }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -67,7 +69,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.sig }}</q-item-label>
+            <q-item-label>{{ deployInfo.sig }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -78,7 +80,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.sigAlgorithm }}</q-item-label>
+            <q-item-label>{{ deployInfo.sigAlgorithm }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -89,7 +91,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.phloPrice }}</q-item-label>
+            <q-item-label>{{ deployInfo.phloPrice }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -100,7 +102,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.phloLimit }}</q-item-label>
+            <q-item-label>{{ deployInfo.phloLimit }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -111,7 +113,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.validAfterBlockNumber }}</q-item-label>
+            <q-item-label>{{ deployInfo.validAfterBlockNumber }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -122,7 +124,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.cost }}</q-item-label>
+            <q-item-label>{{ deployInfo.cost }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -133,7 +135,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.errored }}</q-item-label>
+            <q-item-label>{{ deployInfo.errored }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -144,7 +146,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfo.systemDeployError }}</q-item-label>
+            <q-item-label>{{ deployInfo.systemDeployError }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -156,65 +158,42 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import client from '../defineAPI';
+import { BlockInfo, DeployInfo } from '../defineAPI/rnodeTypes';
 
 export default Vue.extend({
   name: 'deployDetail',
+  props: {
+    blockInfoDetail: {
+      type: Object as () => BlockInfo
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    deployId: {
+      type: String
+    }
+  },
   data() {
     return {
-      blockInfo: {
-        blockHash: '',
-        sender: '',
-        seqNum: 0,
+      deployInfo: {
+        deployer: '',
+        term: '',
+        timestamp: 0,
         sig: '',
         sigAlgorithm: '',
-        shardId: '',
-        extraBytes: '',
-
-        // HeaderProto message
-        version: 0,
-        timestamp: 0,
-        headerExtraBytes: '',
-        parentsHashList: [''],
-
-        // BodyProto message
-        blockNumber: 0,
-        preStateHash: '',
-        postStateHash: '',
-        bodyExtraBytes: '',
-        bonds: [{ validator: '', stake: 0 }],
-
-        // extra
-        blockSize: '',
-        deployCount: 0,
-        faultTolerance: 0
-      },
-      deploys: [
-        {
-          deployer: '',
-          term: '',
-          timestamp: 0,
-          sig: '',
-          sigAlgorithm: '',
-          phloPrice: 1,
-          phloLimit: 1,
-          validAfterBlockNumber: 1,
-          cost: 1,
-          errored: false,
-          systemDeployError: ''
-        }
-      ],
-      loading: false,
-      blockHash: ''
+        phloPrice: 1,
+        phloLimit: 1,
+        validAfterBlockNumber: 1,
+        cost: 1,
+        errored: false,
+        systemDeployError: ''
+      }
     };
   },
-  methods: {},
-  async mounted() {
-    this.loading = true;
-    const block = await client.showBlock(this.$route.params.blockHash);
-    this.deploys = block.deploys;
-    this.blockInfo = block.blockInfo;
-    this.loading = false;
+  beforeUpdate() {
+    const targetDeploy = this.blockInfoDetail.deploys.find(element => element.sig == this.deployId) as DeployInfo;
+    this.deployInfo = targetDeploy;
   }
 });
 </script>
