@@ -149,6 +149,7 @@ export default Vue.extend({
         // sortBy: 'desc',
         // descending: false,
         page: 1,
+        // this is not relying on the q-table pagination to get page
         rowsPerPage: 0
         // rowsNumber: 10
       }

@@ -2,7 +2,7 @@
   <div class="full-width">
     <q-table
       title="Accounts"
-      :data="data"
+      :data="accounts"
       :columns="columns"
       :pagination.sync="pagination"
       hide-pagination
@@ -72,6 +72,7 @@
         :max="50"
         :max-pages="6"
         :boundary-links="true"
+        @input="onRequest"
       >
       </q-pagination>
     </div>
@@ -80,7 +81,6 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import client from '../defineAPI';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
 import addressLink from './links/AddressLink.vue';
@@ -92,6 +92,10 @@ export default Vue.extend({
     'define-loading': defineLoading,
     'address-link': addressLink,
     'block-link': blockLink
+  },
+  props: {
+    accounts: Array,
+    loading: Boolean
   },
   data() {
     return {
@@ -117,32 +121,21 @@ export default Vue.extend({
           field: 'lastOperationBlock'
         }
       ],
-      data: [
-        {
-          address: '',
-          balance: 0,
-          isGenesisVault: true,
-          lastOperationBlock: ''
-        }
-      ],
-      loading: false,
       pagination: {
         // sortBy: 'desc',
         // descending: false,
         page: 1,
-        rowsPerPage: 50
+        // this is not relying on the q-table pagination to get page
+        rowsPerPage: 0
         // rowsNumber: 10
       }
     };
   },
   methods: {
-    revUnit: revUnit
-  },
-  async created() {
-    this.loading = true;
-    const resp = await client.revAccounts();
-    this.data = resp.accounts;
-    this.loading = false;
+    revUnit: revUnit,
+    onRequest(page: number) {
+      this.$emit('request', page);
+    }
   }
 });
 </script>

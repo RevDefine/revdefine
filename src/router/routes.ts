@@ -24,7 +24,7 @@ const routes: RouteConfig[] = [
       {
         name: 'revaccounts', path: 'revaccounts', component: () => import('pages/Accounts.vue'),
         children: [
-          { path: '', component: () => import('components/AccountTable.vue') },
+          { path: '', component: () => import('pages/AccountList.vue') },
           { name: 'revaccount', path: ':addr', component: () => import('pages/AccountDetail.vue') }
         ]
       },

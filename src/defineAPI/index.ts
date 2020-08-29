@@ -4,8 +4,8 @@ import axios, { AxiosInstance } from 'axios';
 import domainHost from './host'
 
 
-const defaultRowsPerPage = 20
-const defaultPage = 1
+export const defaultRowsPerPage = 20
+export const defaultPage = 1
 class DefineClient {
   public readonly HTTPHost: string;
   public readonly HTTPPort: number;

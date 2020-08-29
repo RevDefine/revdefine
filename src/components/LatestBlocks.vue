@@ -93,6 +93,7 @@
         :max="50"
         :max-pages="6"
         :boundary-links="true"
+        @input="onRequest"
       >
       </q-pagination>
     </div>
@@ -100,7 +101,6 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import client from '../defineAPI';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
 import blockLink from './links/BlockLink.vue';
@@ -110,6 +110,10 @@ export default Vue.extend({
   components: {
     'define-loading': defineLoading,
     'block-link': blockLink
+  },
+  props: {
+    data: Array,
+    loading: Boolean
   },
   data() {
     return {
@@ -153,53 +157,21 @@ export default Vue.extend({
           field: 'sender'
         }
       ],
-      data: [
-        {
-          blockHash: '',
-          sender: '',
-          seqNum: 0,
-          sig: '',
-          sigAlgorithm: '',
-          shardId: '',
-          extraBytes: '',
-
-          // HeaderProto message
-          version: 0,
-          timestamp: 0,
-          headerExtraBytes: '',
-          parentsHashList: [''],
-
-          // BodyProto message
-          blockNumber: 0,
-          preStateHash: '',
-          postStateHash: '',
-          bodyExtraBytes: '',
-          bonds: [{ validator: '', stake: 0 }],
-
-          // extra
-          blockSize: '',
-          deployCount: 0,
-          faultTolerance: 0
-        }
-      ],
-      loading: false,
       pagination: {
         // sortBy: 'desc',
         // descending: false,
         page: 1,
-        rowsPerPage: 20
+        // this is not relying on the q-table pagination to get page
+        rowsPerPage: 0
         // rowsNumber: 10
       }
     };
   },
   methods: {
-    revUnit: revUnit
-  },
-  async mounted() {
-    this.loading = true;
-    const blocks = await client.showBlocks(10);
-    this.data = blocks;
-    this.loading = false;
+    revUnit: revUnit,
+    onRequest(page: number) {
+      this.$emit('request', page);
+    }
   }
 });
 </script>
