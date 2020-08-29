@@ -9,12 +9,12 @@
         bg-color="white"
         :placeholder="$t('Search')"
         v-model="searchHash"
-        v-on:keyup.enter.native="$emit('search', searchHash, searchType)"
+        v-on:keyup.enter.native="$emit('search', searchHash)"
       >
         <template v-slot:prepend>
           <q-icon
             name="search"
-            v-on:click="$emit('search', searchHash, searchType)"
+            v-on:click="$emit('search', searchHash)"
           />
         </template>
       </q-input>

@@ -1,7 +1,7 @@
  <template>
   <div>
     <div class="row col-xs-12 justify-center">
-      <search-bar @search='search'></search-bar>
+      <search-bar @search="search"></search-bar>
     </div>
 
     <div class="row">
@@ -17,7 +17,7 @@
         <apex-chart
           :loading="deployStatLoading"
           :data="deployStatData"
-          title="Last 7 Days Deploy"
+          title="Last 7 Days Transfer"
           :total="deployStatTotal"
         ></apex-chart>
       </div>
@@ -39,14 +39,17 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import SearchBlockBar from '../components/SearchBar.vue';
+import searchBar from '../components/SearchBar.vue';
 import lastBlockInfo from '../components/LastBlock.vue';
 import latestTransfer from '../components/LatestTransfer.vue';
 import apexChart from '../components/ApexChart.vue';
 import client from '../defineAPI';
+import { StringType, judgeSearchString } from '../lib';
+import { getAddrFromEth } from '../lib/rnode-address';
+
 export default Vue.extend({
   components: {
-    'search-bar': SearchBlockBar,
+    'search-bar': searchBar,
     'last-block-info': lastBlockInfo,
     'latest-transfer': latestTransfer,
     'apex-chart': apexChart
@@ -101,7 +104,9 @@ export default Vue.extend({
           ]
         }
       ],
-      deployStatTotal: 0
+      deployStatTotal: 0,
+
+      searchString: ''
     };
   },
   methods: {
@@ -139,7 +144,20 @@ export default Vue.extend({
       this.deployStatTotal = total;
       this.deployStatLoading = false;
     },
-    search() {}
+    async search(target: string) {
+      const targetType = judgeSearchString(target);
+      if (targetType == StringType.revAddress) {
+        this.$router.push({ name: 'revaccount', params: { addr: target } });
+      } else if (targetType == StringType.ethAddress) {
+        const revAddress = getAddrFromEth(target);
+        this.$router.push({ name: 'revaccount', params: { addr: revAddress } });
+      } else if (targetType == StringType.blockHash) {
+        this.$router.push({ name: 'block', params: { blockHash: target } });
+      } else if (targetType == StringType.deployId) {
+        const block = await client.findDeploy(target);
+        this.$router.push({ name: 'deploy', params: { blockHash: block.blockHash, deployId: target } });
+      }
+    }
   },
   async mounted() {
     const itemsToLoad = [this.requestLatestTransfer(1), this.getTransferStat(), this.getDeployStat()];
