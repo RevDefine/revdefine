@@ -8,6 +8,7 @@
       <transfer-list
         :transactions="transactions"
         :loading="loading"
+        v-on:request="getTransactions"
       ></transfer-list>
     </div>
   </div>
@@ -47,19 +48,19 @@ export default Vue.extend({
     };
   },
   methods: {
-    async getTransfer() {
+    async getTransactions(page: number) {
       this.loading = true;
-      const resp = await client.trasactions(this.$route.params.addr);
+      const resp = await client.trasactions(this.$route.params.addr, page);
       this.transactions = resp.transactions;
       this.loading = false;
     }
   },
   async mounted() {
-    await this.getTransfer();
+    await this.getTransactions(1);
   },
   watch: {
     async $route() {
-      await this.getTransfer();
+      await this.getTransactions(1);
     }
   }
 });

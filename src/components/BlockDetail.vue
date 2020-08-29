@@ -217,24 +217,6 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">bondsValidatorList</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section padding>
-            <q-list>
-              <q-item
-                v-for="bond in blockInfoDetail.blockInfo.bonds"
-                :key="bond.validator"
-              >
-                <q-item-label>{{ bond }}</q-item-label>
-              </q-item>
-            </q-list>
-          </q-item-section>
-        </q-item>
-
-        <q-item>
           <q-item-section class="col-sm-3 col-xs-5 col-md-2">deploys</q-item-section>
           <q-separator
             vertical
@@ -258,6 +240,24 @@
         </q-item>
 
         <q-item>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">bondsValidatorList</q-item-section>
+          <q-separator
+            vertical
+            spaced
+          />
+          <q-item-section padding>
+            <q-list>
+              <q-item
+                v-for="bond in blockInfoDetail.blockInfo.bonds"
+                :key="bond.validator"
+              >
+                <q-item-label>{{ bond }}</q-item-label>
+              </q-item>
+            </q-list>
+          </q-item-section>
+        </q-item>
+
+        <!-- <q-item>
           <q-expansion-item
             expand-separator
             label="Justifications"
@@ -268,7 +268,7 @@
               </q-card-section>
             </q-card>
           </q-expansion-item>
-        </q-item>
+        </q-item> -->
 
       </q-list>
 

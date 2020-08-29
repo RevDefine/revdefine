@@ -4,6 +4,7 @@
       <latest-transfer
         :transactions="transactions"
         :loading="loading"
+        v-on:request="getTransfer"
       ></latest-transfer>
     </div>
   </div>
@@ -40,19 +41,19 @@ export default Vue.extend({
     };
   },
   methods: {
-    async getTransfer() {
+    async getTransfer(page: number) {
       this.loading = true;
-      const transactions = await client.getLatestTransactions();
+      const transactions = await client.getLatestTransactions(page);
       this.transactions = transactions.transactions;
       this.loading = false;
     }
   },
   async mounted() {
-    await this.getTransfer();
+    await this.getTransfer(1);
   },
   watch: {
     async $route() {
-      await this.getTransfer();
+      await this.getTransfer(1);
     }
   }
 });

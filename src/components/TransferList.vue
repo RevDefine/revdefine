@@ -128,6 +128,7 @@
         :max="50"
         :max-pages="6"
         :boundary-links="true"
+        @input="onRequest"
       >
       </q-pagination>
     </div>
@@ -188,13 +189,17 @@ export default Vue.extend({
         // sortBy: 'desc',
         // descending: false,
         page: 1,
-        rowsPerPage: 50
+        // this is not relying on the q-table pagination to get page
+        rowsPerPage: 0
         // rowsNumber: 10
       }
     };
   },
   methods: {
-    revUnit: revUnit
+    revUnit: revUnit,
+    onRequest(page: number) {
+      this.$emit('request', page);
+    }
   }
 });
 </script>
