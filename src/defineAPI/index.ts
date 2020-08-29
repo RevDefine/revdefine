@@ -41,6 +41,11 @@ class DefineClient {
     return resp.data;
   }
 
+  public async getBlocksByHeight (start: number, end: number): Promise<LightBlockInfo[]> {
+    const resp = await this.rnodeAxiosInstance.get<LightBlockInfo[]>('/api/blocks/' + start + '/' + end);
+    return resp.data;
+  }
+
   public async findDeploy (deployId: string): Promise<LightBlockInfo> {
     const resp = await this.rnodeAxiosInstance.get<LightBlockInfo>('/api/deploy/' + deployId)
     return resp.data

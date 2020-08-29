@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <define-loading :showing="loading">
-    </define-loading>
-    <apexchart
-      type="area"
-      :options="options"
-      :series="data"
-    >
-    </apexchart>
+  <div class="q-mx-md q-my-md">
+    <q-card>
+      <define-loading :showing="loading">
+      </define-loading>
+      <apexchart
+        type="area"
+        :options="options"
+        :series="data"
+      >
+      </apexchart>
+    </q-card>
   </div>
 </template>
 
@@ -38,6 +40,7 @@ export default Vue.extend({
             show: false
           }
         },
+        colors: this.colors,
         stroke: {
           curve: 'smooth'
         },
@@ -60,6 +63,7 @@ export default Vue.extend({
           show: false
         }
       },
+      colors: this.colors,
       stroke: {
         curve: 'smooth'
       },

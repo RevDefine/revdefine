@@ -7,6 +7,7 @@ const routes: RouteConfig[] = [
     children: [
       { path: '', component: () => import('pages/Home.vue') },
       { name: 'home', path: 'home', component: () => import('pages/Home.vue') },
+      { path: 'explorer/transfer/:deployId', component: () => import('pages/SearchTransfer.vue') },
       {
         name: 'blocks', path: 'blocks', component: () => import('pages/Blocks.vue'),
         children: [
