@@ -3,6 +3,9 @@ import { OldTransactionResponse, TransactionsResponse, RevAccountResponse, RevAc
 import axios, { AxiosInstance } from 'axios';
 import domainHost from './host'
 
+
+const defaultRowsPerPage = 20
+const defaultPage = 1
 class DefineClient {
   public readonly HTTPHost: string;
   public readonly HTTPPort: number;
@@ -56,19 +59,19 @@ class DefineClient {
 
 
   //// ========================================== define API==========================================
-  public async getLatestTransactions (): Promise<TransactionsResponse> {
-    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/transactions')
+  public async getLatestTransactions (page: number = defaultPage, rowsPerPage: number = defaultRowsPerPage): Promise<TransactionsResponse> {
+    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/transactions', { params: { rowsPerPage: rowsPerPage, page: page } })
     return resp.data
   }
 
 
-  public async trasactions (address: string): Promise<TransactionsResponse> {
-    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/transactions/' + address)
+  public async trasactions (address: string, page: number = defaultPage, rowsPerPage: number = defaultRowsPerPage): Promise<TransactionsResponse> {
+    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/transactions/' + address, { params: { rowsPerPage: rowsPerPage, page: page } })
     return resp.data
   }
 
-  public async deployTransaction (deployId: string): Promise<TransactionsResponse> {
-    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/deploy/' + deployId + '/transfer')
+  public async deployTransaction (deployId: string, page: number = defaultPage, rowsPerPage: number = defaultRowsPerPage): Promise<TransactionsResponse> {
+    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/deploy/' + deployId + '/transfer', { params: { rowsPerPage: rowsPerPage, page: page } })
     return resp.data
   }
 
@@ -77,8 +80,8 @@ class DefineClient {
     return resp.data
   }
 
-  public async revAccounts (): Promise<RevAccountListResponse> {
-    const resp = await this.defineAxiosInstance.get<RevAccountListResponse>('/revaccounts')
+  public async revAccounts (page: number = defaultPage, rowsPerPage: number = defaultRowsPerPage): Promise<RevAccountListResponse> {
+    const resp = await this.defineAxiosInstance.get<RevAccountListResponse>('/revaccounts', { params: { rowsPerPage: rowsPerPage, page: page } })
     return resp.data
   }
 

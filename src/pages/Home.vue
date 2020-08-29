@@ -1,7 +1,7 @@
  <template>
   <div>
     <div class="row col-xs-12 justify-center">
-      <search-bar @search='searchAlert'></search-bar>
+      <search-bar @search='search'></search-bar>
     </div>
 
     <div class="row">
@@ -21,6 +21,7 @@
       <latest-transfer
         :transactions="data"
         :loading="loading"
+        v-on:request="requestLatestTransfer"
       ></latest-transfer>
     </div>
   </div>
@@ -62,13 +63,16 @@ export default Vue.extend({
     };
   },
   methods: {
-    searchAlert() {}
+    async requestLatestTransfer(page: number) {
+      this.loading = true;
+      const transactions = await client.getLatestTransactions(page);
+      this.data = transactions.transactions;
+      this.loading = false;
+    },
+    search() {}
   },
   async mounted() {
-    this.loading = true;
-    const transactions = await client.getLatestTransactions();
-    this.data = transactions.transactions;
-    this.loading = false;
+    await this.requestLatestTransfer(1);
   }
 });
 </script>
