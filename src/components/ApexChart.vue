@@ -1,10 +1,13 @@
 <template>
   <div>
+    <define-loading :showing="loading">
+    </define-loading>
     <apexchart
       type="area"
       :options="options"
-      :series="series"
-    ></apexchart>
+      :series="data"
+    >
+    </apexchart>
   </div>
 </template>
 
@@ -12,11 +15,20 @@
 <script>
 import Vue from 'vue'
 import VueApexCharts from 'vue-apexcharts'
-import client from '../defineAPI'
+import defineLoading from './Loading.vue'
+
 export default Vue.extend({
-  name: 'ApexChart',
+  name: 'apexChart',
   components: {
-    apexchart: VueApexCharts
+    apexchart: VueApexCharts,
+    'define-loading': defineLoading
+  },
+  props: {
+    loading: Boolean,
+    title: String,
+    data: Array,
+    colors: String,
+    total: Number
   },
   data () {
     return {
@@ -29,24 +41,38 @@ export default Vue.extend({
         stroke: {
           curve: 'smooth'
         },
+        title: {
+          text: this.title
+        },
+        subtitle: {
+          text: 'Total: ' + this.total
+        },
         xaxis: {
           type: 'datetime'
         }
-      },
-      series: [{
-        name: 'transfer',
-        data: [0, 0, 0, 0, 0, 0, 0]
-      }]
+      }
     }
   },
-  async mounted () {
-    const stat = await client.statTransfer()
-    const data = stat.datas.map(element => [element.start, element.data])
-    console.log(data)
-    this.series = [{
-      name: 'transfer',
-      data: data
-    }]
+  beforeUpdate () {
+    this.options = {
+      chart: {
+        toolbar: {
+          show: false
+        }
+      },
+      stroke: {
+        curve: 'smooth'
+      },
+      title: {
+        text: this.title
+      },
+      subtitle: {
+        text: 'Total: ' + this.total
+      },
+      xaxis: {
+        type: 'datetime'
+      }
+    }
   }
 })
 </script>
