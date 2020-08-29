@@ -28,6 +28,9 @@ export default Vue.extend({
         },
         stroke: {
           curve: 'smooth'
+        },
+        xaxis: {
+          type: 'datetime'
         }
       },
       series: [{
@@ -37,8 +40,13 @@ export default Vue.extend({
     }
   },
   async mounted () {
-    const data = await client.statTransfer()
-    data.datas.forEach(element => (element.start, element.data))
+    const stat = await client.statTransfer()
+    const data = stat.datas.map(element => [element.start, element.data])
+    console.log(data)
+    this.series = [{
+      name: 'transfer',
+      data: data
+    }]
   }
 })
 </script>
