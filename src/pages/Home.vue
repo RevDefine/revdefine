@@ -9,7 +9,7 @@
         <apex-chart
           :loading="transferStatLoading"
           :data="transferStatData"
-          title="Last 7 Days Transfer"
+          title="Last 7 Days Transfers"
           :total="transferStatTotal"
           :colors="['#1677FF']"
         ></apex-chart>
@@ -18,7 +18,7 @@
         <apex-chart
           :loading="deployStatLoading"
           :data="deployStatData"
-          title="Last 7 Days Transfer"
+          title="Last 7 Days Deploys"
           :total="deployStatTotal"
           :colors="['#AC1C36']"
         ></apex-chart>
