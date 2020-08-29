@@ -6,6 +6,7 @@ import domainHost from './host'
 
 export const defaultRowsPerPage = 20
 export const defaultPage = 1
+const definePrefix = '/define/api'
 class DefineClient {
   public readonly HTTPHost: string;
   public readonly HTTPPort: number;
@@ -21,7 +22,7 @@ class DefineClient {
     this.RnodePort = RnodePort
     this.TimeOut = TimeOut;
     this.defineAxiosInstance = axios.create({
-      baseURL: HTTPHost + ':' + HTTPPort,
+      baseURL: HTTPHost + ':' + HTTPPort + definePrefix,
       timeout: TimeOut * 1000
     });
 
