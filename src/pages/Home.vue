@@ -11,6 +11,7 @@
           :data="transferStatData"
           title="Last 7 Days Transfer"
           :total="transferStatTotal"
+          :colors="['#1677FF']"
         ></apex-chart>
       </div>
       <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 bg-white">
@@ -19,6 +20,7 @@
           :data="deployStatData"
           title="Last 7 Days Transfer"
           :total="deployStatTotal"
+          :colors="['#AC1C36']"
         ></apex-chart>
       </div>
     </div>

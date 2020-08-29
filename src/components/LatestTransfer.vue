@@ -1,5 +1,5 @@
 <template>
-  <div class="full-width">
+  <div class="full-width bg-white">
     <q-table
       title="Transfers"
       :data="transactions"
@@ -7,6 +7,7 @@
       :pagination.sync="pagination"
       hide-pagination
       :loading="loading"
+      class="q-mx-md q-my-md"
     >
 
       <template v-slot:header="props">

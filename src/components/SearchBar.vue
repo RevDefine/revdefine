@@ -7,7 +7,7 @@
         dense
         clearable
         bg-color="white"
-        :placeholder="$t('Search')"
+        placeholder="Search blockHash, deployId, revAddress"
         v-model="searchHash"
         v-on:keyup.enter.native="$emit('search', searchHash)"
       >

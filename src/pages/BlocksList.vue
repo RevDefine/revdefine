@@ -2,6 +2,7 @@
   <latest-block
     :data="data"
     :loading="loading"
+    v-on:request="getBlockData"
   ></latest-block>
 </template>
 
@@ -52,7 +53,11 @@ export default Vue.extend({
   methods: {
     async getBlockData(page: number) {
       this.loading = true;
-      const blocks = await client.showBlocks(defaultRowsPerPage);
+      const latestBlock = await client.showBlocks(1);
+      const latestBlockNumber = latestBlock[0].blockNumber;
+      const start = latestBlockNumber - page * defaultRowsPerPage;
+      const end = latestBlockNumber - (page - 1) * defaultRowsPerPage;
+      const blocks = await client.getBlocksByHeight(start, end);
       this.data = blocks;
       this.loading = false;
     }
