@@ -139,7 +139,7 @@ export default Vue.extend({
       const total = stat.datas.reduce((s, element) => s + element.data, 0);
       this.deployStatData = [
         {
-          name: 'transfer',
+          name: 'deploy',
           data: data
         }
       ];
@@ -158,6 +158,10 @@ export default Vue.extend({
       } else if (targetType == StringType.deployId) {
         const block = await client.findDeploy(target);
         this.$router.push({ name: 'deploy', params: { blockHash: block.blockHash, deployId: target } });
+      } else if (targetType == StringType.blockNumber) {
+        const blockNumber = Number(target);
+        const block = await client.getBlocksByHeight(blockNumber, blockNumber);
+        this.$router.push({ name: 'block', params: { blockHash: block[0].blockHash } });
       }
     }
   },

@@ -20,6 +20,7 @@ export const StringType = {
   ethAddress: 2,
   blockHash: 3,
   deployId: 4,
+  blockNumber: 5,
   Nothing: 0
 }
 
@@ -65,6 +66,8 @@ export function judgeSearchString (target: string) {
       return StringType.blockHash
     } else if (verifyDeployId(target)) {
       return StringType.deployId
+    } else if (!isNaN(Number(target))) {
+      return StringType.blockNumber
     } else {
       return StringType.Nothing
     }
@@ -75,6 +78,8 @@ export function judgeSearchString (target: string) {
       return StringType.blockHash
     } else if (verifyDeployId(target)) {
       return StringType.deployId
+    } else if (!isNaN(Number(target))) {
+      return StringType.blockNumber
     } else {
       return StringType.Nothing
     }
