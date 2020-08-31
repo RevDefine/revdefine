@@ -1,3 +1,19 @@
+<i18n>
+{
+  'en-us':{
+    "Home": "Home",
+    "Blocks": "Blocks",
+    "Transfer": "Transfer",
+    "Account": "Account"
+  },
+  'zh':{
+    "Home": "首页",
+    "Blocks": "区块",
+    "Transfer": "转账",
+    "Account": "账户"
+  }
+}
+</i18n>
 <template>
   <div>
     <q-layout
@@ -35,25 +51,25 @@
               <q-route-tab
                 no-caps
                 name="home"
-                label="Home"
+                :label="$t('Home')"
                 to="/home"
               />
               <q-route-tab
                 no-caps
                 name="blocks"
-                label="Blocks"
+                :label="$t('Blocks')"
                 to="/blocks"
               />
               <q-route-tab
                 no-caps
                 name="transfer"
-                label="Transfer"
+                :label="$t('Transfer')"
                 to="/transfer"
               />
               <q-route-tab
                 no-caps
                 name="account"
-                label="Account"
+                :label="$t('Account')"
                 to="/revaccounts"
               />
             </q-tabs>
@@ -130,7 +146,7 @@ export default Vue.extend({
   },
   methods: {
     onLangSelect(lang: LangLabel) {
-      this.$i18n.locale = lang.value;
+      this.$root.$i18n.locale = lang.value;
       this.lang = lang.label;
     }
   }

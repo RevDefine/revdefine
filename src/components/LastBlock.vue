@@ -1,3 +1,15 @@
+<i18n>
+{
+  'en-us':{
+    "Latest Block Info": "Latest Block Info",
+    
+  },
+  'zh':{
+    "Latest Block Info": "最新区块信息",
+  }
+}
+</i18n>
+
 <template>
   <div class="full-width bg-white">
     <q-card
@@ -8,7 +20,7 @@
         <define-loading :showing="loading"></define-loading>
       </div>
       <q-card-section>
-        <div class="text-h6">Latest Block Info</div>
+        <div class="text-h6">{{$t('Latest Block Info')}}</div>
       </q-card-section>
       <q-separator
         dark
@@ -21,7 +33,7 @@
         >
           <q-item>
             <q-item-section class="col-sm-3 col-xs-5 col-md-2">
-              <q-item-label>blockHash</q-item-label>
+              <q-item-label>{{$t('blockHash')}}</q-item-label>
             </q-item-section>
 
             <q-item-section side>
@@ -38,7 +50,7 @@
 
           <q-item>
             <q-item-section class="col-sm-3 col-xs-5 col-md-2">
-              <q-item-label>sender</q-item-label>
+              <q-item-label>{{$t('sender')}}</q-item-label>
             </q-item-section>
 
             <q-item-section side>
@@ -52,7 +64,7 @@
 
           <q-item>
             <q-item-section class="col-sm-3 col-xs-5 col-md-2">
-              <q-item-label>timestamp</q-item-label>
+              <q-item-label>{{$t('timestamp')}}</q-item-label>
             </q-item-section>
 
             <q-item-section side>
@@ -70,7 +82,7 @@
 
           <q-item>
             <q-item-section class="col-sm-3 col-xs-5 col-md-2">
-              <q-item-label>deployCount</q-item-label>
+              <q-item-label>{{$t('deployCount')}}</q-item-label>
             </q-item-section>
 
             <q-item-section side>

@@ -30,7 +30,7 @@
         style="word-break: break-all;"
       >
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">deployer</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('deployer')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -41,7 +41,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">term</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('term')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -52,7 +52,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">timestamp</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('timestamp')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -63,7 +63,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">signature</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('signature')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -74,7 +74,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">sigAlgorithm</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('sigAlgorithm')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -85,7 +85,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">phloPrice</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('phloPrice')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -96,7 +96,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">phloLimit</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('phloLimit')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -107,7 +107,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">validAfterBlockNumber</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('validAfterBlockNumber')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -118,7 +118,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">cost</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('cost')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -129,7 +129,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">errored</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('errored')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -140,7 +140,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">systemDeployError</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('systemDeployError')}}</q-item-section>
           <q-separator
             vertical
             spaced

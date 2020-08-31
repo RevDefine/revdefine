@@ -1,7 +1,20 @@
+<i18n>
+{
+  'en-us':{
+    "Age": "Age",
+    "Latest Blocks": "Latest Blocks"
+    
+  },
+  'zh':{
+    "Age": "块龄",
+    "Latest Blocks": "最新区块"
+  }
+}
+</i18n>
 <template>
   <div class="full-width bg-white">
     <q-table
-      title="Blocks"
+      :title="$t('Latest Blocks')"
       :data="data"
       :columns="columns"
       :pagination.sync="pagination"
@@ -17,7 +30,7 @@
             :key="col.name"
             :props="props"
           >
-            {{ col.label }}
+            {{ $t(col.label) }}
           </q-th>
         </q-tr>
       </template>
@@ -122,7 +135,7 @@ export default Vue.extend({
         {
           name: 'blockHash',
           required: true,
-          label: 'blockHash',
+          label: 'BlockHash',
           align: 'left',
           field: 'blockHash'
         },
@@ -130,31 +143,31 @@ export default Vue.extend({
         {
           name: 'blockNumber',
           align: 'left',
-          label: 'blockNumber',
+          label: 'BlockNumber',
           field: 'blockNumber'
         },
         {
           name: 'deployCount',
           align: 'left',
-          label: 'deployCount',
+          label: 'DeployCount',
           field: 'deployCount'
         },
         {
           name: 'seqNum',
           align: 'left',
-          label: 'seqNum',
+          label: 'SeqNum',
           field: 'seqNum'
         },
         {
           name: 'timestamp',
           align: 'left',
-          label: 'timestamp',
+          label: 'Age',
           field: 'timestamp'
         },
         {
           name: 'sender',
           align: 'left',
-          label: 'sender',
+          label: 'Sender',
           field: 'sender'
         }
       ],

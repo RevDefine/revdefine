@@ -1,4 +1,22 @@
-  <template>
+<i18n>
+{
+  'en-us':{
+    "Address": "address",
+    "Balance": "balance",
+    "IsGenesisVault": "isGenesisAddresss",
+    "LastOperationBlock": "lastOperationBlock",
+    "Account": "RevAccount"
+  },
+  'zh':{
+    "Address": "地址",
+    "Balance": "余额",
+    "IsGenesisVault": "创世钱包",
+    "LastOperationBlock": "上次转账区块",
+    "Account": "Rev帐户"
+  }
+}
+</i18n>
+<template>
   <q-card
     bordered
     class="full-width"
@@ -8,7 +26,7 @@
     </div>
 
     <q-card-section>
-      <div class="text-h6">Account</div>
+      <div class="text-h6">{{$t('Account')}}</div>
     </q-card-section>
 
     <q-separator
@@ -20,7 +38,7 @@
       <q-list>
         <q-item>
           <q-item-section>
-            <q-item-label>address</q-item-label>
+            <q-item-label>{{$t('Address')}}</q-item-label>
           </q-item-section>
 
           <q-item-section side>
@@ -32,7 +50,7 @@
 
         <q-item>
           <q-item-section>
-            <q-item-label>balance</q-item-label>
+            <q-item-label>{{$t('Balance')}}</q-item-label>
           </q-item-section>
 
           <q-item-section side>
@@ -44,7 +62,7 @@
 
         <q-item>
           <q-item-section>
-            <q-item-label>isGenesisAddress</q-item-label>
+            <q-item-label>{{$t('IsGenesisVault')}}</q-item-label>
           </q-item-section>
 
           <q-item-section side>
@@ -56,7 +74,7 @@
 
         <q-item>
           <q-item-section>
-            <q-item-label>lastOperationBlock</q-item-label>
+            <q-item-label>{{$t('LastOperationBlock')}}</q-item-label>
           </q-item-section>
 
           <q-item-section side>
