@@ -37,7 +37,7 @@
 
           <q-item-section side>
             <q-item-label>
-              {{ balance }}
+              {{ revUnit(balance) + ' Rev' }}
             </q-item-label>
           </q-item-section>
         </q-item>
@@ -78,7 +78,7 @@ import Vue from 'vue';
 import client from '../defineAPI';
 import defineLoading from './Loading.vue';
 import blockLink from './links/BlockLink.vue';
-
+import { revUnit } from '../lib';
 export default Vue.extend({
   name: 'accountOverview',
   components: {
@@ -107,7 +107,8 @@ export default Vue.extend({
       this.isGenesisAddress = account.account.isGenesisVault;
       this.lastOperationBlock = account.account.lastOperationBlock;
       this.loading = false;
-    }
+    },
+    revUnit: revUnit
   },
   async mounted() {
     await this.getOverviewData();

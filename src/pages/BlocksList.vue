@@ -58,7 +58,7 @@ export default Vue.extend({
       const start = latestBlockNumber - page * defaultRowsPerPage;
       const end = latestBlockNumber - (page - 1) * defaultRowsPerPage;
       const blocks = await client.getBlocksByHeight(start, end);
-      this.data = blocks;
+      this.data = blocks.reverse();
       this.loading = false;
     }
   },

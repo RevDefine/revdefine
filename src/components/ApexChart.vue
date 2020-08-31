@@ -29,7 +29,7 @@ export default Vue.extend({
     loading: Boolean,
     title: String,
     data: Array,
-    colors: String,
+    colors: Array,
     total: Number
   },
   data () {
