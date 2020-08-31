@@ -1,3 +1,20 @@
+<i18n>
+{
+  'en-us':{
+    "Address": "Address",
+    "Balance": "Aalance",
+    "IsGenesisVault": "IsGenesisAddresss",
+    "LastOperationBlock": "LastOperationBlock",
+  },
+  'zh':{
+    "Address": "地址",
+    "Balance": "余额",
+    "IsGenesisVault": "是否创世钱包",
+    "LastOperationBlock": "上次转账区块",
+  }
+}
+</i18n>
+
 <template>
   <div class="full-width bg-white">
     <q-table
@@ -17,7 +34,7 @@
             :key="col.name"
             :props="props"
           >
-            {{ col.label }}
+            {{ $t(col.label) }}
           </q-th>
         </q-tr>
       </template>
@@ -104,21 +121,21 @@ export default Vue.extend({
         {
           name: 'address',
           required: true,
-          label: 'address',
+          label: 'Address',
           align: 'left',
           field: 'address'
         },
-        { name: 'balance', align: 'left', label: 'balance', field: 'balance' },
+        { name: 'balance', align: 'left', label: 'Balance', field: 'balance' },
         {
           name: 'isGenesisVault',
           align: 'left',
-          label: 'isGenesisVault',
+          label: 'IsGenesisVault',
           field: 'isGenesisVault'
         },
         {
           name: 'lastOperationBlock',
           align: 'left',
-          label: 'lastOperationBlock',
+          label: 'LastOperationBlock',
           field: 'lastOperationBlock'
         }
       ],

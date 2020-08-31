@@ -28,7 +28,7 @@
         style="word-break: break-all;"
       >
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">BlockHash</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('BlockHash')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -39,7 +39,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">sender</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('sender')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -50,7 +50,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">seqNum</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('seqNum')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -61,7 +61,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">signature</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('signature')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -72,7 +72,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">sigAlgorithm</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('sigAlgorithm')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -83,7 +83,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">shardId</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('shardId')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -94,7 +94,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">extraBytes</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('extraBytes')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -105,7 +105,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">version</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('version')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -116,7 +116,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">timestamp</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('timestamp')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -127,7 +127,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">headerExtraBytes</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('headerExtraBytes')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -138,7 +138,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">blockNumber</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('blockNumber')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -149,7 +149,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">preStateHash</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('preStateHash')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -160,7 +160,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">postStateHash</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('postStateHash')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -171,7 +171,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">bodyExtraBytes</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('bodyExtraBytes')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -182,7 +182,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">blockSize</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('blockSize')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -193,7 +193,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">parentsHashList'</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('parentsHashList')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -217,7 +217,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">deploys</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('deploys')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -240,7 +240,7 @@
         </q-item>
 
         <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">bondsValidatorList</q-item-section>
+          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('bondsValidatorList')}}</q-item-section>
           <q-separator
             vertical
             spaced
@@ -256,19 +256,6 @@
             </q-list>
           </q-item-section>
         </q-item>
-
-        <!-- <q-item>
-          <q-expansion-item
-            expand-separator
-            label="Justifications"
-          >
-            <q-card>
-              <q-card-section>
-                Justifications
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
-        </q-item> -->
 
       </q-list>
 

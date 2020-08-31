@@ -1,7 +1,46 @@
+<i18n>
+{
+  'en-us':{
+    "from": "from",
+    "to": "to",
+    "amount": "amount",
+    "type": "type",
+    "blockHash": "blockHash",
+    "blockNumber": "blockNumber",
+    "deployId": "deployId",
+    "timestamp": "timestamp",
+    "success": "success",
+    "finalized": "finalized",
+    "Transfer": "Transfer",
+    "deploy": "deploy",
+    "transfer": "transfer",
+    "genesis": "genesis",
+    "bond": "bond"
+  },
+  'zh':{
+    "from": "转出方",
+    "to": "转入方",
+    "amount": "数量",
+    "type": "类型",
+    "blockHash": "区块哈希",
+    "blockNumber": "区块高度",
+    "deployId": "部署ID",
+    "timestamp": "时间戳",
+    "success": "成功",
+    "finalized": "确认",
+    "Transfer": "转账",
+    "deploy": "部署",
+    "transfer": "转账",
+    "genesis": "创世",
+    "bond": "加入验证节点"
+  }
+}
+</i18n>
+
 <template>
   <div class="full-width">
     <q-table
-      title="Transfer"
+      :title="$t('Transfer')"
       :data="transactions"
       :columns="columns"
       :pagination.sync="pagination"
@@ -16,7 +55,7 @@
             :key="col.name"
             :props="props"
           >
-            {{ col.label }}
+            {{ $t(col.label) }}
           </q-th>
         </q-tr>
       </template>
@@ -56,7 +95,7 @@
             key="type"
             :props="props"
           >
-            {{ props.row.transactionType }}
+            {{ $t(props.row.transactionType) }}
           </q-td>
 
           <q-td

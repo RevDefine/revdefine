@@ -1,3 +1,13 @@
+<i18n>
+{
+  'en-us':{
+    "Search blockHash, blockNumber, deployId, revAddress": "Search BlockHash, BlockNumber, DeployId, RevAddress",
+  },
+  'zh':{
+    "Search blockHash, blockNumber, deployId, revAddress": "搜索区块哈希，区块高度，部署ID, Rev地址",
+  }
+}
+</i18n>
 <template>
   <div class="row col-xs-12 col-sm-12 col-md-12 justify-center items-center search-bg rounded">
     <div class="col-md-6 col-sm-8 col-xs-10">
@@ -7,7 +17,7 @@
         dense
         clearable
         bg-color="white"
-        placeholder="Search blockHash, deployId, revAddress"
+        :placeholder="$t('Search blockHash, blockNumber, deployId, revAddress')"
         v-model="searchHash"
         v-on:keyup.enter.native="$emit('search', searchHash)"
       >

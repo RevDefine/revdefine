@@ -1,3 +1,19 @@
+ <i18n>
+{
+  'en-us':{
+    "transfer": "transfer",
+    "deploy": "deploy",
+    "Last 7 Days Transfers": "Last 7 Days Transfers",
+    "Last 7 Days Deploys": "Last 7 Days Deploys"
+  },
+  'zh':{
+    "transfer": "转账",
+    "deploy": "部署",
+    "Last 7 Days Transfers":"7天内转账量",
+    "Last 7 Days Deploys": "7天内部署量"
+  }
+}
+</i18n>
  <template>
   <div>
     <div class="row col-xs-12 justify-center">
@@ -9,7 +25,7 @@
         <apex-chart
           :loading="transferStatLoading"
           :data="transferStatData"
-          title="Last 7 Days Transfers"
+          :title="$t('Last 7 Days Transfers')"
           :total="transferStatTotal"
           :colors="['#1677FF']"
         ></apex-chart>
@@ -18,7 +34,7 @@
         <apex-chart
           :loading="deployStatLoading"
           :data="deployStatData"
-          title="Last 7 Days Deploys"
+          :title="$t('Last 7 Days Deploys')"
           :total="deployStatTotal"
           :colors="['#AC1C36']"
         ></apex-chart>
@@ -79,7 +95,7 @@ export default Vue.extend({
       transferStatLoading: false,
       transferStatData: [
         {
-          name: 'transfer',
+          name: this.$t('transfer'),
           data: [
             [0, 0],
             [0, 0],
@@ -95,7 +111,7 @@ export default Vue.extend({
       deployStatLoading: false,
       deployStatData: [
         {
-          name: 'Deploy',
+          name: this.$t('deploy'),
           data: [
             [0, 0],
             [0, 0],
@@ -125,7 +141,7 @@ export default Vue.extend({
       const total = stat.datas.reduce((s, element) => s + element.data, 0);
       this.transferStatData = [
         {
-          name: 'transfer',
+          name: this.$t('transfer'),
           data: data
         }
       ];
@@ -139,7 +155,7 @@ export default Vue.extend({
       const total = stat.datas.reduce((s, element) => s + element.data, 0);
       this.deployStatData = [
         {
-          name: 'deploy',
+          name: this.$t('deploy'),
           data: data
         }
       ];

@@ -77,6 +77,14 @@ module.exports = function (ctx) {
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
         });
+        cfg.module.rules.push({
+          resourceQuery: /blockType=i18n/,
+          type: 'javascript/auto',
+          use: [
+            { loader: '@kazupon/vue-i18n-loader' },
+            { loader: 'yaml-loader' }
+          ]
+        })
       }
     },
 

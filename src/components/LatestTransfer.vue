@@ -1,7 +1,27 @@
+<i18n>
+{
+  'en-us':{
+    "Latest Transfers": "Latest Transfers",
+    "Age": "Age",
+    "From": "From",
+    "To": "To",
+    "Value": "Value"
+    
+  },
+  'zh':{
+    "Latest Transfers": "最新转账",
+    "Age": "转账时间",
+    "From": "转出方",
+    "To": "转入方",
+    "Value": "数量"
+  }
+}
+</i18n>
+
 <template>
   <div class="full-width bg-white">
     <q-table
-      title="Transfers"
+      :title="$t('Latest Transfers')"
       :data="transactions"
       :columns="columns"
       :pagination.sync="pagination"
@@ -17,7 +37,7 @@
             :key="col.name"
             :props="props"
           >
-            {{ col.label }}
+            {{ $t(col.label) }}
           </q-th>
         </q-tr>
       </template>
@@ -122,7 +142,7 @@ export default Vue.extend({
         {
           name: 'blockHash',
           required: true,
-          label: 'blockHash',
+          label: 'BlockHash',
           align: 'left',
           field: 'blockHash'
         },
