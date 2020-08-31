@@ -147,6 +147,8 @@ export default Vue.extend({
   methods: {
     onLangSelect(lang: LangLabel) {
       this.$root.$i18n.locale = lang.value;
+      // @ts-ignore
+      this.$root.$timeago.locale = lang.value;
       this.lang = lang.label;
     }
   }

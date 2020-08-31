@@ -40,5 +40,7 @@ export default {
   signature: 'signature',
   phloPrice: 'phloPrice',
   phloLimit: 'phloLimit',
-  validAfterBlockNumber: 'validAfterBlockNumber'
+  validAfterBlockNumber: 'validAfterBlockNumber',
+  deployer: 'deployer',
+  term: 'term'
 };
