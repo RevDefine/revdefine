@@ -143,14 +143,16 @@
             key="success"
             :props="props"
           >
-            {{ props.row.isSucceeded }}
+            <define-bool :yesOrNo="props.row.isSucceeded">
+            </define-bool>
           </q-td>
 
           <q-td
             key="finalized"
             :props="props"
           >
-            {{ props.row.isFinalized }}
+            <define-bool :yesOrNo="props.row.isFinalized">
+            </define-bool>
           </q-td>
         </q-tr>
 
@@ -181,6 +183,7 @@ import defineLoading from './Loading.vue';
 import addressLink from './links/AddressLink.vue';
 import deployLink from './links/DeployLink.vue';
 import blockLink from './links/BlockLink.vue';
+import defineBool from './BoolItem.vue';
 
 export default Vue.extend({
   name: 'transferList',
@@ -188,7 +191,8 @@ export default Vue.extend({
     'define-loading': defineLoading,
     'address-link': addressLink,
     'deploy-link': deployLink,
-    'block-link': blockLink
+    'block-link': blockLink,
+    'define-bool': defineBool
   },
   props: {
     transactions: Array,
