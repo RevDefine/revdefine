@@ -1,2 +1,2 @@
 export const productionHost = 'http://localhost'
-export const productionRnodeHost = 'localhost'
+export const productionRNodeHost = 'http://localhost'
