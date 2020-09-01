@@ -18,8 +18,8 @@
 </i18n>
 <template>
   <q-card
-    bordered
     class="full-width"
+    flat
   >
     <div>
       <define-loading :showing="loading"></define-loading>

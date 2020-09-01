@@ -1,10 +1,26 @@
+<i18n>
+{
+  'en-us':{
+    "Holders distributions": "Holders distributions",
+    "top 100 holders": "top 100 holders",
+    "top 50 holders": "top 50 holders",
+    "top 10 holders": "top 10 holders"
+  },
+  'zh':{
+    "Holders distributions": "持仓分布",
+    "top 100 holders": "前100名持仓占比",
+    "top 50 holders": "前50名持仓占比",
+    "top 10 holders": "前10名持仓占比"
+  }
+}
+</i18n>
 <template>
   <div>
     <define-loading :showing="loading">
     </define-loading>
     <div class="column  items-center">
       <div class="col">
-        <h5>Holders distribution</h5>
+        <h5>{{$t('Holders distributions')}}</h5>
       </div>
       <div class="col">
         <apexchart
@@ -64,7 +80,7 @@ export default Vue.extend({
             }
           }
         },
-        labels: ['top 100 holders', 'top 50 holders', 'top 10 holders'],
+        labels: [this.$t('top 100 holders'), this.$t('top 50 holders'), this.$t('top 10 holders')],
         colors: ['#1ab7ea', '#0084ff', '#39539E'],
         legend: {
           show: true,

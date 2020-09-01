@@ -20,32 +20,37 @@
       <search-bar @search="search"></search-bar>
     </div>
 
-    <div class="row">
-      <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 bg-white">
-        <apex-chart
-          :loading="transferStatLoading"
-          :data="transferStatData"
-          :title="$t('Last 7 Days Transfers')"
-          :total="transferStatTotal"
-          :colors="['#1677FF']"
-        ></apex-chart>
+    <div class="row q-mt-md">
+      <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 q-pr-xs">
+        <div class="bg-white q-pa-md rounded-borders">
+          <apex-chart
+            :loading="transferStatLoading"
+            :data="transferStatData"
+            :title="$t('Last 7 Days Transfers')"
+            :total="transferStatTotal"
+            :colors="['#1677FF']"
+          ></apex-chart>
+        </div>
       </div>
-      <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 bg-white">
-        <apex-chart
-          :loading="deployStatLoading"
-          :data="deployStatData"
-          :title="$t('Last 7 Days Deploys')"
-          :total="deployStatTotal"
-          :colors="['#AC1C36']"
-        ></apex-chart>
+      <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 q-pl-xs">
+        <div class="bg-white q-pa-md rounded-borders">
+          <apex-chart
+            :loading="deployStatLoading"
+            :data="deployStatData"
+            :title="$t('Last 7 Days Deploys')"
+            :total="deployStatTotal"
+            :colors="['#AC1C36']"
+          ></apex-chart>
+
+        </div>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row q-mt-md">
       <last-block-info></last-block-info>
     </div>
 
-    <div class="row">
+    <div class="row q-my-md">
       <latest-transfer
         :transactions="data"
         :loading="loading"

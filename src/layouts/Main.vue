@@ -23,6 +23,7 @@
       <q-header
         reveal
         class="bg-white"
+        style="position: relative"
       >
         <div class="row justify-center">
           <q-toolbar class="col-md-10">
@@ -108,7 +109,7 @@
         </div>
       </q-footer> -->
 
-      <q-page-container>
+      <q-page-container style="padding-top: 16px">
         <!-- This is where pages get injected -->
         <div class="row justify-center">
           <div

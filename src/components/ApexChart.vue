@@ -1,15 +1,13 @@
 <template>
-  <div class="q-mx-md q-my-md">
-    <q-card>
-      <define-loading :showing="loading">
-      </define-loading>
-      <apexchart
-        type="area"
-        :options="options"
-        :series="data"
-      >
-      </apexchart>
-    </q-card>
+  <div>
+    <define-loading :showing="loading">
+    </define-loading>
+    <apexchart
+      type="area"
+      :options="options"
+      :series="data"
+    >
+    </apexchart>
   </div>
 </template>
 

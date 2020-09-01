@@ -5,7 +5,7 @@
   <div v-else>
     <router-link
       :to="{name:'block', params:{'blockHash': blockHash}}"
-      class="cursor-pointer clickable"
+      class="clickable"
     >
       <div v-if="short">
         {{ blockHash.slice(0, this.length) + "..." }}

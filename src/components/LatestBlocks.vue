@@ -20,7 +20,8 @@
       :pagination.sync="pagination"
       hide-pagination
       :loading="loading"
-      class="q-mx-md q-my-md"
+      flat
+      bordered=false
     >
 
       <template v-slot:header="props">

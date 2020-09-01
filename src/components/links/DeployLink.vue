@@ -2,7 +2,7 @@
   <div>
     <router-link
       :to="{name:'deploy', params:{'blockHash': blockHash, 'deployId': deployId}}"
-      class="cursor-pointer clickable"
+      class="clickable"
     >
       <div v-if="short">
         {{ deployId.slice(0, this.length) + "..." }}

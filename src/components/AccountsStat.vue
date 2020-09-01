@@ -18,22 +18,22 @@
 <template>
   <q-list>
     <q-item>
-      <q-item-section>{{$t('Total Accounts' + ':')}} </q-item-section>
+      <q-item-section>{{$t('Total Accounts') + ':'}} </q-item-section>
       <q-item-section>{{totalAccount}}</q-item-section>
     </q-item>
 
     <q-item>
-      <q-item-section>{{$t('Last 24 hours active account amount' + ':')}} </q-item-section>
+      <q-item-section>{{$t('Last 24 hours active account amount') + ':'}} </q-item-section>
       <q-item-section>{{last24hActiveAccountAmount}}</q-item-section>
     </q-item>
 
     <q-item>
-      <q-item-section>{{$t('Last one week active account amount' + ':')}} </q-item-section>
+      <q-item-section>{{$t('Last one week active account amount') + ':'}} </q-item-section>
       <q-item-section>{{last7dActiveAccountAmount}}</q-item-section>
     </q-item>
 
     <q-item>
-      <q-item-section>{{$t('Last one month active account amount' + ':')}}</q-item-section>
+      <q-item-section>{{$t('Last one month active account amount') + ':'}}</q-item-section>
       <q-item-section>{{last1mActiveAccountAmount}}</q-item-section>
     </q-item>
   </q-list>
