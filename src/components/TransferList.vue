@@ -38,7 +38,7 @@
 </i18n>
 
 <template>
-  <div class="full-width">
+  <div class="full-width bg-white q-pb-sm">
     <q-table
       :title="$t('Transfer')"
       :data="transactions"
@@ -47,7 +47,6 @@
       hide-pagination
       :loading="loading"
       flat
-      bordered=false
     >
 
       <template v-slot:header="props">
