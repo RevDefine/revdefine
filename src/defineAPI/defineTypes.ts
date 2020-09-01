@@ -59,3 +59,22 @@ export interface RangeData {
 export interface RangeDataResponse {
   datas: RangeData[]
 }
+
+
+export interface AccountTopStatData {
+  top10: number
+  top50: number
+  top100: number
+  total: number
+  destroy: number
+  destroyAddr: string
+
+  totalAccount: number
+  last24hActiveAccountAmount: number
+  last7dActiveAccountAmount: number
+  last1mActiveAccountAmount: number
+}
+
+export interface AccountTopStatDataResponse {
+  data: AccountTopStatData
+}

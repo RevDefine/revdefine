@@ -22,12 +22,12 @@
       </div>
     </div>
     <q-card>
+      <define-loading :showing="loading"></define-loading>
       <q-list
         bordered
         separator
         style="word-break: break-all;"
       >
-        <define-loading :showing="loading"></define-loading>
         <q-item>
           <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('BlockHash')}}</q-item-section>
           <q-separator
