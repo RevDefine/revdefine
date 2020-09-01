@@ -24,6 +24,7 @@
       </div>
     </div>
     <q-card>
+      <define-loading :showing="loading"></define-loading>
       <q-list
         bordered
         separator
@@ -169,19 +170,17 @@ import Vue from 'vue';
 import { BlockInfo, DeployInfo } from '../defineAPI/rnodeTypes';
 import client from '../defineAPI';
 import transferList from './TransferList.vue';
+import defineLoading from './Loading.vue';
 
 export default Vue.extend({
   name: 'deployDetail',
   components: {
-    'transfer-list': transferList
+    'transfer-list': transferList,
+    'define-loading': defineLoading
   },
   props: {
     blockInfoDetail: {
       type: Object as () => BlockInfo
-    },
-    loading: {
-      type: Boolean,
-      default: false
     },
     deployId: {
       type: String
@@ -202,7 +201,7 @@ export default Vue.extend({
         errored: false,
         systemDeployError: ''
       },
-      transactionsLoading: false,
+      loading: false,
       transactions: [
         {
           fromAddr: '',
@@ -226,10 +225,10 @@ export default Vue.extend({
   },
   methods: {
     async getTransfer() {
-      this.transactionsLoading = true;
+      this.loading = true;
       const transactions = await client.deployTransaction(this.deployId);
       this.transactions = transactions.transactions;
-      this.transactionsLoading = false;
+      this.loading = false;
     }
   },
   async mounted() {

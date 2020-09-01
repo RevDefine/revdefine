@@ -27,6 +27,7 @@
         separator
         style="word-break: break-all;"
       >
+        <define-loading :showing="loading"></define-loading>
         <q-item>
           <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('BlockHash')}}</q-item-section>
           <q-separator
@@ -268,11 +269,13 @@ import Vue from 'vue';
 import { BlockInfo } from '../defineAPI/rnodeTypes';
 import blockLink from './links/BlockLink.vue';
 import deployLink from './links/DeployLink.vue';
+import defineLoading from './Loading.vue';
 export default Vue.extend({
   name: 'blockDetail',
   components: {
     'block-link': blockLink,
-    'deploy-link': deployLink
+    'deploy-link': deployLink,
+    'define-loading': defineLoading
   },
   props: {
     blockInfoDetail: {

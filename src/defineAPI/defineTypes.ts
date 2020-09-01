@@ -34,19 +34,20 @@ export interface TransactionsResponse {
   transactions: Transaction[]
 }
 
-export interface RevAccount {
+export interface RankRevAccount {
   address: string
   balance: number
   isGenesisVault: boolean
   lastOperationBlock: string
+  rank: number
 }
 
 export interface RevAccountResponse {
-  account: RevAccount
+  account: RankRevAccount
 }
 
 export interface RevAccountListResponse {
-  accounts: RevAccount[]
+  accounts: RankRevAccount[]
 }
 
 export interface RangeData {
@@ -55,6 +56,6 @@ export interface RangeData {
   data: number
 }
 
-export interface RangeDataResponse{
+export interface RangeDataResponse {
   datas: RangeData[]
 }
