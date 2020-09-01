@@ -67,7 +67,7 @@
 
           <q-item-section side>
             <q-item-label>
-              {{ isGenesisAddress }}
+              <define-bool :yesOrNo="isGenesisAddress"></define-bool>
             </q-item-label>
           </q-item-section>
         </q-item>
@@ -97,11 +97,14 @@ import client from '../defineAPI';
 import defineLoading from './Loading.vue';
 import blockLink from './links/BlockLink.vue';
 import { revUnit } from '../lib';
+import defineBool from './BoolItem.vue';
+
 export default Vue.extend({
   name: 'accountOverview',
   components: {
     'define-loading': defineLoading,
-    'block-link': blockLink
+    'block-link': blockLink,
+    'define-bool': defineBool
   },
   props: {
     addr: String

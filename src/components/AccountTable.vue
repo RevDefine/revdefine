@@ -75,7 +75,7 @@
             key="isGenesisVault"
             :props="props"
           >
-            {{ props.row.isGenesisVault }}
+            <define-bool :yesOrNo="props.row.isGenesisVault"></define-bool>
           </q-td>
           <q-td
             key="lastOperationBlock"
@@ -115,13 +115,15 @@ import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
 import addressLink from './links/AddressLink.vue';
 import blockLink from './links/BlockLink.vue';
+import defineBool from './BoolItem.vue';
 
 export default Vue.extend({
   name: 'accountTable',
   components: {
     'define-loading': defineLoading,
     'address-link': addressLink,
-    'block-link': blockLink
+    'block-link': blockLink,
+    'define-bool': defineBool
   },
   props: {
     accounts: Array,
