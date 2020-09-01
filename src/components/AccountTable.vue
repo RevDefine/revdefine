@@ -5,12 +5,16 @@
     "Balance": "Aalance",
     "IsGenesisVault": "IsGenesisAddresss",
     "LastOperationBlock": "LastOperationBlock",
+    "Rank": "Rank",
+    "Account": "Account"
   },
   'zh':{
     "Address": "地址",
     "Balance": "余额",
     "IsGenesisVault": "是否创世钱包",
     "LastOperationBlock": "上次转账区块",
+    "Rank": "排名",
+    "Account": "账户"
   }
 }
 </i18n>
@@ -18,7 +22,7 @@
 <template>
   <div class="full-width bg-white">
     <q-table
-      title="Accounts"
+      :title="$t('Accounts')"
       :data="accounts"
       :columns="columns"
       :pagination.sync="pagination"
@@ -41,6 +45,14 @@
 
       <template v-slot:body="props">
         <q-tr :props="props">
+
+          <q-td
+            key="rank"
+            :props="props"
+          >
+            {{props.row.rank}}
+          </q-td>
+
           <q-td
             key="address"
             :props="props"
@@ -118,6 +130,7 @@ export default Vue.extend({
   data() {
     return {
       columns: [
+        { name: 'rank', align: 'left', label: 'Rank', field: 'rank' },
         {
           name: 'address',
           required: true,
