@@ -1,5 +1,5 @@
 import { BlockInfo, LightBlockInfo, ExploratoryDeployResponse, IsFinalizedResponse } from './rnodeTypes';
-import { OldTransactionResponse, TransactionsResponse, RevAccountResponse, RevAccountListResponse, RangeDataResponse } from './defineTypes'
+import { OldTransactionResponse, TransactionsResponse, RevAccountResponse, RevAccountListResponse, RangeDataResponse, AccountTopStatDataResponse } from './defineTypes'
 import axios, { AxiosInstance } from 'axios';
 import domainHost from './host'
 
@@ -101,6 +101,10 @@ class DefineClient {
   }
   public async statTransfer (): Promise<RangeDataResponse> {
     const resp = await this.defineAxiosInstance.get<RangeDataResponse>('/stat/transfer')
+    return resp.data
+  }
+  public async statAccounts (): Promise<AccountTopStatDataResponse> {
+    const resp = await this.defineAxiosInstance.get<AccountTopStatDataResponse>('/stat/accounts')
     return resp.data
   }
 
