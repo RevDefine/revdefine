@@ -20,7 +20,7 @@
 </i18n>
 
 <template>
-  <div class="full-width bg-white">
+  <div class="full-width bg-white q-pb-sm">
     <q-table
       :title="$t('Accounts')"
       :data="accounts"
@@ -29,7 +29,6 @@
       hide-pagination
       :loading="loading"
       flat
-      bordered=false
     >
 
       <template v-slot:header="props">

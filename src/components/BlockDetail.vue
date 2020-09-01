@@ -1,8 +1,8 @@
 <template>
-  <div class="q-py-md q-px-md">
+  <div class="q-px-md">
     <div class="full-width">
-      <div class="q-py-md">
-        <q-card>
+      <div class="q-pb-md">
+        <q-card flat>
           <div>
             <q-toolbar>
               <q-breadcrumbs>
@@ -21,10 +21,9 @@
         </q-card>
       </div>
     </div>
-    <q-card>
+    <q-card flat>
       <define-loading :showing="loading"></define-loading>
       <q-list
-        bordered
         separator
         style="word-break: break-all;"
       >
