@@ -4,7 +4,7 @@
       <account-overview :addr="addr"></account-overview>
     </div>
 
-    <div class="row col-xs-12 justify-center">
+    <div class="row col-xs-12 justify-center q-my-md">
       <transfer-list
         :transactions="transactions"
         :loading="loading"

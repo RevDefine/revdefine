@@ -6,7 +6,7 @@
     "IsGenesisVault": "IsGenesisAddresss",
     "LastOperationBlock": "LastOperationBlock",
     "Rank": "Rank",
-    "Account": "Account"
+    "Accounts": "Account"
   },
   'zh':{
     "Address": "地址",
@@ -14,7 +14,7 @@
     "IsGenesisVault": "是否创世钱包",
     "LastOperationBlock": "上次转账区块",
     "Rank": "排名",
-    "Account": "账户"
+    "Accounts": "账户",
   }
 }
 </i18n>
@@ -28,7 +28,8 @@
       :pagination.sync="pagination"
       hide-pagination
       :loading="loading"
-      class="q-mx-md q-my-md"
+      flat
+      bordered=false
     >
 
       <template v-slot:header="props">

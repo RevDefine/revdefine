@@ -11,7 +11,7 @@
     <div v-else>
       <router-link
         :to="{name:'revaccount', params:{'addr': addr}}"
-        class="cursor-pointer clickable"
+        class="clickable"
       >
         <div v-if="short">
           {{ addr.slice(0, this.length) + "..." }}

@@ -17,7 +17,8 @@
         </accounts-stat>
       </div>
     </div>
-    <div class="row">
+
+    <div class="row q-my-md">
       <account-table
         :loading="loading"
         :accounts="accounts"

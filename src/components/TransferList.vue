@@ -46,6 +46,8 @@
       :pagination.sync="pagination"
       hide-pagination
       :loading="loading"
+      flat
+      bordered=false
     >
 
       <template v-slot:header="props">

@@ -12,31 +12,28 @@
 
 <template>
   <div class="full-width bg-white">
-    <q-card
-      bordered
-      class="q-mx-md q-my-md"
-    >
+    <q-card flat>
       <div>
         <define-loading :showing="loading"></define-loading>
       </div>
+
       <q-card-section>
         <div class="text-h6">{{$t('Latest Block Info')}}</div>
       </q-card-section>
-      <q-separator
-        dark
-        inset
-      />
+
+      <q-separator />
+
       <q-card-section>
-        <q-list
-          bordered
-          style="word-break: break-all;"
-        >
+        <q-list style="word-break: break-all;">
           <q-item>
-            <q-item-section class="col-sm-3 col-xs-5 col-md-2">
+            <q-item-section
+              side
+              class="col-sm-3 col-xs-5 col-md-2"
+            >
               <q-item-label>{{$t('blockHash')}}</q-item-label>
             </q-item-section>
 
-            <q-item-section side>
+            <q-item-section>
               <q-item-label>
                 <block-link
                   :blockHash="blockHash"
@@ -46,28 +43,30 @@
             </q-item-section>
           </q-item>
 
-          <q-separator />
-
           <q-item>
-            <q-item-section class="col-sm-3 col-xs-5 col-md-2">
+            <q-item-section
+              side
+              class="col-sm-3 col-xs-5 col-md-2"
+            >
               <q-item-label>{{$t('sender')}}</q-item-label>
             </q-item-section>
 
-            <q-item-section side>
+            <q-item-section>
               <q-item-label>
                 {{sender}}
               </q-item-label>
             </q-item-section>
           </q-item>
 
-          <q-separator />
-
           <q-item>
-            <q-item-section class="col-sm-3 col-xs-5 col-md-2">
+            <q-item-section
+              side
+              class="col-sm-3 col-xs-5 col-md-2"
+            >
               <q-item-label>{{$t('timestamp')}}</q-item-label>
             </q-item-section>
 
-            <q-item-section side>
+            <q-item-section>
               <q-item-label>
                 <timeago
                   :datetime="timestamp"
@@ -78,14 +77,15 @@
             </q-item-section>
           </q-item>
 
-          <q-separator />
-
           <q-item>
-            <q-item-section class="col-sm-3 col-xs-5 col-md-2">
+            <q-item-section
+              side
+              class="col-sm-3 col-xs-5 col-md-2"
+            >
               <q-item-label>{{$t('deployCount')}}</q-item-label>
             </q-item-section>
 
-            <q-item-section side>
+            <q-item-section>
               <q-item-label>
                 {{ deployCount}}
               </q-item-label>
