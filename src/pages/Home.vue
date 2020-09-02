@@ -142,7 +142,7 @@ export default Vue.extend({
     async getTransferStat() {
       this.transferStatLoading = true;
       const stat = await client.statTransfer();
-      const data = stat.datas.map(element => [element.start, element.data]);
+      const data = stat.datas.map(element => [element.end, element.data]);
       const total = stat.datas.reduce((s, element) => s + element.data, 0);
       this.transferStatData = [
         {
@@ -156,7 +156,7 @@ export default Vue.extend({
     async getDeployStat() {
       this.deployStatLoading = true;
       const stat = await client.statDeploy();
-      const data = stat.datas.map(element => [element.start, element.data]);
+      const data = stat.datas.map(element => [element.end, element.data]);
       const total = stat.datas.reduce((s, element) => s + element.data, 0);
       this.deployStatData = [
         {

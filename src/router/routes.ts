@@ -5,6 +5,7 @@ const routes: RouteConfig[] = [
     path: '/',
     component: () => import('layouts/Main.vue'),
     children: [
+      { path: 'explorer/front', redirect: 'home' }, // old version in cmc
       { path: '', component: () => import('pages/Home.vue') },
       { name: 'home', path: 'home', component: () => import('pages/Home.vue') },
       { path: 'explorer/transfer/:deployId', component: () => import('pages/SearchTransfer.vue') },
