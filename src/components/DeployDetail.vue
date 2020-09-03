@@ -13,12 +13,12 @@
                     color="black"
                   />
                 </template>
-                <q-breadcrumbs-el label="Blocks" />
+                <q-breadcrumbs-el :label="$t('Blocks')" />
                 <q-breadcrumbs-el
                   :label="blockInfoDetail.blockInfo.blockHash.slice(0,20)+ '...'"
                   :to="{name:'block', params:{blockHash: blockInfoDetail.blockInfo.blockHash}}"
                 />
-                <q-breadcrumbs-el label="Deploy" />
+                <q-breadcrumbs-el :label="$t('Deploy')" />
                 <q-breadcrumbs-el :label="deployInfo.sig.slice(0,20)+ '...'" />
               </q-breadcrumbs>
             </q-toolbar>

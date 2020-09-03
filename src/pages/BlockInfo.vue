@@ -1,7 +1,8 @@
 <template>
   <router-view
     v-bind:loading="loading"
-    v-bind:blockInfoDetail="blockInfoDetail"
+    v-bind:block-info-detail="blockInfoDetail"
+    v-bind:validators-info="validatorsInfo"
   ></router-view>
 </template>
 
@@ -39,7 +40,8 @@ export default Vue.extend({
           // extra
           blockSize: '',
           deployCount: 0,
-          faultTolerance: 0
+          faultTolerance: 0,
+          justifications: [{ validator: '', latestBlockHash: '' }]
         },
         deploys: [
           {
@@ -56,7 +58,8 @@ export default Vue.extend({
             systemDeployError: ''
           }
         ]
-      }
+      },
+      validatorsInfo: [{ validator: '', stake: 0, latestBlockHash: '' }]
     };
   },
   methods: {
@@ -64,6 +67,15 @@ export default Vue.extend({
       this.loading = true;
       const block = await client.showBlock(this.$route.params.blockHash);
       this.blockInfoDetail = block;
+      let validators = [];
+      for (let i = 0; i < block.blockInfo.bonds.length; i++) {
+        validators.push({
+          ...block.blockInfo.bonds[i],
+          ...block.blockInfo.justifications.find(v => v.validator == block.blockInfo.bonds[i].validator)
+        });
+      }
+      // @ts-ignore
+      this.validatorsInfo = validators;
       this.loading = false;
     }
   },

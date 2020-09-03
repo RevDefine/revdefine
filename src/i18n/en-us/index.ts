@@ -42,5 +42,6 @@ export default {
   phloLimit: 'phloLimit',
   validAfterBlockNumber: 'validAfterBlockNumber',
   deployer: 'deployer',
-  term: 'term'
+  term: 'term',
+  Deploy: 'Deploy'
 };
