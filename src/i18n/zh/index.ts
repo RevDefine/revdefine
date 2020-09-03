@@ -44,5 +44,6 @@ export default {
   phloLimit: '部署最高费用',
   validAfterBlockNumber: '验证区块高度',
   deployer: '部署者',
-  term: '合约内容'
+  term: '合约内容',
+  Deploy: '部署'
 };

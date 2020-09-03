@@ -1,3 +1,19 @@
+<i18n>
+{
+  'en-us':{
+    "Validator": "Validator",
+    "Stake": "Stake",
+    "LatestBlockHash": "LatestBlockHash",
+    "ValidatorsInfo": "ValidatorsInfo"
+  },
+  'zh':{
+    "Validator": "验证节点",
+    "Stake": "抵押数量",
+    "LatestBlockHash": "验证区块",
+    "ValidatorsInfo": "验证节点信息"
+  }
+}
+</i18n>
 <template>
   <div class="q-px-md">
     <div class="full-width">
@@ -13,7 +29,7 @@
                     color="black"
                   />
                 </template>
-                <q-breadcrumbs-el label="Blocks" />
+                <q-breadcrumbs-el :label="$t('Blocks')" />
                 <q-breadcrumbs-el :label="blockInfoDetail.blockInfo.blockHash.slice(0,20)+ '...'" />
               </q-breadcrumbs>
             </q-toolbar>
@@ -21,6 +37,7 @@
         </q-card>
       </div>
     </div>
+
     <q-card flat>
       <define-loading :showing="loading"></define-loading>
       <q-list
@@ -239,27 +256,50 @@
           </q-item-section>
         </q-item>
 
-        <q-item>
-          <q-item-section class="col-sm-3 col-xs-5 col-md-2">{{$t('bondsValidatorList')}}</q-item-section>
-          <q-separator
-            vertical
-            spaced
-          />
-          <q-item-section padding>
-            <q-list>
-              <q-item
-                v-for="bond in blockInfoDetail.blockInfo.bonds"
-                :key="bond.validator"
-              >
-                <q-item-label>{{ bond }}</q-item-label>
-              </q-item>
-            </q-list>
-          </q-item-section>
-        </q-item>
-
       </q-list>
-
     </q-card>
+
+    <div class="q-my-md">
+      <q-table
+        :title="$t('ValidatorsInfo')"
+        :data="validatorsInfo"
+        :columns="validatorColumn"
+        hide-pagination
+        :pagination.sync="pagination"
+        flat
+      >
+
+        <template v-slot:body="props">
+          <q-tr :props="props">
+            <q-td
+              key="validator"
+              :props="props"
+            >
+              {{ props.row.validator.slice(0, 20) + "..."}}
+              <q-tooltip>{{props.row.validator}}</q-tooltip>
+
+            </q-td>
+
+            <q-td
+              key="stake"
+              :props="props"
+            >
+              {{ props.row.stake }}
+            </q-td>
+
+            <q-td
+              key="latestBlockHash"
+              :props="props"
+            >
+              <block-link
+                :blockHash="props.row.latestBlockHash"
+                :short="false"
+              ></block-link>
+            </q-td>
+          </q-tr>
+        </template>
+      </q-table>
+    </div>
   </div>
 </template>
 
@@ -276,9 +316,45 @@ export default Vue.extend({
     'deploy-link': deployLink,
     'define-loading': defineLoading
   },
+  data() {
+    return {
+      validatorColumn: [
+        {
+          name: 'validator',
+          required: true,
+          label: this.$t('Validator'),
+          align: 'left',
+          field: 'validator'
+        },
+        {
+          name: 'stake',
+          align: 'left',
+          label: this.$t('Stake'),
+          field: 'stake'
+        },
+        {
+          name: 'latestBlockHash',
+          align: 'left',
+          label: this.$t('LatestBlockHash'),
+          field: 'latestBlockHash'
+        }
+      ],
+      pagination: {
+        // sortBy: 'desc',
+        // descending: false,
+        page: 1,
+        // this is not relying on the q-table pagination to get page
+        rowsPerPage: 0
+        // rowsNumber: 10
+      }
+    };
+  },
   props: {
     blockInfoDetail: {
       type: Object as () => BlockInfo
+    },
+    validatorsInfo: {
+      type: Array
     },
     loading: {
       type: Boolean,
