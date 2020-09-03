@@ -21,6 +21,11 @@ export interface BondInfo {
   stake: number;
 }
 
+export interface JustificationInfo {
+  validator: string;
+  latestBlockHash: string;
+}
+
 export interface LightBlockInfo {
   readonly blockHash: string;
   readonly sender: string;
@@ -47,6 +52,7 @@ export interface LightBlockInfo {
   readonly blockSize: string;
   readonly deployCount: number;
   readonly faultTolerance: number;
+  readonly justifications: JustificationInfo[]
 }
 
 export interface ExploratoryDeployResponse {

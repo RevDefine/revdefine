@@ -1,5 +1,5 @@
 <template>
-  <div class="q-py-md q-px-md">
+  <div class="q-px-md">
     <div class="full-width">
       <div class="q-pb-md">
         <q-card flat>
@@ -14,7 +14,10 @@
                   />
                 </template>
                 <q-breadcrumbs-el label="Blocks" />
-                <q-breadcrumbs-el :label="blockInfoDetail.blockInfo.blockHash.slice(0,20)+ '...'" />
+                <q-breadcrumbs-el
+                  :label="blockInfoDetail.blockInfo.blockHash.slice(0,20)+ '...'"
+                  :to="{name:'block', params:{blockHash: blockInfoDetail.blockInfo.blockHash}}"
+                />
                 <q-breadcrumbs-el label="Deploy" />
                 <q-breadcrumbs-el :label="deployInfo.sig.slice(0,20)+ '...'" />
               </q-breadcrumbs>
