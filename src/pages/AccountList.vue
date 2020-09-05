@@ -45,7 +45,7 @@ export default Vue.extend({
   methods: {
     async getAccounts(page: number) {
       this.loading = true;
-      const resp = await client.revAccounts(page);
+      const resp = await client.revAccounts(page, 100);
       this.accounts = resp.accounts;
       this.loading = false;
     },
