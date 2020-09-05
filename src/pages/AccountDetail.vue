@@ -8,6 +8,7 @@
       <transfer-list
         :transactions="transactions"
         :loading="loading"
+        :max="maxPages"
         v-on:request="getTransactions"
       ></transfer-list>
     </div>
@@ -44,7 +45,8 @@ export default Vue.extend({
           isSucceeded: false,
           reason: ''
         }
-      ]
+      ],
+      maxPages: 50
     };
   },
   methods: {
@@ -52,6 +54,7 @@ export default Vue.extend({
       this.loading = true;
       const resp = await client.trasactions(this.$route.params.addr, page);
       this.transactions = resp.transactions;
+      this.maxPages = resp.pageInfo.totalPage;
       this.loading = false;
     }
   },

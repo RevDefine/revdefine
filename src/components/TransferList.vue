@@ -167,7 +167,7 @@
     <div class="row justify-center q-mt-md">
       <q-pagination
         v-model="pagination.page"
-        :max="50"
+        :max="max"
         :max-pages="6"
         :boundary-links="true"
         @input="onRequest"
@@ -197,7 +197,11 @@ export default Vue.extend({
   },
   props: {
     transactions: Array,
-    loading: Boolean
+    loading: Boolean,
+    max: {
+      type: Number,
+      default: 50
+    }
   },
   data() {
     return {
