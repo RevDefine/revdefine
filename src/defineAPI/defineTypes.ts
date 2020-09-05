@@ -32,6 +32,7 @@ export interface Transaction {
 
 export interface TransactionsResponse {
   transactions: Transaction[]
+  pageInfo: PageInfo
 }
 
 export interface RankRevAccount {
@@ -44,6 +45,7 @@ export interface RankRevAccount {
 
 export interface RevAccountResponse {
   account: RankRevAccount
+  pageInfo: PageInfo
 }
 
 export interface RevAccountListResponse {
@@ -73,6 +75,11 @@ export interface AccountTopStatData {
   last24hActiveAccountAmount: number
   last7dActiveAccountAmount: number
   last1mActiveAccountAmount: number
+}
+
+export interface PageInfo {
+  totalPage: number
+  currentPage: number
 }
 
 export interface AccountTopStatDataResponse {
