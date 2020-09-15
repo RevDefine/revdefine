@@ -144,7 +144,10 @@
             key="success"
             :props="props"
           >
-            <define-bool :yesOrNo="props.row.isSucceeded">
+            <define-bool
+              :yesOrNo="props.row.isSucceeded"
+              red
+            >
             </define-bool>
           </q-td>
 
@@ -152,7 +155,10 @@
             key="finalized"
             :props="props"
           >
-            <define-bool :yesOrNo="props.row.isFinalized">
+            <define-bool
+              :yesOrNo="props.row.isFinalized"
+              red
+            >
             </define-bool>
           </q-td>
         </q-tr>
