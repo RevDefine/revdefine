@@ -214,8 +214,8 @@ export default Vue.extend({
           blockNumber: 0,
           deployId: '',
           timestamp: 0,
-          isFinalized: false,
-          isSucceeded: false,
+          isFinalized: true,
+          isSucceeded: true,
           reason: ''
         }
       ]

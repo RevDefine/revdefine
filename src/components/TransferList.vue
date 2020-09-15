@@ -15,7 +15,9 @@
     "deploy": "deploy",
     "transfer": "transfer",
     "genesis": "genesis",
-    "bond": "bond"
+    "bond": "bond",
+    "Transfer failed reason": "Transfer failed reason",
+    "Insufficient funds": "Insufficient funds"
   },
   'zh':{
     "from": "转出方",
@@ -32,7 +34,9 @@
     "deploy": "部署",
     "transfer": "转账",
     "genesis": "创世",
-    "bond": "加入验证节点"
+    "bond": "加入验证节点",
+    "Transfer failed reason": "转账失败原因",
+    "Insufficient funds": "余额不足"
   }
 }
 </i18n>
@@ -143,6 +147,7 @@
           <q-td
             key="success"
             :props="props"
+            @click="addExpanded(props)"
           >
             <define-bool
               :yesOrNo="props.row.isSucceeded"
@@ -163,6 +168,14 @@
           </q-td>
         </q-tr>
 
+        <q-tr
+          v-show="isExpanded(props.rowIndex)"
+          :props="props"
+        >
+          <q-td colspan="100%">
+            <div class="text-left">{{$t("Transfer failed reason")}}: {{ $t(props.row.reason) }}.</div>
+          </q-td>
+        </q-tr>
       </template>
 
       <template v-slot:loading>
@@ -211,6 +224,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      expanded: [false],
       columns: [
         {
           name: 'from',
@@ -253,7 +267,20 @@ export default Vue.extend({
     revUnit: revUnit,
     onRequest(page: number) {
       this.$emit('request', page);
+    },
+    // @ts-ignore
+    addExpanded(props) {
+      if (!props.row.isSucceeded) {
+        const original = this.expanded[props.rowIndex];
+        this.expanded.splice(props.rowIndex, 1, !original);
+      }
+    },
+    isExpanded(i: number) {
+      return this.expanded[i];
     }
+  },
+  created() {
+    this.expanded = this.transactions.map(() => false);
   }
 });
-</script>
+</script>string
