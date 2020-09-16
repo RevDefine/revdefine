@@ -11,7 +11,7 @@ module.exports = function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
-    boot: ['i18n'],
+    boot: ['i18n', 'timeago'],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ['app.sass'],
@@ -41,41 +41,7 @@ module.exports = function (ctx) {
       //            (fastest compile time; minimum bundle size; most tedious)
       // * true   - Import everything from Quasar
       //            (not treeshaking Quasar; biggest bundle size; convenient)
-      all: false,
-
-      components: [
-        'QLayout',
-        'QHeader',
-        'QDrawer',
-        'QPageContainer',
-        'QPage',
-        'QToolbar',
-        'QToolbarTitle',
-        'QBtn',
-        'QIcon',
-        'QList',
-        'QItem',
-        'QItemSection',
-        'QItemLabel',
-        'QInput',
-        'QBtn',
-        'QSeparator',
-        'QScrollArea',
-        'QTable',
-        'QTh',
-        'QTr',
-        'QTd',
-        'QCard',
-        'QCardSection',
-        'QCheckbox',
-        'QDialog',
-        'QCardActions',
-        'QBtnDropdown',
-        'QSeparator',
-        'QSelect',
-        'QSpace',
-        'QToggle',
-      ],
+      all: 'auto',
 
       directives: ['Ripple', 'ClosePopup'],
 
@@ -111,6 +77,14 @@ module.exports = function (ctx) {
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
         });
+        cfg.module.rules.push({
+          resourceQuery: /blockType=i18n/,
+          type: 'javascript/auto',
+          use: [
+            { loader: '@kazupon/vue-i18n-loader' },
+            { loader: 'yaml-loader' }
+          ]
+        })
       }
     },
 
