@@ -5,19 +5,32 @@ const routes: RouteConfig[] = [
     path: '/',
     component: () => import('layouts/Main.vue'),
     children: [
-      { path: '', component: () => import('pages/Settings.vue') },
+      { path: 'explorer/front', redirect: 'home' }, // old version in cmc
+      { path: '', component: () => import('pages/Home.vue') },
+      { name: 'home', path: 'home', component: () => import('pages/Home.vue') },
+      { path: 'explorer/transfer/:deployId', component: () => import('pages/SearchTransfer.vue') },
       {
-        path: 'explorer',
-        component: () => import('pages/Explorer.vue'),
-
+        name: 'blocks', path: 'blocks', component: () => import('pages/Blocks.vue'),
         children: [
-          { path: 'block/:blockHash', name: 'blockInfo', component: () => import('pages/BlockInfo.vue') },
-          // { path: 'block', component: { template: '<div>User {{ $route.params.blockHash }}</div>' } },
-          { path: 'front', name: 'explorerFront', component: () => import('pages/ExplorerFront.vue') },
-          { path: 'rev', name: 'rev', component: () => import('pages/Rev.vue') }
+          { path: '', component: () => import('pages/BlocksList.vue') },
+          {
+            path: ':blockHash', component: () => import('pages/BlockInfo.vue'), children: [
+              { name: 'block', path: '', component: () => import('components/BlockDetail.vue') },
+              { name: 'deploy', path: 'deploy/:deployId', component: () => import('components/DeployDetail.vue'), props: true }
+            ]
+          }
+
         ]
       },
-      { path: 'settings', name: 'settings', component: () => import('pages/Settings.vue') }
+      { name: 'transfer', path: 'transfer', component: () => import('pages/Transfer.vue') },
+      {
+        name: 'revaccounts', path: 'revaccounts', component: () => import('pages/Accounts.vue'),
+        children: [
+          { path: '', component: () => import('pages/AccountList.vue') },
+          { name: 'revaccount', path: ':addr', component: () => import('pages/AccountDetail.vue') }
+        ]
+      },
+
     ]
   }
 ];

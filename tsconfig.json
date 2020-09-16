@@ -1,5 +1,4 @@
 {
-    "extends": "@quasar/app/tsconfig-preset",
     "compilerOptions": {
         "allowJs": true,
         "sourceMap": true,
@@ -9,6 +8,7 @@
         "module": "esnext",
         "moduleResolution": "node",
         "baseUrl": ".",
+        "allowSyntheticDefaultImports": true,
         "types": [
             "quasar",
             "node"
@@ -20,8 +20,7 @@
         "dist",
         "./babel.config.js",
         "./quasar.conf.js",
-        "pb",
-        "quasar"
+        "pb"
     ]
     // "include": ["src/rnode-grpc-gen/js/rnode-grpc-js.d.ts"]
 }
