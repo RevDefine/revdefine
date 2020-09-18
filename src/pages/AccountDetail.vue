@@ -59,7 +59,6 @@ export default Vue.extend({
         this.loading = false;
       } catch {
         this.loading = false;
-
         this.$router.push({ name: 'notFound' });
       }
     },
