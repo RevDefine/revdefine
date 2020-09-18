@@ -11,7 +11,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.9.3",
+    "@quasar/extras": "^1.9.5",
     "apexcharts": "^3.20.0",
     "axios": "^0.19.1",
     "base-58": "^0.0.1",
@@ -19,7 +19,7 @@
     "echarts": "^4.8.0",
     "elliptic": "^6.5.2",
     "js-sha3": "^0.8.0",
-    "quasar": "^1.12.13",
+    "quasar": "^1.14.0",
     "vue-apexcharts": "^1.6.0",
     "vue-echarts-v3": "^2.0.1",
     "vue-i18n": "^8.15.4",
@@ -29,8 +29,8 @@
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^1.0.0",
     "@kazupon/vue-i18n-loader": "^0.5.0",
-    "@quasar/app": "^1.2.1",
-    "@quasar/quasar-app-extension-typescript": "^1.0.0-beta.1",
+    "@quasar/app": "^1.9.6",
+    "@quasar/quasar-app-extension-typescript": "^1.0.2",
     "@types/node": "^12.11.7",
     "@types/vue-i18n": "^7.0.0",
     "@typescript-eslint/eslint-plugin": "^1.12.0",
