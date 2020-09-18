@@ -17,7 +17,10 @@
  <template>
   <div>
     <div class="row col-xs-12 justify-center">
-      <search-bar @search="search"></search-bar>
+      <div class="row col-xs-12 col-sm-12 col-md-12 justify-center items-center search-bg rounded">
+        <search-bar @search="search"></search-bar>
+        <define-loading :showing="searchLoading"></define-loading>
+      </div>
     </div>
 
     <div class="row q-mt-md">
@@ -66,6 +69,7 @@ import searchBar from '../components/SearchBar.vue';
 import lastBlockInfo from '../components/LastBlock.vue';
 import latestTransfer from '../components/LatestTransfer.vue';
 import apexChart from '../components/ApexChart.vue';
+import defineLoading from '../components/Loading.vue';
 import client from '../defineAPI';
 import { StringType, judgeSearchString } from '../lib';
 import { getAddrFromEth } from '../lib/rnode-address';
@@ -75,7 +79,8 @@ export default Vue.extend({
     'search-bar': searchBar,
     'last-block-info': lastBlockInfo,
     'latest-transfer': latestTransfer,
-    'apex-chart': apexChart
+    'apex-chart': apexChart,
+    'define-loading': defineLoading,
   },
   name: 'Home',
   data() {
@@ -92,11 +97,11 @@ export default Vue.extend({
           timestamp: 0,
           isFinalized: false,
           isSucceeded: false,
-          reason: ''
-        }
+          reason: '',
+        },
       ],
       loading: false,
-
+      searchLoading: false,
       transferStatLoading: false,
       transferStatData: [
         {
@@ -107,9 +112,9 @@ export default Vue.extend({
             [0, 0],
             [0, 0],
             [0, 0],
-            [0, 0]
-          ]
-        }
+            [0, 0],
+          ],
+        },
       ],
       transferStatTotal: 0,
 
@@ -123,13 +128,13 @@ export default Vue.extend({
             [0, 0],
             [0, 0],
             [0, 0],
-            [0, 0]
-          ]
-        }
+            [0, 0],
+          ],
+        },
       ],
       deployStatTotal: 0,
 
-      searchString: ''
+      searchString: '',
     };
   },
   methods: {
@@ -142,13 +147,13 @@ export default Vue.extend({
     async getTransferStat() {
       this.transferStatLoading = true;
       const stat = await client.statTransfer();
-      const data = stat.datas.map(element => [element.end, element.data]);
+      const data = stat.datas.map((element) => [element.end, element.data]);
       const total = stat.datas.reduce((s, element) => s + element.data, 0);
       this.transferStatData = [
         {
           name: this.$t('transfer'),
-          data: data
-        }
+          data: data,
+        },
       ];
       this.transferStatTotal = total;
       this.transferStatLoading = false;
@@ -156,18 +161,19 @@ export default Vue.extend({
     async getDeployStat() {
       this.deployStatLoading = true;
       const stat = await client.statDeploy();
-      const data = stat.datas.map(element => [element.end, element.data]);
+      const data = stat.datas.map((element) => [element.end, element.data]);
       const total = stat.datas.reduce((s, element) => s + element.data, 0);
       this.deployStatData = [
         {
           name: this.$t('deploy'),
-          data: data
-        }
+          data: data,
+        },
       ];
       this.deployStatTotal = total;
       this.deployStatLoading = false;
     },
     async search(target: string) {
+      this.searchLoading = true;
       const targetType = judgeSearchString(target);
       if (targetType == StringType.revAddress) {
         this.$router.push({ name: 'revaccount', params: { addr: target } });
@@ -183,13 +189,23 @@ export default Vue.extend({
         const blockNumber = Number(target);
         const block = await client.getBlocksByHeight(blockNumber, blockNumber);
         this.$router.push({ name: 'block', params: { blockHash: block[0].blockHash } });
+      } else {
+        this.$router.push({ name: 'notFound' });
       }
-    }
+    },
   },
   async mounted() {
     const itemsToLoad = [this.requestLatestTransfer(1), this.getTransferStat(), this.getDeployStat()];
     await Promise.all(itemsToLoad);
-  }
+  },
 });
 </script>
 
+<style lang="sass" scoped>
+.search-bg
+  background-image: url('~assets/searching-bc.png')
+  max-width: 1200px
+  height: 160px
+.rounded
+  border-radius: 8px
+</style>

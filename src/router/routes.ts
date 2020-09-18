@@ -30,6 +30,7 @@ const routes: RouteConfig[] = [
           { name: 'revaccount', path: ':addr', component: () => import('pages/AccountDetail.vue') }
         ]
       },
+      { name: 'notFound', path: 'notFound', component: () => import('pages/NotFound.vue') }
 
     ]
   }

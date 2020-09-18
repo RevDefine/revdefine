@@ -178,15 +178,15 @@ export default Vue.extend({
   name: 'deployDetail',
   components: {
     'transfer-list': transferList,
-    'define-loading': defineLoading
+    'define-loading': defineLoading,
   },
   props: {
     blockInfoDetail: {
-      type: Object as () => BlockInfo
+      type: Object as () => BlockInfo,
     },
     deployId: {
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
@@ -201,7 +201,7 @@ export default Vue.extend({
         validAfterBlockNumber: 1,
         cost: 1,
         errored: false,
-        systemDeployError: ''
+        systemDeployError: '',
       },
       loading: false,
       transactions: [
@@ -216,22 +216,27 @@ export default Vue.extend({
           timestamp: 0,
           isFinalized: true,
           isSucceeded: true,
-          reason: ''
-        }
-      ]
+          reason: '',
+        },
+      ],
     };
   },
   beforeUpdate() {
-    const targetDeploy = this.blockInfoDetail.deploys.find(element => element.sig == this.deployId) as DeployInfo;
+    const targetDeploy = this.blockInfoDetail.deploys.find((element) => element.sig == this.deployId) as DeployInfo;
     this.deployInfo = targetDeploy;
   },
   methods: {
     async getTransfer() {
-      this.loading = true;
-      const transactions = await client.deployTransaction(this.deployId);
-      this.transactions = transactions.transactions;
-      this.loading = false;
-    }
+      try {
+        this.loading = true;
+        const transactions = await client.deployTransaction(this.deployId);
+        this.transactions = transactions.transactions;
+        this.loading = false;
+      } catch {
+        this.loading = false;
+        this.$router.push({ name: 'NotFound' });
+      }
+    },
   },
   async mounted() {
     await this.getTransfer();
@@ -239,7 +244,7 @@ export default Vue.extend({
   watch: {
     async $route() {
       await this.getTransfer();
-    }
-  }
+    },
+  },
 });
 </script>

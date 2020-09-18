@@ -24,7 +24,7 @@ import client from '../defineAPI';
 export default Vue.extend({
   components: {
     'account-overview': accountOverview,
-    'transfer-list': transferList
+    'transfer-list': transferList,
   },
   name: 'accountDetail',
   data() {
@@ -43,20 +43,26 @@ export default Vue.extend({
           timestamp: 0,
           isFinalized: false,
           isSucceeded: false,
-          reason: ''
-        }
+          reason: '',
+        },
       ],
-      maxPages: 50
+      maxPages: 50,
     };
   },
   methods: {
     async getTransactions(page: number) {
-      this.loading = true;
-      const resp = await client.trasactions(this.$route.params.addr, page);
-      this.transactions = resp.transactions;
-      this.maxPages = resp.pageInfo.totalPage;
-      this.loading = false;
-    }
+      try {
+        this.loading = true;
+        const resp = await client.trasactions(this.$route.params.addr, page);
+        this.transactions = resp.transactions;
+        this.maxPages = resp.pageInfo.totalPage;
+        this.loading = false;
+      } catch {
+        this.loading = false;
+
+        this.$router.push({ name: 'notFound' });
+      }
+    },
   },
   async mounted() {
     await this.getTransactions(1);
@@ -64,8 +70,8 @@ export default Vue.extend({
   watch: {
     async $route() {
       await this.getTransactions(1);
-    }
-  }
+    },
+  },
 });
 </script>
 
