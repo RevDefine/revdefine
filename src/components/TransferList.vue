@@ -149,11 +149,16 @@
             :props="props"
             @click="addExpanded(props)"
           >
-            <define-bool
-              :yesOrNo="props.row.isSucceeded"
-              red
-            >
-            </define-bool>
+            <div class="row cursor-pointer justify-center">
+              <define-bool
+                :yesOrNo="props.row.isSucceeded"
+                red
+              >
+              </define-bool>
+              <template v-if="!props.row.isSucceeded">
+                <q-icon name="keyboard_arrow_down"></q-icon>
+              </template>
+            </div>
           </q-td>
 
           <q-td
@@ -212,15 +217,15 @@ export default Vue.extend({
     'address-link': addressLink,
     'deploy-link': deployLink,
     'block-link': blockLink,
-    'define-bool': defineBool
+    'define-bool': defineBool,
   },
   props: {
     transactions: Array,
     loading: Boolean,
     max: {
       type: Number,
-      default: 50
-    }
+      default: 50,
+    },
   },
   data() {
     return {
@@ -231,7 +236,7 @@ export default Vue.extend({
           required: true,
           label: 'from',
           align: 'left',
-          field: 'fromAddr'
+          field: 'fromAddr',
         },
         { name: 'to', align: 'left', label: 'to', field: 'toAddr' },
         { name: 'amount', align: 'left', label: 'amount', field: 'amount' },
@@ -239,28 +244,28 @@ export default Vue.extend({
           name: 'type',
           align: 'left',
           label: 'type',
-          field: 'type'
+          field: 'type',
         },
         {
           name: 'blockHash',
           align: 'left',
           label: 'blockHash',
-          field: 'blockHash'
+          field: 'blockHash',
         },
         { name: 'blockNumber', align: 'left', label: 'blockNumber', field: 'blockNumber' },
         { name: 'deployId', align: 'left', label: 'deployId', field: 'deployId' },
         { name: 'timestamp', align: 'left', label: 'timestamp', field: 'timestamp' },
         { name: 'success', align: 'left', label: 'success', field: 'success' },
-        { name: 'finalized', align: 'left', label: 'finalized', field: 'finalized' }
+        { name: 'finalized', align: 'left', label: 'finalized', field: 'finalized' },
       ],
       pagination: {
         // sortBy: 'desc',
         // descending: false,
         page: 1,
         // this is not relying on the q-table pagination to get page
-        rowsPerPage: 0
+        rowsPerPage: 0,
         // rowsNumber: 10
-      }
+      },
     };
   },
   methods: {
@@ -277,10 +282,10 @@ export default Vue.extend({
     },
     isExpanded(i: number) {
       return this.expanded[i];
-    }
+    },
   },
   created() {
     this.expanded = this.transactions.map(() => false);
-  }
+  },
 });
 </script>string
