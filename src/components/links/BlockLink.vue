@@ -2,7 +2,13 @@
   <div v-if="blockHash.length == 0">
     None
   </div>
-  <div v-else>
+  <div
+    class="row"
+    v-else
+  >
+    <template v-if="short">
+      <copy-icon :contentS="blockHash"></copy-icon>
+    </template>
     <router-link
       :to="{name:'block', params:{'blockHash': blockHash}}"
       class="clickable"
@@ -19,8 +25,12 @@
 
 <script>
 import Vue from 'vue'
+import copyIcon from './CopyIcon.vue'
 export default Vue.extend({
   name: 'blockLink',
+  components: {
+    'copy-icon': copyIcon
+  },
   props: {
     blockHash: String,
     short: Boolean,

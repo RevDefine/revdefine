@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="row">
+    <template v-if="short">
+      <copy-icon :contentS="deployId"></copy-icon>
+    </template>
     <router-link
       :to="{name:'deploy', params:{'blockHash': blockHash, 'deployId': deployId}}"
       class="clickable"
@@ -16,8 +19,12 @@
 
 <script>
 import Vue from 'vue'
+import copyIcon from './CopyIcon.vue'
 export default Vue.extend({
   name: 'deployLink',
+  components: {
+    'copy-icon': copyIcon
+  },
   props: {
     blockHash: String,
     deployId: String,
@@ -26,3 +33,9 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style lang="sass" scoped>
+.copy
+  &:hover
+    color: #347AFF
+</style>
