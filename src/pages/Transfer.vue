@@ -17,7 +17,7 @@ import client from '../defineAPI';
 
 export default Vue.extend({
   components: {
-    'latest-transfer': latestTransfer
+    'latest-transfer': latestTransfer,
   },
   name: 'transfer',
   data() {
@@ -34,10 +34,10 @@ export default Vue.extend({
           timestamp: 0,
           isFinalized: false,
           isSucceeded: false,
-          reason: ''
-        }
+          reason: '',
+        },
       ],
-      loading: false
+      loading: false,
     };
   },
   methods: {
@@ -46,7 +46,7 @@ export default Vue.extend({
       const transactions = await client.getLatestTransactions(page);
       this.transactions = transactions.transactions;
       this.loading = false;
-    }
+    },
   },
   async mounted() {
     await this.getTransfer(1);
@@ -54,8 +54,8 @@ export default Vue.extend({
   watch: {
     async $route() {
       await this.getTransfer(1);
-    }
-  }
+    },
+  },
 });
 </script>
 

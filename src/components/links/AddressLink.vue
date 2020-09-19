@@ -12,7 +12,9 @@
       class="row"
       v-else
     >
-      <copy-icon :contentS="addr"></copy-icon>
+      <template v-if="short">
+        <copy-icon :contentS="addr"></copy-icon>
+      </template>
       <router-link
         :to="{name:'revaccount', params:{'addr': addr}}"
         class="clickable"

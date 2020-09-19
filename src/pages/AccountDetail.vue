@@ -9,6 +9,7 @@
         :transactions="transactions"
         :loading="loading"
         :max="maxPages"
+        :address="addr"
         v-on:request="getTransactions"
       ></transfer-list>
     </div>
@@ -56,6 +57,7 @@ export default Vue.extend({
         const resp = await client.trasactions(this.$route.params.addr, page);
         this.transactions = resp.transactions;
         this.maxPages = resp.pageInfo.totalPage;
+        this.addr = this.$route.params.addr;
         this.loading = false;
       } catch {
         this.loading = false;

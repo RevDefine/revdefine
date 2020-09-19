@@ -17,7 +17,9 @@
     "genesis": "genesis",
     "bond": "bond",
     "Transfer failed reason": "Transfer failed reason",
-    "Insufficient funds": "Insufficient funds"
+    "Insufficient funds": "Insufficient funds",
+    "In": "In",
+    "Out": "Out"
   },
   'zh':{
     "from": "转出方",
@@ -36,7 +38,9 @@
     "genesis": "创世",
     "bond": "加入验证节点",
     "Transfer failed reason": "转账失败原因",
-    "Insufficient funds": "余额不足"
+    "Insufficient funds": "余额不足",
+    "In": "转入",
+    "Out": "转出"
   }
 }
 </i18n>
@@ -77,7 +81,23 @@
               :length="10"
             ></address-link>
           </q-td>
-
+          <q-td
+            key="direction"
+            :props="props"
+          >
+            <template v-if="props.row.fromAddr == address">
+              <q-badge
+                outline
+                color="warning"
+              >{{$t('Out')}}</q-badge>
+            </template>
+            <template v-else>
+              <q-badge
+                outline
+                color="info"
+              >{{$t('In')}}</q-badge>
+            </template>
+          </q-td>
           <q-td
             key="to"
             :props="props"
@@ -226,6 +246,7 @@ export default Vue.extend({
       type: Number,
       default: 50,
     },
+    address: String,
   },
   data() {
     return {
@@ -237,6 +258,12 @@ export default Vue.extend({
           label: 'from',
           align: 'left',
           field: 'fromAddr',
+        },
+        {
+          name: 'direction',
+          label: '',
+          align: 'left',
+          field: '',
         },
         { name: 'to', align: 'left', label: 'to', field: 'toAddr' },
         { name: 'amount', align: 'left', label: 'amount', field: 'amount' },
@@ -288,4 +315,8 @@ export default Vue.extend({
     this.expanded = this.transactions.map(() => false);
   },
 });
-</script>string
+</script>
+<style lang="sass" scoped>
+$in-transfer : #02977e
+$out-transfercolor: #b47d00
+</style>
