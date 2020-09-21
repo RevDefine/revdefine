@@ -114,7 +114,7 @@
         <div class="row justify-center">
           <div
             class="col-md-10 col-sm-12 col-xs-12"
-            style="max-width:1200px"
+            style="max-width:1400px"
           >
             <router-view />
           </div>
@@ -140,9 +140,9 @@ export default Vue.extend({
       lang: 'English',
       langOptions: [
         { value: 'en-us', label: 'English' },
-        { value: 'zh', label: '中文' }
+        { value: 'zh', label: '中文' },
       ],
-      tab: 'home'
+      tab: 'home',
     };
   },
   methods: {
@@ -151,8 +151,8 @@ export default Vue.extend({
       // @ts-ignore
       this.$root.$timeago.locale = lang.value;
       this.lang = lang.label;
-    }
-  }
+    },
+  },
 });
 </script>
 

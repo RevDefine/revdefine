@@ -203,8 +203,8 @@ export default Vue.extend({
 
 <style lang="sass" scoped>
 .search-bg
-  background-image: url('~assets/searching-bc.png')
-  max-width: 1200px
+  background-image: url('~assets/search-bg.jpg')
+  max-width: 1400px
   height: 160px
 .rounded
   border-radius: 8px
