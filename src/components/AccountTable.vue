@@ -2,7 +2,7 @@
 {
   'en-us':{
     "Address": "Address",
-    "Balance": "Aalance",
+    "Balance": "Balance",
     "IsGenesisVault": "IsGenesisAddresss",
     "LastOperationBlock": "LastOperationBlock",
     "Rank": "Rank",
