@@ -13,7 +13,7 @@
     "dependencies": {
         "@quasar/extras": "^1.9.3",
         "apexcharts": "^3.20.0",
-        "axios": "^0.19.1",
+        "axios": "^0.21.1",
         "base-58": "^0.0.1",
         "blakejs": "^1.1.0",
         "echarts": "^4.8.0",
