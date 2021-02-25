@@ -82,6 +82,21 @@
               side
               class="col-sm-3 col-xs-5 col-md-2"
             >
+              <q-item-label>{{$t('blockNumber')}}</q-item-label>
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>
+                {{ blockNumber}}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item>
+            <q-item-section
+              side
+              class="col-sm-3 col-xs-5 col-md-2"
+            >
               <q-item-label>{{$t('deployCount')}}</q-item-label>
             </q-item-section>
 
@@ -107,7 +122,7 @@ export default Vue.extend({
   name: 'lastBlockInfo',
   components: {
     'define-loading': defineLoading,
-    'block-link': blockLink
+    'block-link': blockLink,
   },
   data() {
     return {
@@ -115,7 +130,8 @@ export default Vue.extend({
       timestamp: 1,
       sender: '',
       blockHash: '',
-      loading: false
+      blockNumber: 0,
+      loading: false,
     };
   },
   async beforeMount() {
@@ -125,8 +141,9 @@ export default Vue.extend({
     this.timestamp = blocks[0].timestamp;
     this.sender = blocks[0].sender;
     this.blockHash = blocks[0].blockHash;
+    this.blockNumber = blocks[0].blockNumber;
     this.loading = false;
-  }
+  },
 });
 </script>
 
