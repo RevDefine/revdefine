@@ -48,7 +48,7 @@ function verifyBlockHash (blockHash: string): boolean {
 }
 
 function verifyDeployId (deployId: string): boolean {
-  if (deployId.length > 136) {
+  if (deployId.length > 120) {
     return true
   } else {
     return false
@@ -71,7 +71,7 @@ export function judgeSearchString (target: string) {
     } else {
       return StringType.Nothing
     }
-  } catch{
+  } catch {
     if (verifyEthAddress(target)) {
       return StringType.ethAddress
     } else if (verifyBlockHash(target)) {
