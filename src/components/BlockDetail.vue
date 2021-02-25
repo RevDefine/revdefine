@@ -139,7 +139,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.timestamp }}</q-item-label>
+            <q-item-label>{{Date(blockInfoDetail.blockInfo.timestamp)}} - {{ blockInfoDetail.blockInfo.timestamp }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -314,7 +314,7 @@ export default Vue.extend({
   components: {
     'block-link': blockLink,
     'deploy-link': deployLink,
-    'define-loading': defineLoading
+    'define-loading': defineLoading,
   },
   data() {
     return {
@@ -324,42 +324,42 @@ export default Vue.extend({
           required: true,
           label: this.$t('Validator'),
           align: 'left',
-          field: 'validator'
+          field: 'validator',
         },
         {
           name: 'stake',
           align: 'left',
           label: this.$t('Stake'),
-          field: 'stake'
+          field: 'stake',
         },
         {
           name: 'latestBlockHash',
           align: 'left',
           label: this.$t('LatestBlockHash'),
-          field: 'latestBlockHash'
-        }
+          field: 'latestBlockHash',
+        },
       ],
       pagination: {
         // sortBy: 'desc',
         // descending: false,
         page: 1,
         // this is not relying on the q-table pagination to get page
-        rowsPerPage: 0
+        rowsPerPage: 0,
         // rowsNumber: 10
-      }
+      },
     };
   },
   props: {
     blockInfoDetail: {
-      type: Object as () => BlockInfo
+      type: Object as () => BlockInfo,
     },
     validatorsInfo: {
-      type: Array
+      type: Array,
     },
     loading: {
       type: Boolean,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 });
 </script>

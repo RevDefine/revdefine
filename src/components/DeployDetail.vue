@@ -61,7 +61,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ deployInfo.timestamp }}</q-item-label>
+            <q-item-label>{{ Date(deployInfo.timestamp) }} - {{ deployInfo.timestamp }}</q-item-label>
           </q-item-section>
         </q-item>
 

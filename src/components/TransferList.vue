@@ -162,6 +162,7 @@
               :auto-update="5"
             >
             </timeago>
+            <q-tooltip>{{Date(props.row.timestamp)}}</q-tooltip>
           </q-td>
 
           <q-td
