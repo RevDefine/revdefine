@@ -139,7 +139,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{Date(blockInfoDetail.blockInfo.timestamp)}} - {{ blockInfoDetail.blockInfo.timestamp }}</q-item-label>
+            <q-item-label>{{new Date(blockInfoDetail.blockInfo.timestamp)}} - {{ blockInfoDetail.blockInfo.timestamp }}</q-item-label>
           </q-item-section>
         </q-item>
 
