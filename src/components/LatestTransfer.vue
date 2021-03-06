@@ -97,7 +97,7 @@
           </q-td>
 
           <q-td
-            key="Value"
+            key="Amount"
             :props="props"
           >
             {{ revUnit(props.row.amount) }}
@@ -186,9 +186,9 @@ export default Vue.extend({
           field: 'toAddr',
         },
         {
-          name: 'Value',
+          name: 'Amount',
           align: 'left',
-          label: 'Value',
+          label: 'Amount',
           field: 'amount',
         },
         {
