@@ -56,6 +56,13 @@
           </q-td>
 
           <q-td
+            key="blockNumber"
+            :props="props"
+          >
+            {{props.row.blockNumber}}
+          </q-td>
+
+          <q-td
             key="Age"
             :props="props"
           >
@@ -158,6 +165,12 @@ export default Vue.extend({
           label: 'BlockHash',
           align: 'left',
           field: 'blockHash',
+        },
+        {
+          name: 'blockNumber',
+          label: 'blockNumber',
+          align: 'left',
+          field: 'blockNumber',
         },
         { name: 'Age', align: 'left', label: 'Age', field: 'age' },
         {
