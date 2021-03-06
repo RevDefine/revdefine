@@ -73,6 +73,7 @@
                   :auto-update="5"
                 >
                 </timeago>
+                <q-tooltip>{{new Date(timestamp)}}</q-tooltip>
               </q-item-label>
             </q-item-section>
           </q-item>

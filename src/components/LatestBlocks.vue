@@ -85,6 +85,8 @@
               :auto-update="5"
             >
             </timeago>
+            <q-tooltip>{{new Date(props.row.timestamp)}}</q-tooltip>
+
           </q-td>
 
           <q-td
@@ -123,11 +125,11 @@ export default Vue.extend({
   name: 'latestBlocks',
   components: {
     'define-loading': defineLoading,
-    'block-link': blockLink
+    'block-link': blockLink,
   },
   props: {
     data: Array,
-    loading: Boolean
+    loading: Boolean,
   },
   data() {
     return {
@@ -137,55 +139,55 @@ export default Vue.extend({
           required: true,
           label: 'BlockHash',
           align: 'left',
-          field: 'blockHash'
+          field: 'blockHash',
         },
         { name: 'blockSize', align: 'left', label: 'blockSize', field: 'blockSize' },
         {
           name: 'blockNumber',
           align: 'left',
           label: 'BlockNumber',
-          field: 'blockNumber'
+          field: 'blockNumber',
         },
         {
           name: 'deployCount',
           align: 'left',
           label: 'DeployCount',
-          field: 'deployCount'
+          field: 'deployCount',
         },
         {
           name: 'seqNum',
           align: 'left',
           label: 'SeqNum',
-          field: 'seqNum'
+          field: 'seqNum',
         },
         {
           name: 'timestamp',
           align: 'left',
           label: 'Age',
-          field: 'timestamp'
+          field: 'timestamp',
         },
         {
           name: 'sender',
           align: 'left',
           label: 'Sender',
-          field: 'sender'
-        }
+          field: 'sender',
+        },
       ],
       pagination: {
         // sortBy: 'desc',
         // descending: false,
         page: 1,
         // this is not relying on the q-table pagination to get page
-        rowsPerPage: 0
+        rowsPerPage: 0,
         // rowsNumber: 10
-      }
+      },
     };
   },
   methods: {
     revUnit: revUnit,
     onRequest(page: number) {
       this.$emit('request', page);
-    }
-  }
+    },
+  },
 });
 </script>
