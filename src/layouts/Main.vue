@@ -113,7 +113,7 @@
         <!-- This is where pages get injected -->
         <div class="row justify-center">
           <div
-            class="col-md-10 col-sm-12 col-xs-12"
+            class="col-md-10 col-sm-11 col-xs-11"
             style="max-width:1400px"
           >
             <router-view />

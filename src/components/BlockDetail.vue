@@ -1,13 +1,11 @@
 <i18n>
 {
   'en-us':{
-    "Validator": "Validator",
     "Stake": "Stake",
     "LatestBlockHash": "LatestBlockHash",
     "ValidatorsInfo": "ValidatorsInfo"
   },
   'zh':{
-    "Validator": "验证节点",
     "Stake": "抵押数量",
     "LatestBlockHash": "验证区块",
     "ValidatorsInfo": "验证节点信息"
@@ -260,45 +258,7 @@
     </q-card>
 
     <div class="q-my-md">
-      <q-table
-        :title="$t('ValidatorsInfo')"
-        :data="validatorsInfo"
-        :columns="validatorColumn"
-        hide-pagination
-        :pagination.sync="pagination"
-        flat
-      >
-
-        <template v-slot:body="props">
-          <q-tr :props="props">
-            <q-td
-              key="validator"
-              :props="props"
-            >
-              {{ props.row.validator.slice(0, 20) + "..."}}
-              <q-tooltip>{{props.row.validator}}</q-tooltip>
-
-            </q-td>
-
-            <q-td
-              key="stake"
-              :props="props"
-            >
-              {{ props.row.stake }}
-            </q-td>
-
-            <q-td
-              key="latestBlockHash"
-              :props="props"
-            >
-              <block-link
-                :blockHash="props.row.latestBlockHash"
-                :short="false"
-              ></block-link>
-            </q-td>
-          </q-tr>
-        </template>
-      </q-table>
+      <validator-table :validatorsInfo="validatorsInfo"></validator-table>
     </div>
   </div>
 </template>
@@ -309,12 +269,14 @@ import { BlockInfo } from '../defineAPI/rnodeTypes';
 import blockLink from './links/BlockLink.vue';
 import deployLink from './links/DeployLink.vue';
 import defineLoading from './Loading.vue';
+import validatorTable from './ValidatorTable.vue';
 export default Vue.extend({
   name: 'blockDetail',
   components: {
     'block-link': blockLink,
     'deploy-link': deployLink,
     'define-loading': defineLoading,
+    'validator-table': validatorTable,
   },
   data() {
     return {
