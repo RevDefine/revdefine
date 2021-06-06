@@ -11,7 +11,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.9.5",
+    "@quasar/extras": "^1.10.6",
     "apexcharts": "^3.20.0",
     "axios": "^0.19.1",
     "base-58": "^0.0.1",
@@ -19,7 +19,7 @@
     "echarts": "^4.8.0",
     "elliptic": "^6.5.2",
     "js-sha3": "^0.8.0",
-    "quasar": "^1.14.0",
+    "quasar": "^1.15.19",
     "vue-apexcharts": "^1.6.0",
     "vue-echarts-v3": "^2.0.1",
     "vue-gtag": "^1.11.0",
