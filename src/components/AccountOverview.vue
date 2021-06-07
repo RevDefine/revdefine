@@ -41,7 +41,7 @@
             <q-item-label>{{$t('Address')}}</q-item-label>
           </q-item-section>
 
-          <q-item-section side>
+          <q-item-section side class="col-xs-8 break-hash">
             <q-item-label>
               {{ address }}
             </q-item-label>
@@ -77,7 +77,7 @@
             <q-item-label>{{$t('LastOperationBlock')}}</q-item-label>
           </q-item-section>
 
-          <q-item-section side>
+          <q-item-section side class="col-xs-8 break-hash">
             <q-item-label>
               <block-link
                 :blockHash="lastOperationBlock"
