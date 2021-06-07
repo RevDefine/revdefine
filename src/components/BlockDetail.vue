@@ -13,7 +13,7 @@
 }
 </i18n>
 <template>
-  <div class="q-px-md">
+  <q-page>
     <div class="full-width">
       <div class="q-pb-md">
         <q-card flat>
@@ -260,7 +260,7 @@
     <div class="q-my-md">
       <validator-table :validatorsInfo="validatorsInfo"></validator-table>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script lang="ts">

@@ -16,8 +16,9 @@
   <q-table
     :title="$t('ValidatorsInfo')"
     :data="validatorsInfo"
-    :columns="validatorColumn"
     hide-pagination
+    :columns="validatorColumn"
+    :pagination="pagination"
     flat
   >
 
@@ -45,7 +46,8 @@
         >
           <block-link
             :blockHash="props.row.latestBlockHash"
-            :short="false"
+            :length="40"
+            :short="true"
           ></block-link>
         </q-td>
       </q-tr>
@@ -85,6 +87,9 @@ export default Vue.extend({
           field: 'latestBlockHash',
         },
       ],
+      pagination:{
+        rowsPerPage: 0
+      }
     };
   },
   props: {

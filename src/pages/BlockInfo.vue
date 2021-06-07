@@ -1,9 +1,11 @@
 <template>
-  <router-view
-    v-bind:loading="loading"
-    v-bind:block-info-detail="blockInfoDetail"
-    v-bind:validators-info="validatorsInfo"
-  ></router-view>
+  <q-page-container style="padding-top: 0px;">
+    <router-view
+      v-bind:loading="loading"
+      v-bind:block-info-detail="blockInfoDetail"
+      v-bind:validators-info="validatorsInfo"
+    ></router-view>
+  </q-page-container>
 </template>
 
 <script lang="ts">

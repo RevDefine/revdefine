@@ -1,5 +1,5 @@
 <template>
-  <div class="q-px-md">
+  <q-page>
     <div class="full-width">
       <div class="q-pb-md">
         <q-card flat>
@@ -164,7 +164,7 @@
       >
       </transfer-list>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script lang="ts">

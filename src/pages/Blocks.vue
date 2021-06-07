@@ -1,9 +1,7 @@
  <template>
-  <div>
-    <div class="row col-xs-12 justify-center q-mb-md">
-      <router-view></router-view>
-    </div>
-  </div>
+  <q-page-container style="padding-top: 0px;">
+    <router-view></router-view>
+  </q-page-container>
 </template>
 
 <script lang="ts">
