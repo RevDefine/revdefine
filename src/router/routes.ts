@@ -15,8 +15,8 @@ const routes: RouteConfig[] = [
           { path: '', component: () => import('pages/BlocksList.vue') },
           {
             path: ':blockHash', component: () => import('pages/BlockInfo.vue'), children: [
-              { name: 'block', path: '', component: () => import('components/BlockDetail.vue') },
-              { name: 'deploy', path: 'deploy/:deployId', component: () => import('components/DeployDetail.vue'), props: true }
+              { name: 'block', path: '', component: () => import('pages/BlockDetail.vue') },
+              { name: 'deploy', path: 'deploy/:deployId', component: () => import('pages/DeployDetail.vue'), props: true }
             ]
           }
 

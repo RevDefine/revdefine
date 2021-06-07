@@ -171,8 +171,8 @@
 import Vue from 'vue';
 import { BlockInfo, DeployInfo } from '../defineAPI/rnodeTypes';
 import client from '../defineAPI';
-import transferList from './TransferList.vue';
-import defineLoading from './Loading.vue';
+import transferList from '../components/TransferList.vue';
+import defineLoading from '../components/Loading.vue';
 
 export default Vue.extend({
   name: 'deployDetail',

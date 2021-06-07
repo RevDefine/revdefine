@@ -266,10 +266,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import { BlockInfo } from '../defineAPI/rnodeTypes';
-import blockLink from './links/BlockLink.vue';
-import deployLink from './links/DeployLink.vue';
-import defineLoading from './Loading.vue';
-import validatorTable from './ValidatorTable.vue';
+import blockLink from '../components/links/BlockLink.vue';
+import deployLink from '../components/links/DeployLink.vue';
+import defineLoading from '../components/Loading.vue';
+import validatorTable from '../components/ValidatorTable.vue';
 export default Vue.extend({
   name: 'blockDetail',
   components: {
