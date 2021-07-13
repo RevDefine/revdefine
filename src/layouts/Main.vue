@@ -116,6 +116,15 @@
             class="col-md-10 col-sm-11 col-xs-11"
             style="max-width:1400px"
           >
+            <div>
+              <div class="row col-xs-12 justify-center">
+                <q-banner inline-actions rounded class="bg-orange text-white full-width">
+                  RChain is going to hard fork between July 16th and July 18th. 
+                  At that time , the network would stop proposing new blocks and no deploys would be accepted.
+                  For more details, please look at <a href="https://github.com/rchain/rchip-proposals/issues/42">RChips</a>.
+                </q-banner>
+              </div>
+            </div>
             <router-view />
           </div>
         </div>
