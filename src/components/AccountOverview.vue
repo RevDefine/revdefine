@@ -5,14 +5,14 @@
     "Balance": "balance",
     "IsGenesisVault": "isGenesisAddresss",
     "LastOperationBlock": "lastOperationBlock",
-    "Account": "RevAccount"
+    "Account": "REVAccount"
   },
   'zh':{
     "Address": "地址",
     "Balance": "余额",
     "IsGenesisVault": "创世钱包",
     "LastOperationBlock": "上次转账区块",
-    "Account": "Rev帐户"
+    "Account": "REV帐户"
   }
 }
 </i18n>
