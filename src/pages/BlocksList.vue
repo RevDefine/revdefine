@@ -33,7 +33,7 @@ export default Vue.extend({
           version: 0,
           timestamp: 0,
           headerExtraBytes: '',
-          parentsHashList: [''],
+          parents: [''],
 
           // BodyProto message
           blockNumber: 0,

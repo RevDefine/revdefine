@@ -10,9 +10,12 @@
   'zh':{
     "Address": "地址",
     "Balance": "余额",
-    "IsGenesisVault": "创世钱包",
-    "LastOperationBlock": "上次转账区块",
-    "Account": "REV帐户"
+    "Tags": "标签",
+    "Account": "REV帐户",
+    "GenesisVault": "创世地址",
+    "PosStakingVault": "抵押地址",
+    "CoopMultiSigVault": "Coop多签地址",
+    "PerValidatorVault": "验证者地址"
   }
 }
 </i18n>
@@ -62,28 +65,18 @@
 
         <q-item>
           <q-item-section>
-            <q-item-label>{{$t('IsGenesisVault')}}</q-item-label>
-          </q-item-section>
-
-          <q-item-section side>
-            <q-item-label>
-              <define-bool :yesOrNo="isGenesisAddress"></define-bool>
-            </q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item>
-          <q-item-section>
-            <q-item-label>{{$t('LastOperationBlock')}}</q-item-label>
+            <q-item-label>{{$t('Tags')}}</q-item-label>
           </q-item-section>
 
           <q-item-section side class="col-xs-8 break-hash">
-            <q-item-label>
-              <block-link
-                :blockHash="lastOperationBlock"
-                :short="false"
-              ></block-link>
-            </q-item-label>
+            <q-list dense>
+              <q-item
+                v-for="tag in tags"
+                :key="tag"
+              >
+                {{$t(tag)}}
+              </q-item>
+            </q-list>
           </q-item-section>
         </q-item>
       </q-list>
@@ -93,51 +86,22 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import client from '../defineAPI';
 import defineLoading from './Loading.vue';
-import blockLink from './links/BlockLink.vue';
 import { revUnit } from '../lib';
-import defineBool from './BoolItem.vue';
 
 export default Vue.extend({
   name: 'accountOverview',
   components: {
     'define-loading': defineLoading,
-    'block-link': blockLink,
-    'define-bool': defineBool
   },
   props: {
-    addr: String
-  },
-  data() {
-    return {
-      address: '',
-      balance: 0,
-      isGenesisAddress: false,
-      lastOperationBlock: '',
-
-      loading: false
-    };
+    address: String,
+    balance: Number,
+    tags: Array,
+    loading: Boolean
   },
   methods: {
-    async getOverviewData() {
-      this.loading = true;
-      const account = await client.revAccount(this.$route.params.addr);
-      this.address = account.account.address;
-      this.balance = account.account.balance;
-      this.isGenesisAddress = account.account.isGenesisVault;
-      this.lastOperationBlock = account.account.lastOperationBlock;
-      this.loading = false;
-    },
     revUnit: revUnit
-  },
-  async mounted() {
-    await this.getOverviewData();
-  },
-  watch: {
-    async $route() {
-      await this.getOverviewData();
-    }
   }
 });
 </script>

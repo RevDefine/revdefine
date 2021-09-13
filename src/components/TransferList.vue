@@ -48,14 +48,24 @@
 <template>
   <div class="full-width bg-white q-pb-sm">
     <q-table
-      :title="$t('Transfer')"
       :data="transactions"
       :columns="columns"
-      :pagination.sync="pagination"
       hide-pagination
       :loading="loading"
+      :pagination="pagination"
       flat
     >
+      <template v-slot:top>
+        <div class="col-2 q-table__title">{{$t('Transfer')}}</div>
+        <q-space />
+
+        <template v-if="isToggle">
+        <div class="col">
+          <q-toggle v-model="isSucceededFilter" label="IsSucceeded" v-on:input="onRequestToggle"/>
+          <q-toggle v-model="isUserDeployFilter" label="IsUserDeploy" v-on:input="onRequestToggle"/>
+        </div>
+        </template>
+      </template>
 
       <template v-slot:header="props">
         <q-tr :props="props">
@@ -207,11 +217,12 @@
       <template v-slot:loading>
         <define-loading :showing="loading"></define-loading>
       </template>
+      
     </q-table>
 
     <div class="row justify-center q-mt-md">
       <q-pagination
-        v-model="pagination.page"
+        v-model="page"
         :max="max"
         :max-pages="6"
         :boundary-links="true"
@@ -248,9 +259,19 @@ export default Vue.extend({
       default: 50,
     },
     address: String,
+    page: {
+      type: Number,
+      default: 1
+    },
+    isToggle: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
+      isSucceededFilter: false,
+      isUserDeployFilter: true,
       expanded: [false],
       columns: [
         {
@@ -291,15 +312,17 @@ export default Vue.extend({
         // descending: false,
         page: 1,
         // this is not relying on the q-table pagination to get page
-        rowsPerPage: 0,
-        // rowsNumber: 10
+        rowsPerPage: 20,
       },
     };
   },
   methods: {
     revUnit: revUnit,
     onRequest(page: number) {
-      this.$emit('request', page);
+      this.$emit('request', page, this.isSucceededFilter, this.isUserDeployFilter);
+    },
+    onRequestToggle(){
+      this.$emit('request', this.pagination.page, this.isSucceededFilter, this.isUserDeployFilter);
     },
     // @ts-ignore
     addExpanded(props) {

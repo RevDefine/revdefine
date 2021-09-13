@@ -28,7 +28,7 @@
                   />
                 </template>
                 <q-breadcrumbs-el :label="$t('Blocks')" />
-                <q-breadcrumbs-el :label="blockInfoDetail.blockInfo.blockHash.slice(0,20)+ '...'" />
+                <q-breadcrumbs-el :label="blockInfoDetail.header.blockHash.slice(0,20)+ '...'" />
               </q-breadcrumbs>
             </q-toolbar>
           </div>
@@ -49,7 +49,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.blockHash }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.blockHash }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -60,7 +60,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.sender }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.sender }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -71,7 +71,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.seqNum }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.seqNum }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -82,7 +82,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.sig }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.sig }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -93,7 +93,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.sigAlgorithm }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.sigAlgorithm }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -104,7 +104,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.shardId }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.shardId }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -115,7 +115,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.extraBytes }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.extraBytes }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -126,7 +126,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.version }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.version }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -137,7 +137,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{new Date(blockInfoDetail.blockInfo.timestamp)}} - {{ blockInfoDetail.blockInfo.timestamp }}</q-item-label>
+            <q-item-label>{{new Date(blockInfoDetail.header.timestamp)}} - {{ blockInfoDetail.header.timestamp }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -148,7 +148,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.headerExtraBytes }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.headerExtraBytes }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -159,7 +159,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.blockNumber }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.blockNumber }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -170,7 +170,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.preStateHash }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.preStateHash }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -181,7 +181,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.postStateHash }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.postStateHash }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -192,7 +192,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.bodyExtraBytes }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.bodyExtraBytes }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -203,7 +203,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ blockInfoDetail.blockInfo.blockSize }}</q-item-label>
+            <q-item-label>{{ blockInfoDetail.header.blockSize }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -216,7 +216,7 @@
           <q-item-section>
             <q-list>
               <q-item
-                v-for="parentHash in blockInfoDetail.blockInfo.parentsHashList"
+                v-for="parentHash in blockInfoDetail.header.parents"
                 :key="parentHash"
               >
                 <q-item-label>
@@ -240,12 +240,12 @@
           <q-item-section padding>
             <q-list>
               <q-item
-                v-for="deploy in blockInfoDetail.deploys"
-                :key="deploy.sig"
+                v-for="deploy in blockInfoDetail.body.deploys"
+                :key="deploy.deploy.sig"
               >
                 <deploy-link
-                  :blockHash="blockInfoDetail.blockInfo.blockHash"
-                  :deployId="deploy.sig"
+                  :blockHash="blockInfoDetail.header.blockHash"
+                  :deployId="deploy.deploy.sig"
                   :short="false"
                   :length="10"
                 ></deploy-link>

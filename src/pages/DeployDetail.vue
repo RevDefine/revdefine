@@ -15,11 +15,11 @@
                 </template>
                 <q-breadcrumbs-el :label="$t('Blocks')" />
                 <q-breadcrumbs-el
-                  :label="blockInfoDetail.blockInfo.blockHash.slice(0,20)+ '...'"
-                  :to="{name:'block', params:{blockHash: blockInfoDetail.blockInfo.blockHash}}"
+                  :label="blockInfoDetail.header.blockHash.slice(0,20)+ '...'"
+                  :to="{name:'block', params:{blockHash: blockInfoDetail.header.blockHash}}"
                 />
                 <q-breadcrumbs-el :label="$t('Deploy')" />
-                <q-breadcrumbs-el :label="deployInfo.sig.slice(0,20)+ '...'" />
+                <q-breadcrumbs-el :label="deployInfo.deploy.sig.slice(0,20)+ '...'" />
               </q-breadcrumbs>
             </q-toolbar>
           </div>
@@ -39,7 +39,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ deployInfo.deployer }}</q-item-label>
+            <q-item-label>{{ deployInfo.deploy.deployer }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -50,7 +50,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ deployInfo.term }}</q-item-label>
+            <q-item-label>{{ deployInfo.deploy.term }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -61,7 +61,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ new Date(deployInfo.timestamp) }} - {{ deployInfo.timestamp }}</q-item-label>
+            <q-item-label>{{ new Date(deployInfo.deploy.timestamp) }} - {{ deployInfo.deploy.timestamp }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -72,7 +72,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ deployInfo.sig }}</q-item-label>
+            <q-item-label>{{ deployInfo.deploy.sig }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -83,7 +83,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ deployInfo.sigAlgorithm }}</q-item-label>
+            <q-item-label>{{ deployInfo.deploy.sigAlgorithm }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -94,7 +94,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ deployInfo.phloPrice }}</q-item-label>
+            <q-item-label>{{ deployInfo.deploy.phloPrice }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -105,7 +105,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ deployInfo.phloLimit }}</q-item-label>
+            <q-item-label>{{ deployInfo.deploy.phloLimit }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -116,7 +116,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ deployInfo.validAfterBlockNumber }}</q-item-label>
+            <q-item-label>{{ deployInfo.deploy.validAfterBlockNumber }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -138,7 +138,7 @@
             spaced
           />
           <q-item-section padding>
-            <q-item-label>{{ deployInfo.errored }}</q-item-label>
+            <q-item-label>{{ deployInfo.isFailed }}</q-item-label>
           </q-item-section>
         </q-item>
 
@@ -160,7 +160,8 @@
     <div class="q-my-md">
       <transfer-list
         :transactions="transactions"
-        :loading="transactionsLoading"
+        :loading="loading"
+        :isToggle="false"
       >
       </transfer-list>
     </div>
@@ -191,16 +192,18 @@ export default Vue.extend({
   data() {
     return {
       deployInfo: {
-        deployer: '',
-        term: '',
-        timestamp: 0,
-        sig: '',
-        sigAlgorithm: '',
-        phloPrice: 1,
-        phloLimit: 1,
-        validAfterBlockNumber: 1,
+        deploy: {
+          deployer: '',
+          term: '',
+          timestamp: 0,
+          sig: '',
+          sigAlgorithm: '',
+          phloPrice: 1,
+          phloLimit: 1,
+          validAfterBlockNumber: 1,
+        },
         cost: 1,
-        errored: false,
+        isFailed: false,
         systemDeployError: '',
       },
       loading: false,
@@ -222,7 +225,7 @@ export default Vue.extend({
     };
   },
   beforeUpdate() {
-    const targetDeploy = this.blockInfoDetail.deploys.find((element) => element.sig == this.deployId) as DeployInfo;
+    const targetDeploy = this.blockInfoDetail.body.deploys.find((element) => element.deploy.sig == this.deployId) as DeployInfo;
     this.deployInfo = targetDeploy;
   },
   methods: {

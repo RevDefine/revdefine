@@ -15,6 +15,11 @@
     "LastOperationBlock": "上次转账区块",
     "Rank": "排名",
     "Accounts": "账户",
+    "GenesisVault": "创世地址",
+    "PosStakingVault": "抵押地址",
+    "CoopMultiSigVault": "Coop多签地址",
+    "PerValidatorVault": "验证者地址",
+    "Tags": "标签"
   }
 }
 </i18n>
@@ -72,20 +77,17 @@
           </q-td>
 
           <q-td
-            key="isGenesisVault"
+            key="tags"
             :props="props"
           >
-            <define-bool :yesOrNo="props.row.isGenesisVault"></define-bool>
-          </q-td>
-          <q-td
-            key="lastOperationBlock"
-            :props="props"
-          >
-            <block-link
-              :blockHash="props.row.lastOperationBlock"
-              :short="false"
-            >
-            </block-link>
+            <q-list dense>
+              <q-item
+                v-for="tag in props.row.tags"
+                :key="tag"
+              >
+                {{$t(tag)}}
+              </q-item>
+            </q-list>
           </q-td>
         </q-tr>
 
@@ -114,16 +116,12 @@ import Vue from 'vue';
 import { revUnit } from '../lib';
 import defineLoading from './Loading.vue';
 import addressLink from './links/AddressLink.vue';
-import blockLink from './links/BlockLink.vue';
-import defineBool from './BoolItem.vue';
 
 export default Vue.extend({
   name: 'accountTable',
   components: {
     'define-loading': defineLoading,
-    'address-link': addressLink,
-    'block-link': blockLink,
-    'define-bool': defineBool
+    'address-link': addressLink
   },
   props: {
     accounts: Array,
@@ -142,16 +140,10 @@ export default Vue.extend({
         },
         { name: 'balance', align: 'left', label: 'Balance', field: 'balance' },
         {
-          name: 'isGenesisVault',
+          name: 'tags',
           align: 'left',
-          label: 'IsGenesisVault',
-          field: 'isGenesisVault'
-        },
-        {
-          name: 'lastOperationBlock',
-          align: 'left',
-          label: 'LastOperationBlock',
-          field: 'lastOperationBlock'
+          label: this.$t('Tags'),
+          field: 'tags'
         }
       ],
       pagination: {

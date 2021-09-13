@@ -1,5 +1,5 @@
-import { BlockInfo, LightBlockInfo, ExploratoryDeployResponse, IsFinalizedResponse } from './rnodeTypes';
-import { OldTransactionResponse, TransactionsResponse, RevAccountResponse, RevAccountListResponse, RangeDataResponse, AccountTopStatDataResponse } from './defineTypes'
+import { BlockInfo, BlockHeader, ExploratoryDeployResponse, IsFinalizedResponse } from './rnodeTypes';
+import { TransactionsResponse, RankRevAccount, RevAccountListResponse, RangeDataResponse, AccountTopStatDataResponse } from './defineTypes'
 import axios, { AxiosInstance } from 'axios';
 import domainHost from './host'
 
@@ -37,18 +37,18 @@ class DefineClient {
     return resp.data;
   }
 
-  public async showBlocks (depth: number): Promise<LightBlockInfo[]> {
-    const resp = await this.rnodeAxiosInstance.get<LightBlockInfo[]>('/api/blocks/' + depth);
+  public async showBlocks (depth: number): Promise<BlockHeader[]> {
+    const resp = await this.rnodeAxiosInstance.get<BlockHeader[]>('/api/blocks/' + depth);
     return resp.data;
   }
 
-  public async getBlocksByHeight (start: number, end: number): Promise<LightBlockInfo[]> {
-    const resp = await this.rnodeAxiosInstance.get<LightBlockInfo[]>('/api/blocks/' + start + '/' + end);
+  public async getBlocksByHeight (start: number, end: number): Promise<BlockHeader[]> {
+    const resp = await this.rnodeAxiosInstance.get<BlockHeader[]>('/api/blocks/' + start + '/' + end);
     return resp.data;
   }
 
-  public async findDeploy (deployId: string): Promise<LightBlockInfo> {
-    const resp = await this.rnodeAxiosInstance.get<LightBlockInfo>('/api/deploy/' + deployId)
+  public async findDeploy (deployId: string): Promise<BlockHeader> {
+    const resp = await this.rnodeAxiosInstance.get<BlockHeader>('/api/deploy/' + deployId)
     return resp.data
   }
 
@@ -76,13 +76,30 @@ class DefineClient {
     return resp.data
   }
 
+  public async trasactionsSucceeded (address: string, page: number = defaultPage, rowsPerPage: number = defaultRowsPerPage): Promise<TransactionsResponse> {
+    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/transactions/' + address, { params: { rowsPerPage: rowsPerPage, page: page , isSucceeded:true} })
+    return resp.data
+  }
+
+
+  public async userTransaction (address: string, page: number = defaultPage, rowsPerPage: number = defaultRowsPerPage): Promise<TransactionsResponse> {
+    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/transactions/' + address + '/transfer', { params: { rowsPerPage: rowsPerPage, page: page } })
+    return resp.data
+  }
+
+  public async userTransactionSucceeded (address: string, page: number = defaultPage, rowsPerPage: number = defaultRowsPerPage): Promise<TransactionsResponse> {
+    const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/transactions/' + address + '/transfer', { params: { rowsPerPage: rowsPerPage, page: page, isSucceeded:true } })
+    return resp.data
+  }
+
+
   public async deployTransaction (deployId: string, page: number = defaultPage, rowsPerPage: number = defaultRowsPerPage): Promise<TransactionsResponse> {
     const resp = await this.defineAxiosInstance.get<TransactionsResponse>('/deploy/' + deployId + '/transfer', { params: { rowsPerPage: rowsPerPage, page: page } })
     return resp.data
   }
 
-  public async revAccount (address: string): Promise<RevAccountResponse> {
-    const resp = await this.defineAxiosInstance.get<RevAccountResponse>('/revaccount/' + address)
+  public async revAccount (address: string): Promise<RankRevAccount> {
+    const resp = await this.defineAxiosInstance.get<RankRevAccount>('/revaccount/' + address)
     return resp.data
   }
 
@@ -108,10 +125,6 @@ class DefineClient {
     return resp.data
   }
 
-  public async getTransactionOld (blockHash: string): Promise<OldTransactionResponse[][]> {
-    const resp = await this.defineAxiosInstance.get<OldTransactionResponse[][]>('/getTransaction/' + blockHash)
-    return resp.data
-  }
   //// ========================================== define API==========================================
 }
 

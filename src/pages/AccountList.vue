@@ -81,8 +81,8 @@ export default Vue.extend({
         {
           address: '',
           balance: 0,
-          isGenesisVault: true,
-          lastOperationBlock: ''
+          tags: [''],
+          rank: 0
         }
       ]
     };

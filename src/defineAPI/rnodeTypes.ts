@@ -1,19 +1,25 @@
 export interface DeployInfo {
-  deployer: string;
-  term: string;
-  timestamp: number;
-  sig: string;
-  sigAlgorithm: string;
-  phloPrice: number;
-  phloLimit: number;
-  validAfterBlockNumber: number;
+  deploy: Deploy
   cost: number;
-  errored: boolean;
-  systemDeployError: string;
+  isFailed: boolean;
+  systemDeployError: string
+  //eventLogs: 
 }
+
+export interface Deploy{
+  deployer: string
+  sig: string
+  sigAlgorithm: string
+  term: string
+  timestamp: number
+  phloPrice: number
+  phloLimit: number
+  validAfterBlockNumber: number
+}
+
 export interface BlockInfo {
-  blockInfo: LightBlockInfo;
-  deploys: DeployInfo[];
+  header: BlockHeader;
+  body: BlockBody;
 }
 
 export interface BondInfo {
@@ -26,7 +32,14 @@ export interface JustificationInfo {
   latestBlockHash: string;
 }
 
-export interface LightBlockInfo {
+export interface BlockBody{
+  deploys: DeployInfo[];
+  extraBytes: string;
+  // rejectedDeploys
+  // systemDeploys
+}
+
+export interface BlockHeader {
   readonly blockHash: string;
   readonly sender: string;
   readonly seqNum: number;
@@ -39,7 +52,7 @@ export interface LightBlockInfo {
   readonly version: number;
   readonly timestamp: number;
   readonly headerExtraBytes: string;
-  readonly parentsHashList: string[];
+  readonly parents: string[];
 
   // BodyProto message
   readonly blockNumber: number;
@@ -57,7 +70,7 @@ export interface LightBlockInfo {
 
 export interface ExploratoryDeployResponse {
   expr: RhoExpr[]
-  block: LightBlockInfo
+  block: BlockHeader
 }
 
 export interface IsFinalizedResponse {

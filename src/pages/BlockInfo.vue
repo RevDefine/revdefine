@@ -17,7 +17,7 @@ export default Vue.extend({
     return {
       loading: false,
       blockInfoDetail: {
-        blockInfo: {
+        header: {
           blockHash: '',
           sender: '',
           seqNum: 0,
@@ -30,7 +30,7 @@ export default Vue.extend({
           version: 0,
           timestamp: 0,
           headerExtraBytes: '',
-          parentsHashList: [''],
+          parents: [''],
 
           // BodyProto message
           blockNumber: 0,
@@ -45,21 +45,23 @@ export default Vue.extend({
           faultTolerance: 0,
           justifications: [{ validator: '', latestBlockHash: '' }],
         },
-        deploys: [
-          {
-            deployer: '',
-            term: '',
-            timestamp: 0,
-            sig: '',
-            sigAlgorithm: '',
-            phloPrice: 1,
-            phloLimit: 1,
-            validAfterBlockNumber: 1,
+        body: {
+          deploys: [{
+            deploy: {
+              deployer: '',
+              term: '',
+              timestamp: 0,
+              sig: '',
+              sigAlgorithm: '',
+              phloPrice: 1,
+              phloLimit: 1,
+              validAfterBlockNumber: 1,
+            },
             cost: 1,
-            errored: false,
-            systemDeployError: '',
-          },
-        ],
+            isFailed: false,
+            systemDeployError: '',},
+          ]
+        },
       },
       validatorsInfo: [{ validator: '', stake: 0, latestBlockHash: '' }],
     };
@@ -71,10 +73,10 @@ export default Vue.extend({
         const block = await client.showBlock(this.$route.params.blockHash);
         this.blockInfoDetail = block;
         let validators = [];
-        for (let i = 0; i < block.blockInfo.bonds.length; i++) {
+        for (let i = 0; i < block.header.bonds.length; i++) {
           validators.push({
-            ...block.blockInfo.bonds[i],
-            ...block.blockInfo.justifications.find((v) => v.validator == block.blockInfo.bonds[i].validator),
+            ...block.header.bonds[i],
+            ...block.header.justifications.find((v) => v.validator == block.header.bonds[i].validator),
           });
         }
         // @ts-ignore

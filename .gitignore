@@ -21,3 +21,6 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+src/boot/gtag.js
+src/defineAPI/host.ts
+src/defineAPI/productionHost.ts

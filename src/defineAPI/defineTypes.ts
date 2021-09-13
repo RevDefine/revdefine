@@ -1,26 +1,8 @@
-import { DeployInfo } from './rnodeTypes'
-
-enum TransactionType {
-  genesis = 'genesis',
-  transfer = 'transfer',
-  deploy = 'deploy'
-}
-
-export interface OldTransactionResponse {
-  fromAddr: string
-  toAddr: string
-  amount: number
-  retUnforeable: string
-  deploy: DeployInfo
-  success: boolean
-  reason: string
-}
-
 export interface Transaction {
   fromAddr: string
   toAddr: string
   amount: number
-  transactionType: TransactionType
+  transactionType: string
   blockHash: string
   blockNumber: number
   deployId: string
@@ -38,8 +20,7 @@ export interface TransactionsResponse {
 export interface RankRevAccount {
   address: string
   balance: number
-  isGenesisVault: boolean
-  lastOperationBlock: string
+  tags: string[]
   rank: number
 }
 
