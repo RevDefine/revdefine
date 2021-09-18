@@ -30,7 +30,7 @@
               side
               class="col-sm-3 col-xs-5 col-md-2"
             >
-              <q-item-label>{{$t('blockHash')}}</q-item-label>
+              <q-item-label>{{$t('Block Hash')}}</q-item-label>
             </q-item-section>
 
             <q-item-section>
@@ -48,7 +48,7 @@
               side
               class="col-sm-3 col-xs-5 col-md-2"
             >
-              <q-item-label>{{$t('sender')}}</q-item-label>
+              <q-item-label>{{$t('Sender')}}</q-item-label>
             </q-item-section>
 
             <q-item-section>
@@ -63,7 +63,7 @@
               side
               class="col-sm-3 col-xs-5 col-md-2"
             >
-              <q-item-label>{{$t('timestamp')}}</q-item-label>
+              <q-item-label>{{$t('Timestamp')}}</q-item-label>
             </q-item-section>
 
             <q-item-section>
@@ -83,7 +83,7 @@
               side
               class="col-sm-3 col-xs-5 col-md-2"
             >
-              <q-item-label>{{$t('blockNumber')}}</q-item-label>
+              <q-item-label>{{$t('Block Number')}}</q-item-label>
             </q-item-section>
 
             <q-item-section>
@@ -98,7 +98,7 @@
               side
               class="col-sm-3 col-xs-5 col-md-2"
             >
-              <q-item-label>{{$t('deployCount')}}</q-item-label>
+              <q-item-label>{{$t('Deploy Count')}}</q-item-label>
             </q-item-section>
 
             <q-item-section>

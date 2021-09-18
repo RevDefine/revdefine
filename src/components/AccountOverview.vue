@@ -1,10 +1,8 @@
 <i18n>
 {
   'en-us':{
-    "Address": "address",
-    "Balance": "balance",
-    "IsGenesisVault": "isGenesisAddresss",
-    "LastOperationBlock": "lastOperationBlock",
+    "Address": "Address",
+    "Balance": "Balance",
     "Account": "REVAccount"
   },
   'zh':{
@@ -58,7 +56,7 @@
 
           <q-item-section side>
             <q-item-label>
-              {{ revUnit(balance) + ' Rev' }}
+              {{ revUnit(balance) + ' REV' }}
             </q-item-label>
           </q-item-section>
         </q-item>

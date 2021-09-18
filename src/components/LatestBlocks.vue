@@ -137,27 +137,27 @@ export default Vue.extend({
         {
           name: 'blockHash',
           required: true,
-          label: 'BlockHash',
+          label: 'Block Hash',
           align: 'left',
           field: 'blockHash',
         },
-        { name: 'blockSize', align: 'left', label: 'blockSize', field: 'blockSize' },
+        { name: 'blockSize', align: 'left', label: 'Block Size', field: 'blockSize' },
         {
           name: 'blockNumber',
           align: 'left',
-          label: 'BlockNumber',
+          label: 'Block Number',
           field: 'blockNumber',
         },
         {
           name: 'deployCount',
           align: 'left',
-          label: 'DeployCount',
+          label: 'Deploy Count',
           field: 'deployCount',
         },
         {
           name: 'seqNum',
           align: 'left',
-          label: 'SeqNum',
+          label: 'Seq Num',
           field: 'seqNum',
         },
         {

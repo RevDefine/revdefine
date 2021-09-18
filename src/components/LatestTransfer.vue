@@ -163,13 +163,13 @@ export default Vue.extend({
         {
           name: 'blockHash',
           required: true,
-          label: 'BlockHash',
+          label: 'Block Hash',
           align: 'left',
           field: 'blockHash',
         },
         {
           name: 'blockNumber',
-          label: 'blockNumber',
+          label: 'Block Number',
           align: 'left',
           field: 'blockNumber',
         },
