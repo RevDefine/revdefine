@@ -3,8 +3,10 @@
   'en-us':{
     "Address": "Address",
     "Balance": "Balance",
-    "IsGenesisVault": "IsGenesisAddresss",
-    "LastOperationBlock": "LastOperationBlock",
+    "GenesisVault": "Genesis Vault",
+    "PosStakingVault": "POS Staking Vault",
+    "CoopMultiSigVault": "Coop Multi Sig Vault",
+    "PerValidatorVault": "Per Validator Vault",
     "Rank": "Rank",
     "Accounts": "Account"
   },
@@ -73,7 +75,7 @@
             key="balance"
             :props="props"
           >
-            {{ revUnit(props.row.balance) + " Rev" }}
+            {{ revUnit(props.row.balance) + " REV" }}
           </q-td>
 
           <q-td
