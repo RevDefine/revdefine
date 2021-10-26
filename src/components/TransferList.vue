@@ -196,11 +196,18 @@
             key="finalized"
             :props="props"
           >
-            <define-bool
-              :yesOrNo="props.row.isFinalized"
-              red
-            >
-            </define-bool>
+            <div v-if="props.row.isFinalized">
+              <define-bool yesOrNo red></define-bool>
+            </div>
+            <div v-else>
+              <div class="row justify-center">
+                <q-spinner-clock
+                  color="deep-orange"
+                  size="1.3em"
+                />
+              </div>
+            </div>
+
           </q-td>
         </q-tr>
 
