@@ -12,20 +12,19 @@ You need to install the software below to compile.
 
 1. [yarn](https://yarnpkg.com/)
 
-## Install the dependencies
+## Download the package and install the dependencies
 ```bash
-yarn
+$ git clone https://github.com/RevDefine/revdefine.git
+$ cd revdefine
+$ yarn
 ```
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-quasar dev
+$ quasar dev
 ```
 
-### Lint the files
-```bash
-yarn run lint
-```
+Then you can browse the page by http://localhost:8080
 
 ### Build the app for production
 ```bash
