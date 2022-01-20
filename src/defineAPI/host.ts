@@ -1,8 +1,6 @@
-import { productionHost, productionRNodeHost } from './productionHost'
+import { productionHost, productionRNodePort } from './productionHost'
 
 interface DomainHost {
-  host: string
-  port: number
   rnodeHost: string
   rnodePort: number
   timeout: number
@@ -10,11 +8,7 @@ interface DomainHost {
 
 const timeout = 3 * 1000
 
-let domainHost: DomainHost
-if (process.env.DEV) {
-  domainHost = { host: 'http://localhost', port: 8000, rnodeHost: 'http://localhost', rnodePort: 40403, timeout: timeout }
-} else {
-  domainHost = { host: productionHost, port: 80, rnodeHost: productionRNodeHost, rnodePort: 80, timeout: timeout }
-}
+const domainHost: DomainHost= {  rnodeHost: productionHost, rnodePort: productionRNodePort, timeout: timeout }
+
 
 export default domainHost 

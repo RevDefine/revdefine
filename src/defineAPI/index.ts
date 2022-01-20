@@ -128,6 +128,6 @@ class DefineClient {
   //// ========================================== define API==========================================
 }
 
-const client = new DefineClient(domainHost.host, domainHost.port, domainHost.rnodeHost, domainHost.rnodePort, domainHost.timeout)
+const client = new DefineClient(domainHost.rnodeHost, domainHost.rnodePort, domainHost.rnodeHost, domainHost.rnodePort, domainHost.timeout)
 
 export default client
