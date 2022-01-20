@@ -44,5 +44,5 @@ Currently revdefine.io is supporting the data providing.You can also use revdefi
 
 ```typescript
 export const productionHost = 'https://revdefine.io'
-export const productionRNodeHost = 'https://revdefine.io'
+export const productionRNodePort = 40406
 ```
