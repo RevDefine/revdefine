@@ -10,14 +10,20 @@ This is just a front-end project which only display the data in the RChain. Ther
 ## Prerequirements
 You need to install the software below to compile.
 
-1. [yarn](https://yarnpkg.com/)
+1. [docker](https://docs.docker.com/engine/install/ubuntu/)
 
-## Download the package and install the dependencies
+## Build in docker
+
+Because a lot of the js libraries are out of dated in revdefine, in order to compile it well for everyone, 
+here presents a docker way to make sure compile would work for different nodejs environments.
+
 ```bash
-$ git clone https://github.com/RevDefine/revdefine.git
-$ cd revdefine
-$ yarn
+$ docker run --rm -it --entrypoint /bin/bash -v $(pwd):/revdefine ubuntu:18.04
+dockerBash $ cd /revdefine
+dockerBash $ bash docker-build.sh
 ```
+
+After the command above , you would find the static files in `dist`.
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
